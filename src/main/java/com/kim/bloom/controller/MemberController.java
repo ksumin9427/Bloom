@@ -3,16 +3,20 @@ package com.kim.bloom.controller;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kim.bloom.model.MemberVO;
 import com.kim.bloom.service.MemberSerivice;
@@ -31,6 +35,9 @@ public class MemberController {
 	@Autowired
 	private JavaMailSender mailSender;
 	
+	@Autowired
+	private BCryptPasswordEncoder pwEncoder;
+	
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String loginGet() {
 		logger.info("회원가입 페이지 진입");
@@ -40,11 +47,15 @@ public class MemberController {
 	
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String joinPost(MemberVO member) throws Exception {
-		logger.info("join 진입");
+		
+		String rawPw = ""; /* 인코딩 전 비밀번호 */
+		String encodePw= ""; /* 인코딩 후 비밀번호 */
+		
+		rawPw = member.getMemberPw();
+		encodePw = pwEncoder.encode(rawPw); /* 비밀번호를 인코딩 */
+		member.setMemberPw(encodePw); /* 인코딩한 비밀번호를 member에 저장 */
 		
 		memberSerivice.memberJoin(member);
-		
-		logger.info("join 서비스 성공");
 		
 		return "redirect:/main";
 	}
@@ -114,5 +125,40 @@ public class MemberController {
 		  return num;
 	}
 	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String loginPost(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception {
+		/* MemberVO 데이터를 전달받기 위해
+		 HttpServletRequest 로그인 성공시에 session에 회원 정보를 저장하기 위해
+		 RedirectAttributes(리다이렉트 할때 파라미터를 넘겨야 할 경우 사용)은 로그인 실패시에 리다이렉트 된 로그인 페이지에 실패를 의미하는 데이터를 전송하기 위해   */
+		
+		HttpSession session = request.getSession();
+		String rawPw = ""; 
+		String encodePw= ""; 
+		
+		MemberVO Ivo = memberSerivice.memberLogin(member);
+		
+		if (Ivo != null) {
+		
+			rawPw = member.getMemberPw(); /* 사용자가 제출한 비밀번호 */ 
+			encodePw = Ivo.getMemberPw(); /* 데이터베이스에 있는 인코딩된 비밀번호 */
+			
+			if (true == pwEncoder.matches(rawPw, encodePw)) {
+				
+				Ivo.setMemberPw(""); /* 세션에 사용자 비밀번호 정보는 지워준다 */
+				session.setAttribute("member", Ivo);
+				return "redirect:/main";
+				
+			} else {
+				rttr.addFlashAttribute("result", 0);
+				return "redirect:/member/login";
+			}
+			 
+			
+		} else {
+			rttr.addFlashAttribute("result", 0);
+			return "redirect:/member/login";
+		}
+		
+	}
 	
 }

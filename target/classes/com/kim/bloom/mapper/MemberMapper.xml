@@ -15,8 +15,8 @@
   	</select>
   	
   	<select id="memberLogin" resultType="com.kim.bloom.model.MemberVO">
-  		select memberId, memberName, adminCk, money, point 
-		from bloom_member where memberId = #{memberId} and memberPw = #{memberPw};
+  		select memberId, memberPw, memberName, adminCk, money, point 
+		from bloom_member where memberId = #{memberId};
   	</select>
   	
   </mapper>
