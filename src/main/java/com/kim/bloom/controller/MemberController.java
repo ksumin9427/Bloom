@@ -70,7 +70,7 @@ public class MemberController {
 	
 	/* 아이디 중복 검사를 실행하는 메서드 */
 	@RequestMapping(value = "/memberIdChk", method = RequestMethod.POST)
-	@ResponseBody /* 자바 객체를 HTTP 요청의 body 내용으로 매핑하는 역할 */
+	@ResponseBody /* ajax를 통해서 서버에 요청을 하는 방식이라면 해당 메서드에 @responseBody를 붙여야 한다 */
 	public String memberIdChkPost(String memberId) throws Exception{
 		logger.info(" memberIdChk() 진입");
 		
@@ -87,7 +87,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/mailCheck", method = RequestMethod.GET)
-	@ResponseBody
+	@ResponseBody /* ajax를 통해서 서버에 요청을 하는 방식이라면 해당 메서드에 @responseBody를 붙여야 한다 */
 	public String mailCheckGet(String email) throws Exception{
 		
 		logger.info("이메일 데이터 전송 확인");
@@ -159,6 +159,27 @@ public class MemberController {
 			return "redirect:/member/login";
 		}
 		
+	}
+	
+	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
+	public String logoutMainGet(HttpServletRequest request) throws Exception{
+		
+		logger.info("logoutMainGet메서드 진입");
+		HttpSession session = request.getSession();
+		
+		session.invalidate();
+		
+		return "redirect:/main";
+	}
+	
+	@RequestMapping(value = "/logout.do", method = RequestMethod.POST)
+	@ResponseBody /* ajax를 통해서 서버에 요청을 하는 방식이라면 해당 메서드에 @responseBody를 붙여야 한다 */
+	public void logoutPost(HttpServletRequest request) throws Exception{
+		logger.info("비동기 로그아웃 메서드 진입");
+		
+		HttpSession session = request.getSession();
+		
+		session.invalidate();
 	}
 	
 }
