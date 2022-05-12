@@ -125,7 +125,7 @@ public class MemberController {
 		  return num;
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String loginPost(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception {
 		/* MemberVO 데이터를 전달받기 위해
 		 HttpServletRequest 로그인 성공시에 session에 회원 정보를 저장하기 위해

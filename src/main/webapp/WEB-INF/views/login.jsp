@@ -56,7 +56,7 @@
 	
 	<script>
 		$(".login_button").click(function() {
-			$("#login_form").attr("action","/member/login"); /*클릭을 하면 로그인 메서드를 서버에 요청한다  */
+			$("#login_form").attr("action","/member/login.do"); /*클릭을 하면 로그인 메서드를 서버에 요청한다  */
 			$("#login_form").submit();
 		});
 	</script>

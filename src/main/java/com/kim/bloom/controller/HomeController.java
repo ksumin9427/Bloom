@@ -1,4 +1,4 @@
-package com.kim.bloom;
+package com.kim.bloom.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
