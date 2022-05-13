@@ -7,23 +7,26 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.kim.bloom.mapper.DesignerMapper;
-import com.kim.bloom.model.DesignerVO;
+import com.kim.bloom.mapper.AuthorMapper;
+import com.kim.bloom.model.AuthorVO;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
-public class DesignerMapperTest {
+public class AuthorMapperTest {
 	
 	@Autowired
-	private DesignerMapper mapper;
-	
-	@Test
-	public void DesignerEnroll() throws Exception{
-		DesignerVO designer = new DesignerVO();
-		
-		designer.setDesignerName("정윤지");
-		
-		mapper.DesignerEnroll(designer);
-	}
+    private AuthorMapper mapper;
+    
+    @Test
+    public void authorEnroll() throws Exception{
+        
+        AuthorVO author = new AuthorVO();
+        
+        author.setNationId("01");
+        author.setAuthorName("테스트");
+        author.setAuthorIntro("테스트 소개");
+        
+        mapper.authorEnroll(author);
+    }
 }

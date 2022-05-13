@@ -42,10 +42,10 @@
                             <a class="admin_list_02" href="/admin/goodsManage">상품 관리</a>
                         </li>
                         <lI>
-                            <a class="admin_list_03" href="/admin/designerEnroll">디자이너 등록</a>                            
+                            <a class="admin_list_03" href="/admin/authorEnroll">작가 등록</a>                            
                         </lI>
                         <lI>
-                            <a class="admin_list_04" href="/admin/designerManage">디자이너 관리</a>                            
+                            <a class="admin_list_04" href="/admin/authorManage">작가 관리</a>                            
                         </lI>
                         <lI>
                             <a class="admin_list_05" href="/admin/">회원 관리</a>                            

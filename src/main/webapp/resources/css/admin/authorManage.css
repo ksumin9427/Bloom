@@ -86,7 +86,7 @@ ul{
 .admin_navi_wrap li a:active {color: black;}
 .admin_navi_wrap li a:hover {color: black;}
  
-.admin_list_03{
+.admin_list_04{
     background-color: #c8c8c8;
 } 
  
@@ -95,9 +95,7 @@ ul{
 .admin_content_wrap{
     width: 80%;
     float:left;
-    height: 100%;
-    height: 700px;
-    
+    height: 100%;    
 }
 .admin_content_subject{            /* 관리자 컨텐츠 제목 영역 */
     font-size: 40px;
