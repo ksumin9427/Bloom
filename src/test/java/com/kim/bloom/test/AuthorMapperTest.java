@@ -1,5 +1,8 @@
 package com.kim.bloom.test;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.kim.bloom.mapper.AuthorMapper;
 import com.kim.bloom.model.AuthorVO;
+import com.kim.bloom.model.Criteria;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,14 +23,14 @@ public class AuthorMapperTest {
     private AuthorMapper mapper;
     
     @Test
-    public void authorEnroll() throws Exception{
+    public void authorGetListTest() throws Exception{
+        Criteria cri = new Criteria(3, 10);
         
-        AuthorVO author = new AuthorVO();
+        List<AuthorVO> list = mapper.authorGetList(cri);
         
-        author.setNationId("01");
-        author.setAuthorName("테스트");
-        author.setAuthorIntro("테스트 소개");
-        
-        mapper.authorEnroll(author);
+        for (int i = 0; i < list.size() ; i++) {
+			System.out.println("list"+i+"...."+list.get(i));
+			
+		}
     }
 }
