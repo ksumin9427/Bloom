@@ -26,6 +26,7 @@ public class AuthorMapperTest {
     public void authorGetListTest() throws Exception{
         Criteria cri = new Criteria(3, 10);
         
+        cri.setKeyword("김영하");
         List<AuthorVO> list = mapper.authorGetList(cri);
         
         for (int i = 0; i < list.size() ; i++) {

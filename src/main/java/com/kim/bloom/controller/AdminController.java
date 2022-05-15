@@ -1,14 +1,19 @@
 package com.kim.bloom.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kim.bloom.model.AuthorVO;
+import com.kim.bloom.model.Criteria;
+import com.kim.bloom.model.PageDTO;
 import com.kim.bloom.service.AuthorService;
 
 @Controller
@@ -41,8 +46,18 @@ public class AdminController {
     }
     
     @RequestMapping(value = "/authorManage", method = RequestMethod.GET)
-    public void authorManageGet() throws Exception{
-        logger.info("작가 관리 페이지 접속");
+    public void authorManageGet(Criteria cri, Model model) throws Exception{
+        logger.info("작가 관리 페이지 접속............. "+cri);
+        
+        List list = authorService.authorGetList(cri);
+        
+        model.addAttribute("list", list);
+        
+        int total = authorService.authorGetTotal(cri);
+        PageDTO pageMaker = new PageDTO(cri, total);
+        
+        model.addAttribute("pageMaker", pageMaker);
+       
     }
     
     @RequestMapping(value = "/authorEnroll.do", method = RequestMethod.POST)

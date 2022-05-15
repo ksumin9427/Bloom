@@ -1,6 +1,7 @@
 package com.kim.bloom.model;
 
-public class Criteria {
+public class Criteria { 
+	/* 페이징 쿼리를 동적 제어하기 위해 필요한 데이터 'pageNum'과 'amount'을 같이 파라미터로 전달하기 위한 용도 */
 	
 	private int pageNum; /* 현재 페이지 번호 */
 	private int amount; /* 한 페이지 당 보여줄 게시물 수  */
