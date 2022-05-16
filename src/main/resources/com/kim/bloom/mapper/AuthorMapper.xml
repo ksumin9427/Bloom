@@ -22,7 +22,7 @@
      	
      </select>
      
-     <select id="authorGetTotal">
+     <select id="authorGetTotal" resultType="int">
      	select count(*) from bloom_author
      	
      	<if test="keyword != null">
