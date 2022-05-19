@@ -51,7 +51,13 @@ public class AdminController {
         
         List list = authorService.authorGetList(cri);
         
-        model.addAttribute("list", list);
+        if(!list.isEmpty()) {
+        	model.addAttribute("list", list);
+        } else {
+        	model.addAttribute("listCheck", "empty");
+        	
+        }
+        
         
         int total = authorService.authorGetTotal(cri);
         PageDTO pageMaker = new PageDTO(cri, total);

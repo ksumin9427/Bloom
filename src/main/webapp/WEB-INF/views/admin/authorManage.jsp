@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/authorManage.css?ver=3">
+<link rel="stylesheet" href="../resources/css/admin/authorManage.css?ver=4">
  
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -22,6 +22,8 @@
                 <div class="admin_content_wrap">
                     <div class="admin_content_subject"><span>작가 관리</span></div>
                     	<div class="author_table_wrap">
+                    	
+                    	<c:if test="${listCheck != 'empty'}">
                     		<table class="author_table">
                     			<thead>
                     				<tr>
@@ -43,6 +45,13 @@
 	                    			</tr>	
                     			</c:forEach>
                     		</table>
+                    		</c:if>
+                    		
+                    		<c:if test="${listCheck == 'empty'}">
+                    			<div class="table_empty">
+                    				등록된 작가가 없습니다.
+                    			</div>
+                    		</c:if>
                     	</div>
                     	
                     	<div class="search_wrap">
@@ -116,7 +125,7 @@
  		
  	});
  	
- 	$('#searchForm button').on('click', function(e){
+ 	$("#searchForm button").on("click", function(e){
  		e.preventDefault();
  		
  		if(!searchForm.find("input[name='keyword']").val()){

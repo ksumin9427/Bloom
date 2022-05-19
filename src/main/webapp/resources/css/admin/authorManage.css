@@ -264,3 +264,10 @@ ul{
     margin-left: 15px;
     background-color: #c3daf7;
 }
+
+.table_empty{
+	height: 50px;
+    text-align: center;
+    margin: 200px 0 215px 0px;
+    font-size: 25px;
+}
