@@ -39,6 +39,12 @@ public class AuthorServiceImpl implements AuthorService{
 		
 		return authorMapper.authorGetTotal(cri);
 	}
+
+	@Override
+	public AuthorVO authorGetDetail(int authorId) throws Exception {
+		
+		return null;
+	}
 	
 	
 }

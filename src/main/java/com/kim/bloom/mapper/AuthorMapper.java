@@ -14,4 +14,6 @@ public interface AuthorMapper {
 	
 	/* 작가의 총 수 */
 	public int authorGetTotal(Criteria cri);
+	
+	public AuthorVO authorGetDetail(int authorId);
 }

@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/authorManage.css?ver=4">
+<link rel="stylesheet" href="../resources/css/admin/authorManage.css?ver=6">
  
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -124,6 +124,8 @@
  		<fomr> 태그 속성에 설정되어 있는 url 경로와 method 방식으로 form을 서버로 전송 */
  		
  	});
+ 	
+ 	let searchForm = $('#searchForm');
  	
  	$("#searchForm button").on("click", function(e){
  		e.preventDefault();
