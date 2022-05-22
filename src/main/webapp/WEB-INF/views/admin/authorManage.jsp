@@ -38,6 +38,11 @@
                     			<c:forEach items="${list}" var="list">
 	                    			<tr>
 	                    				<td><c:out value="${list.authorId}"></c:out></td>
+	                    				<td>
+	                    					<a class="move" href='<c:out value="${list.authorId}"></c:out>'>
+	                    						<c:out value="${list.authorName}"></c:out>
+	                    					</a>
+	                    				</td>
 	                    				<td><c:out value="${list.authorName}"></c:out></td>
 	                    				<td><c:out value="${list.nationName}"></c:out></td>
 	                    				<td><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd"/>
@@ -137,6 +142,14 @@
  		
  		searchForm.find("input[name='pageNum']").val('1');
  		searchForm.submit();
+ 	});
+ 	
+ 	$('.move').on('click', function(e) {
+ 		e.preventDefault();
+ 		
+ 		moveForm.append("<input type= 'hidden' name='authorId' value='"+$(this).attr("href")+  "'>");
+ 		moveForm.attr("action", "/admin/authorDetail");
+ 		moveForm.submit();
  	});
  	
  	

@@ -138,6 +138,11 @@ ul{
 .th_column_5{
 	width:140px;
 }
+
+.author_table a{
+	color:#1088ed;
+	font-weight: 500;
+}
  
 /* footer navai 영역 */
 .footer_nav{
