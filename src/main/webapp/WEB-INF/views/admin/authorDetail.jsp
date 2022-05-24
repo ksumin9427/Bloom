@@ -76,6 +76,8 @@
                    				<button id="cancelBtn" class="btn">작가 목록</button>
 	                    		<button id="modifyBtn" class="btn modify_btn">수 정</button>
 	                    	</div> 
+	                    	
+	                    	
                     </div>                    
                 </div>
                 
@@ -86,6 +88,18 @@
                 	<input type="hidden" name="keyword" value='<c:out value="${cri.keyword }"/>'>
                 </form>
 				<%@include file="../includes/admin/footer.jsp" %>
+				
+	<script>
+		let moveForm = $("#moveForm");
+		
+		$("#cancelBtn").on("click", function(e){
+			e.preventDefault();
+			
+			$("input[name=authorId]").remove();
+			moveForm.attr("action", "/admin/authorManage")
+			moveForm.submit();
+		});
+	</script>			
 
 
 </body>

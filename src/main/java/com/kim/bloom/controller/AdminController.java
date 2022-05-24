@@ -78,7 +78,7 @@ public class AdminController {
     	return "redirect:/admin/authorManage";
     }
 	
-    @GetMapping("/authorDetail")
+    @GetMapping({"/authorDetail", "/authorModify"})
 	public void authorGetInfoGET(int authorId, Criteria cri, Model model) throws Exception {
 		
 		logger.info("authorDetail......." + authorId);
