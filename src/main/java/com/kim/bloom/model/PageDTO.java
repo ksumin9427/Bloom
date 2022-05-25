@@ -22,6 +22,7 @@ public class PageDTO {
 		this.cri = cri;
 		this.total = total;
 		
+		/* 페이지 끝번호, 기본 [1] - [10] 설정 */
 		this.pageEnd = (int) (Math.ceil(cri.getPageNum()/10.0)) * 10;
 		
 		this.pageStart = this.pageEnd - 9;

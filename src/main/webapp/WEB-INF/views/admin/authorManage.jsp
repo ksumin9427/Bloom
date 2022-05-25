@@ -23,6 +23,7 @@
                     <div class="admin_content_subject"><span>작가 관리</span></div>
                     	<div class="author_table_wrap">
                     	
+                    	<!--검색어에 맞는 게시물이 있는 경우  -->
                     	<c:if test="${listCheck != 'empty'}">
                     		<table class="author_table">
                     			<thead>
@@ -50,13 +51,15 @@
 	                    			</tr>	
                     			</c:forEach>
                     		</table>
-                    		</c:if>
+                    	</c:if>
                     		
-                    		<c:if test="${listCheck == 'empty'}">
-                    			<div class="table_empty">
+                    	<!--검색어에 맞는 게시물이 없는 경우  -->
+                    	<c:if test="${listCheck == 'empty'}">
+                    		<div class="table_empty">
                     				등록된 작가가 없습니다.
-                    			</div>
-                    		</c:if>
+                    		</div>
+                    	</c:if>
+                    		
                     	</div>
                     	
                     	<div class="search_wrap">
@@ -70,6 +73,7 @@
                     		</form>
                     	</div>
                     
+                    <!-- 페이지 이동 인터페이스 -->
                     <div class="pageMaker_wrap">
                     	<ul class="pageMaker">
                     		
@@ -81,6 +85,8 @@
                     		
                     		<!-- 페이지 번호 -->
                     		<c:forEach begin="${pageMaker.pageStart}" end="${pageMaker.pageEnd}" var="num">
+                    			<!-- 현재 페이지일 경우 class 속성 값이 pageMaker_btn active가 되는데
+                    			이는 css설정을 사용해서 현재페이지라는 것을 알려주기 위해서 -->
                     			<li class="pageMaker_btn ${pageMaker.cri.pageNum == num ? "active":""}">
                     				<a href="${num}">${num}</a>
                     			</li>
@@ -130,11 +136,13 @@
  		
  	});
  	
+ 	/* 키워드 없이 사용자가 검색버튼을 사용 못하도록 */
  	let searchForm = $('#searchForm');
  	
  	$("#searchForm button").on("click", function(e){
  		e.preventDefault();
  		
+ 		/* 검색 키워드 유효성 검사 */
  		if(!searchForm.find("input[name='keyword']").val()){
  			alert("키워드를 입력하십시오.");
  			return false;

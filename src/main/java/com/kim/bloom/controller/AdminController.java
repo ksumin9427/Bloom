@@ -52,6 +52,7 @@ public class AdminController {
         
         List list = authorService.authorGetList(cri);
         
+		/* 검색어 결과 존재 유무 */ 
         if(!list.isEmpty()) {
         	model.addAttribute("list", list);
         } else {
@@ -83,8 +84,11 @@ public class AdminController {
 		
 		logger.info("authorDetail......." + authorId);
 		
+		/* 작가 상세 페이지에서 작가 관리 페이지 이동을 위한 작가 관리 페이지 정보 
+		  해당 정보가 없으면 무조건 작가 관리 페이지의 1페이지로 이동하게 된다 */
 		model.addAttribute("cri", cri);
 		
+		/* 클릭한 작가 정보 */
 		model.addAttribute("authorInfo", authorService.authorGetDetail(authorId));
 		
 	}
