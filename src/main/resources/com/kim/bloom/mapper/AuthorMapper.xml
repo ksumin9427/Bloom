@@ -5,7 +5,7 @@
   <mapper namespace="com.kim.bloom.mapper.AuthorMapper">
   
      <insert id="authorEnroll">
-         insert into bloom_author(authorName, nationId, authorIntro) values(#{authorName}, #{nationId}, #{authorIntro});
+         insert into bloom_author(authorName, nationId, authorIntro) values(#{authorName}, #{nationId}, #{authorIntro})
      </insert>
      
      <select id="authorGetList" resultType="com.kim.bloom.model.AuthorVO">
@@ -26,7 +26,7 @@
      	select count(*) from bloom_author
      	
      	<if test="keyword != null">
-     		where authorName like concat('%',#{keyword},'%');
+     		where authorName like concat('%',#{keyword},'%')
      	</if>
      		
      </select>
@@ -34,5 +34,10 @@
      <select id="authorGetDetail" resultType="com.kim.bloom.model.AuthorVO">
      	select * from bloom_author where authorId = #{authorId}
      </select>
+     
+     <update id="authorModify">
+     	update bloom_author set authorName = #{authorName}, nationId = #{nationId}, authorIntro = #{authorIntro}, updateDate = now()
+     	where authorId = #{authorId}
+     </update>
       
   </mapper>

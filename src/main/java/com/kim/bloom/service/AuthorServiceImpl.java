@@ -45,6 +45,12 @@ public class AuthorServiceImpl implements AuthorService{
 		log.info("authorGetDetail: "+authorId);
 		return authorMapper.authorGetDetail(authorId);
 	}
+
+	@Override
+	public int authorModify(AuthorVO author) throws Exception {
+		log.info("authorModify....... "+author);
+		return authorMapper.authorModify(author);
+	}
 	
 	
 }

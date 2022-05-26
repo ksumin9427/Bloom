@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kim.bloom.model.AuthorVO;
+import com.kim.bloom.model.BookVO;
 import com.kim.bloom.model.Criteria;
 import com.kim.bloom.model.PageDTO;
+import com.kim.bloom.service.AdminService;
 import com.kim.bloom.service.AuthorService;
 
 @Controller
@@ -25,6 +28,10 @@ public class AdminController {
 
 	@Autowired
 	private AuthorService authorService;
+	
+	@Autowired
+	private AdminService adminService;
+	
 
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public void adminMainGet() throws Exception{
@@ -60,7 +67,6 @@ public class AdminController {
         	
         }
         
-        
         int total = authorService.authorGetTotal(cri);
         PageDTO pageMaker = new PageDTO(cri, total);
         
@@ -79,6 +85,7 @@ public class AdminController {
     	return "redirect:/admin/authorManage";
     }
 	
+	/* @GetMapping은 URL을 배열로 처리할 수 있다 */
     @GetMapping({"/authorDetail", "/authorModify"})
 	public void authorGetInfoGET(int authorId, Criteria cri, Model model) throws Exception {
 		
@@ -92,6 +99,32 @@ public class AdminController {
 		model.addAttribute("authorInfo", authorService.authorGetDetail(authorId));
 		
 	}
+    
+	/* 뷰에서 받은 데이터를 전달받기 위해 AuthorVO 사용 
+	 정보 수정 후 작가 관리 페이지로 이동할 때 수정 성공 여부를 알리기 위해 데이터를 전송하기 위하여 RedirectAttributes 사용 */
+    @PostMapping("/authorModify")
+    public String authorModifyPost(AuthorVO author, RedirectAttributes rttr) throws Exception{
+    	logger.info("authorModifyPost......"+author);
+    	
+    	int result = authorService.authorModify(author);
+    	
+    	rttr.addFlashAttribute("modify_result", result);
+    	
+    	return "redirect:/admin/authorManage";
+    }
+    
+	/* 상품 등록 후, 상품 관리 페이지에 이동하였을 때
+	 책이 등록되었음을 알리는 경고창을 위해 상품 이름과 addFlashAttribute 사용 */
+    @PostMapping("/goodsEnroll")
+    public String goodsEnrollPost(BookVO book, RedirectAttributes rttr) {
+    	logger.info("goodsEnrollPost..... "+book);
+    	
+    	adminService.bookEnroll(book);
+    	
+    	rttr.addFlashAttribute("enroll_result", book.getBookName());
+    	
+    	return "redirect:/admin/goodsEnrollManage";
+    }
 	
 	
 	

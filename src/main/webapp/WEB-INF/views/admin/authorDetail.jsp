@@ -81,7 +81,7 @@
                    		
                    			<div class="btn_section">
                    				<button id="cancelBtn" class="btn">작가 목록</button>
-	                    		<button id="modifyBtn" class="btn modify_btn">수 정</button>
+	                    		<button id="modifyBtn" class="btn modify_btn">수정</button>
 	                    	</div> 
                     </div>                    
                 </div>
@@ -97,50 +97,28 @@
 				<%@include file="../includes/admin/footer.jsp" %>
 				
 	<script>
-		let moveForm = $("#moveForm");
-		let modifyForm = $('#modifyFomr');
+	let moveForm = $("#moveForm");
+
+	/* 작가 관리 페이지 이동 버튼 */
+	$("#cancelBtn").on("click", function(e){
 		
-/* 		작가 상세 페이지 이동 */
-		$("#cancelBtn").on("click", function(e){
-			e.preventDefault();
-			
-			moveForm.attr("action", "/admin/authorDetail")
-			moveForm.submit();
-		});
+		e.preventDefault();
 		
-		$("modifyBtn").on("click",function(e){
-			
-			let authorName = $(".form_section_content input[name= 'authorName']").val();
-			let authorIntro= $(".form_section_content textarea").val();
-			
-			let nameCk = false;
-			let introCk = false;
-			
-			e.preventDefault();
-			
-			if(!authorName){
-				$("#warn_authorName").css("display", "block");
-			} else {
-				$("#warn_authorName").css("display", "none");
-				nameCk = true;
-			}
-			
-			if(!authorIntro){
-				$("#warn_authorIntro").css("display", "block");
-			} else {
-				$("#warn_authorIntro").css("display", "none");
-				IntroCk = true;
-			}
-			
-			if(nameCk && IntroCk){
-				modifyForm.submit();
-			} else {
-				return false;
-			}
-			
-			
-			
-		});
+		$("input[name=authorId]").remove();
+		moveForm.attr("action", "/admin/authorManage")
+		moveForm.submit();
+		
+	});
+	
+	/* 작가 수정 페이지 이동 버튼 */
+	$("#modifyBtn").on("click", function(e){
+		
+		e.preventDefault();
+		
+		moveForm.attr("action", "/admin/authorModify");
+		moveForm.submit();
+		
+	});
 	</script>			
 
 

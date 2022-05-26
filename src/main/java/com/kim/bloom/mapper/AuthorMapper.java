@@ -16,4 +16,6 @@ public interface AuthorMapper {
 	public int authorGetTotal(Criteria cri);
 	
 	public AuthorVO authorGetDetail(int authorId);
+	
+	public int authorModify(AuthorVO author);
 }

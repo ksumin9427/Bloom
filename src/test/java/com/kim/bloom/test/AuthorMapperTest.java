@@ -34,4 +34,15 @@ public class AuthorMapperTest {
 			
 		}
     }
+    
+    @Test
+    public void authorModityTest() {
+    	AuthorVO author = new AuthorVO();
+    	
+    	author.setAuthorId(3555);
+    	author.setAuthorName("수정");
+    	author.setAuthorIntro("수정하였습니다.");
+    	
+    	mapper.authorModify(author);
+    }
 }
