@@ -210,6 +210,37 @@ ul{
     text-align-last: center;
 }
 
+.ck-content {						/* ckeditor 높이 */
+    height: 170px;
+}
+
+.ui-datepicker-trigger {						/* 캘린더 css 설정 */
+    margin-left: 25px;
+    width: 14%;
+    height: 38px;
+    font-weight: 600;
+    background-color: #dfe8f5;
+    font-size: 15px;
+    cursor:pointer;
+}
+input[name='publicYear'] {
+    width: 80%;
+    text-align: center;
+}
+
+.authorId_btn {						/* 작가 선택 css 설정 */
+    margin-left: 20px;
+    width: 14%;
+    height: 38px;
+    font-weight: 600;
+    background-color: #dfe8f5;
+    font-size: 15px;
+    cursor:pointer;
+}
+#authorName_input {
+    width: 80%;
+    text-align: center;
+}
 
 /* 버튼 영역 */
 .btn_section{

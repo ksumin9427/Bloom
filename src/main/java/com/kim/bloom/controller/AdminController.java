@@ -123,7 +123,26 @@ public class AdminController {
     	
     	rttr.addFlashAttribute("enroll_result", book.getBookName());
     	
-    	return "redirect:/admin/goodsEnrollManage";
+    	return "redirect:/admin/goodsManage";
+    }
+    
+	/* 작가 검색 팝업창 */
+    @GetMapping("/authorPop")
+    public void authorPopGet(Criteria cri, Model model) throws Exception{
+    	logger.info("authorPopGet...........");
+    	
+    	cri.setAmount(5);
+    	
+    	 List list = authorService.authorGetList(cri);
+         
+ 		/* 작가 검색 결과 존재 유무 */ 
+         if(!list.isEmpty()) {
+         	model.addAttribute("list", list);
+         } else {
+         	model.addAttribute("listCheck", "empty");
+         }
+		/* 페이지 이동 인터페이스 데이터 */
+         model.addAttribute("pageMaker", new PageDTO(cri, authorService.authorGetTotal(cri)));
     }
 	
 	
