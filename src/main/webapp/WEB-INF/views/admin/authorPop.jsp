@@ -34,7 +34,11 @@
 	                    		<c:forEach items="${list}" var="list">
 	                    		<tr>
 	                    			<td><c:out value="${list.authorId}"></c:out> </td>
-	                    			<td><c:out value="${list.authorName}"></c:out></td>
+	                    			<td>
+	                    			<a class="move" href='<c:out value="${list.authorId}"/>' data-name='<c:out value="${list.authorName}"/>'>
+	                    				<c:out value="${list.authorName}"></c:out>
+									</a>
+	                    			</td>
 	                    			<td><c:out value="${list.nationName}"></c:out> </td>
 	                    		</tr>
 	                    		</c:forEach>
@@ -128,6 +132,18 @@
 		moveForm.find("input[name='pageNum']").val($(this).attr("href"));
 		moveForm.submit();
 	});
+	
+	$(".move").on("click",function(){
+		e.preventDefault();
+		
+		let authorId = $(this).attr("href");
+		let authorName= $(this).data("name");
+		$(opener.document).find("#authorId_input").val(authorId);
+		$(opener.document).find("#authorName_input").val(authorName);
+		
+		window.close();
+	});
+	
 </script>	
 	
 </body>
