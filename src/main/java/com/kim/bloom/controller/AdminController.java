@@ -133,16 +133,15 @@ public class AdminController {
     	
     	cri.setAmount(5);
     	
-    	 List list = authorService.authorGetList(cri);
-         
- 		/* 작가 검색 결과 존재 유무 */ 
-         if(!list.isEmpty()) {
-         	model.addAttribute("list", list);
-         } else {
-         	model.addAttribute("listCheck", "empty");
-         }
-		/* 페이지 이동 인터페이스 데이터 */
-         model.addAttribute("pageMaker", new PageDTO(cri, authorService.authorGetTotal(cri)));
+    	List list = authorService.authorGetList(cri);
+    	
+    	if(!list.isEmpty()) {
+    		model.addAttribute("list", list);
+    	} else {
+    		model.addAttribute("listCheck", "empty");
+    	}
+    	
+    	model.addAttribute("pageMaker", new PageDTO(cri, authorService.authorGetTotal(cri)));
     }
 	
 	

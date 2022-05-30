@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/authorPop.css?ver=3">
+<link rel="stylesheet" href="../resources/css/admin/authorPop.css?ver=18">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -35,9 +35,9 @@
 	                    		<tr>
 	                    			<td><c:out value="${list.authorId}"></c:out> </td>
 	                    			<td>
-	                    			<a class="move" href='<c:out value="${list.authorId}"/>' data-name='<c:out value="${list.authorName}"/>'>
-	                    				<c:out value="${list.authorName}"></c:out>
-									</a>
+		                    			<a class="move" href='<c:out value="${list.authorId}"/>' data-name='<c:out value="${list.authorName}"/>'>
+		                    				<c:out value="${list.authorName}"></c:out>
+										</a>
 	                    			</td>
 	                    			<td><c:out value="${list.nationName}"></c:out> </td>
 	                    		</tr>
@@ -106,43 +106,54 @@
 	</div>
 
 <script>
-	let searchForm = ${"#searchForm"};
-	let moveForm = ${"#moveForm"};
+
+let searchForm = $('#searchForm');
+let moveForm = $('#moveForm');
+
+/* 작거 검색 버튼 동작 */
+$("#searchForm button").on("click", function(e){
 	
-	/* 작가 검색 버튼 */
-	$("#searchForm button").on("click", function(e){
-		e.preventDefault();
-		
-		if(!searchForm.find("input[name='keyword']").val()){
-			alert("키워드를 입력하십시오.");
-			return false;
-		}
-		
-		searchForm.find("input[name='pageNum']").val("1");
-		searchForm.submit();
-	});
+	e.preventDefault();
 	
-	/* 페이지 이동 버튼 */
-	$(".pageMaker_btn a").on("click", function(e){
-		e.preventDefault();
-		
-		console.log($(this).attr("href"));
-		
-		/* $(this)란 특정 이벤트 핸들러 DOM 요소 태그안의 모든 내용*/
-		moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-		moveForm.submit();
-	});
+	/* 검색 키워드 유효성 검사 */
+	if(!searchForm.find("input[name='keyword']").val()){
+		alert("키워드를 입력하십시오");
+		return false;
+	}
 	
-	$(".move").on("click",function(){
-		e.preventDefault();
-		
-		let authorId = $(this).attr("href");
-		let authorName= $(this).data("name");
-		$(opener.document).find("#authorId_input").val(authorId);
-		$(opener.document).find("#authorName_input").val(authorName);
-		
-		window.close();
-	});
+	searchForm.find("input[name='pageNum']").val("1");
+	
+	searchForm.submit();
+	
+});
+
+$(".pageMaker_btn a").on("click", function(e){
+	
+	e.preventDefault();
+	
+	console.log($(this).attr("href"));
+	
+	moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+	
+	moveForm.submit();
+	
+});
+
+$(".move").on("click", function(e){
+	
+	e.preventDefault();
+	
+	let authorId = $(this).attr("href");
+	let authorName = $(this).data("name");
+	$(opener.document).find("#authorId_input").val(authorId);
+	$(opener.document).find("#authorName_input").val(authorName);
+	
+	window.close();
+	
+});
+
+
+	
 	
 </script>	
 	
