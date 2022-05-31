@@ -13,6 +13,11 @@
   			#{bookPrice}, #{bookStock}, #{bookDiscount}, #{bookIntro}, #{bookContents})
   	</insert>
   	
+  	<!-- 카테고리 리스트 -->
+  	<select id="cateList" resultType="com.kim.bloom.model.CateVO">
+  		select * from bloom_bcate order by cateCode
+  	</select>
+  	
   </mapper>
   
   

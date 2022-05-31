@@ -144,8 +144,11 @@ $(".move").on("click", function(e){
 	e.preventDefault();
 	
 	let authorId = $(this).attr("href");
+	
 	let authorName = $(this).data("name");
+	
 	$(opener.document).find("#authorId_input").val(authorId);
+	
 	$(opener.document).find("#authorName_input").val(authorName);
 	
 	window.close();

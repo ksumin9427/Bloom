@@ -19,6 +19,11 @@ public class AdminMapperTest {
 	private AdminMapper mapper;
 	
 	@Test
+	public void cateListTest() throws Exception{
+		System.out.println("cateList().........."+mapper.cateList());
+	}
+	
+	@Test
 	public void bookEnrollTest() throws Exception{
 		
 		BookVO book = new BookVO();

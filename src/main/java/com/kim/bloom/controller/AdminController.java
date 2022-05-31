@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kim.bloom.model.AuthorVO;
 import com.kim.bloom.model.BookVO;
 import com.kim.bloom.model.Criteria;
@@ -32,27 +33,42 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
-
+	/* 관리자 페이지 접속*/
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public void adminMainGet() throws Exception{
 		logger.info("관리자 페이지 이동");
 	}
-	
+
+	/* 상품 관리 페이지 접속*/
 	@RequestMapping(value = "/goodsManage", method = RequestMethod.GET)
 	public void goodsManageGet() throws Exception{
-		logger.info("상품 관리 페이지 이동");
+		logger.info("상품 관리 페이지 접속");
 	}
-	
+
+	/* 상품 등록 페이지 접속*/
 	@RequestMapping(value = "/goodsEnroll", method = RequestMethod.GET)
-	public void goodsEnrollGet() throws Exception{
-		logger.info("상품 등록 페이지 이동");
+	public void goodsEnrollGet(Model model) throws Exception{
+		logger.info("상품 등록 페이지 접속");
+		
+		ObjectMapper objm = new ObjectMapper();
+		
+		List list = adminService.cateList();
+		
+		String cateList = objm.writeValueAsString(list);
+		
+		model.addAttribute("cateList", cateList);
+		
+		logger.info("변경 전....... "+list);
+		logger.info("변경 후....... "+cateList);
 	}
 	
+	/* 작가 등록 페이지 접속 */
     @RequestMapping(value = "/authorEnroll", method = RequestMethod.GET)
     public void authorEnrollGet() throws Exception{
         logger.info("작가 등록 페이지 접속");
     }
-    
+
+	/* 작가 관리 페이지 접속 */
     @RequestMapping(value = "/authorManage", method = RequestMethod.GET)
     public void authorManageGet(Criteria cri, Model model) throws Exception{
         logger.info("작가 관리 페이지 접속............. "+cri);
