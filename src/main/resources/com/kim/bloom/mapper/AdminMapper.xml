@@ -18,6 +18,35 @@
   		select * from bloom_bcate order by cateCode
   	</select>
   	
+  	<!-- 상품 리스트 -->
+  	<select id="goodsGetList" resultType="com.kim.bloom.model.BookVO">
+  		select bookId, bookName, b.authorName, c.cateName, bookStock, a.regDate
+  		from bloom_book a
+  		left outer join bloom_author b on a.authorId = b.authorId
+  		left outer join bloom_bcate c on a.cateCode = c.cateCode
+  		<if test="keyword != null">
+  			where (bookName like concat ('%', #{keyword}, '%'))
+  		</if>
+  		<!--limit 시작지점+1, 데이터 개수 -->
+  		order by bookId desc limit #{skip}, #{amount} 
+  	</select>
+  	
+  	<!-- 상품 총 개수 -->
+  	<select id="goodsGetTotal" resultType="int">
+  		select count(*) from bloom_book
+  		<if test="keyword != null">
+  			where bookName like concat ('%', #{keyword}, '%')
+  		</if>
+  	</select>
+  	
+  	<!-- 상품 조회 페이지 -->
+  	<select id="goodsGetDetail" resultType="com.kim.bloom.model.BookVO">
+  		select bookId, bookName, (select authorName from bloom_author where authorId = bloom_book.authorId) authorName, 
+			authorId, publicYear, publisher, cateCode, bookPrice, bookStock, bookDiscount, bookIntro, bookContents, regDate, updateDate 
+		from bloom_book where bookId = #{bookId}
+  		
+  	</select>
+  	
   </mapper>
   
   
