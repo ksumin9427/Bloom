@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/goodsDetail.css?ver=10">
+<link rel="stylesheet" href="../resources/css/admin/goodsDetail.css?ver=13">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -148,15 +148,15 @@
                    		
                    			<div class="btn_section">
                    				<button id="cancelBtn" class="btn">상품 목록</button>
-	                    		<button id="enrollBtn" class="btn enroll_btn">수정 </button>
+	                    		<button id="modifyBtn" class="btn enroll_btn">수정 </button>
 	                    	</div> 
                     </div>      
 
                 	
                 	<form id="moveForm" action="/admin/goodsManage" method="get" >
- 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+ 						<input type="hidden" name="pageNum" value="${cri.pageNum}">
+						<input type="hidden" name="amount" value="${cri.amount}">
+						<input type="hidden" name="keyword" value="${cri.keyword}">
                 	</form>
                 	
                 </div>
@@ -190,8 +190,10 @@
  				console.error(error);
  			});
  		
- 		
  		/* 카테고리 */
+ 		/* 서버로 부터 전달받은 카테고리 리스트 객체를 JSON으로 변환, 소분류, 중분류, 대분류로 분류하여
+ 		각 데이터를 cate1Array cate2Array cate3Array 변수에 저장한다*/
+ 		
 		let cateList = JSON.parse('${cateList}');
 
 		let cate1Array = new Array();
@@ -227,6 +229,7 @@
 		makeCateArray(cate2Obj,cate2Array,cateList,2);
 		makeCateArray(cate3Obj,cate3Array,cateList,3);
  		
+		/* 카테고리에서 선택된 항목에 대한 데이터를 저장할 변수 */
 		let targetCate2 ='';
 		let targetCate3 ='${goodsInfo.cateCode}';
 		
@@ -236,11 +239,6 @@
 			}
 		}
 		
-		console.log('targetCate3 '+targetCate3);
-		console.log('targetCate3.cateName '+targetCate3.cateName);
-		console.log('targetCate3.cateCode '+targetCate3.cateCode);
-		console.log('targetCate3.cateParent '+targetCate3.cateParent);
-		
 		for(let i = 0; i < cate3Array.length; i++){
 			if(targetCate3.cateParent === cate3Array[i].cateParent){
 				cateSelect3.append("<option value='"+cate3Array[i].cateCode+"'>"+cate3Array[i].cateName+"</option>");
@@ -248,7 +246,58 @@
 			}
 		}
 		
+		/* DB에 저장된 값에 해당하는 카테고리 option 태그에 selected 속성이 추가 */
+		$(".cate3 option").each(function(i,obj){
+			if(targetCate3.cateCode === obj.value){
+				$(obj).attr("selected", "selected");
+			}
+		});
 		
+		for(let i = 0; i < cate2Array.length; i++){
+			if(targetCate3.cateParent === cate2Array[i].cateCode){
+				targetCate2 = cate2Array[i];
+			}
+		}
+		
+		for(let i = 0; i < cate2Array.length; i++){
+			if(targetCate2.cateParent === cate2Array[i].cateParent){
+				cateSelect2.append("<option value='"+cate2Array[i].cateCode+"'>"+cate2Array[i].cateName+"</option>");
+			}
+		}
+		
+		$(".cate2 option").each(function(i,obj){
+			if(targetCate2.cateCode === obj.value){
+				$(obj).attr("selected", "selected");
+			}
+		});
+		
+		/* 대분류의 option 태그 추가 */
+		for(let i = 0; i < cate1Array.length; i++){
+			cateSelect1.append("<option value='"+cate1Array[i].cateCode+"'>"+cate1Array[i].cateName+"</option>");
+		}
+		
+		/* targetCate2.cateParent 값을 활용해서 대분류의 option 태그에 selected 속성 추가 */
+		$(".cate1 option").each(function(i,obj){
+			if(targetCate2.cateParent === obj.value){
+				$(obj).attr("selected","selected");
+			}
+		});
+		
+		$("#cancelBtn").on("click", function(e){
+			e.preventDefault();
+			$("#moveForm").submit();
+		});
+		
+		/* 수정 페이지 이동 */
+		$("#modifyBtn").on("click", function(e){
+			e.preventDefault();
+			
+			let addInput = '<input type="hidden" name="bookId" value="${goodsInfo.bookId}">';
+			$("#moveForm").append(addInput);
+			$("#moveForm").attr("action", "/admin/goodsModify");
+			$("#moveForm").submit();
+		});
+			
  			
  	});
  		

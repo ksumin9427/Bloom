@@ -47,6 +47,12 @@
   		
   	</select>
   	
+  	<update id="goodsModify">
+  		update bloom_book set bookName = #{bookName}, authorId = #{authorId}, publicYear = #{publicYear}, publisher = #{publisher}, cateCode = ${cateCode}, 
+		bookPrice = #{bookPrice}, bookStock = #{bookStock}, bookDiscount = #{bookDiscount}, bookIntro = #{bookIntro}, bookContents = #{bookContents}, updateDate = now()
+		where bookId = ${bookId}
+  	</update>
+  	
   </mapper>
   
   
