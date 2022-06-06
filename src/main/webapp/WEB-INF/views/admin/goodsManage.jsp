@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/goodsManage.css?ver=13">
+<link rel="stylesheet" href="../resources/css/admin/goodsManage.css?ver=14">
  
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -121,6 +121,12 @@
 			}
 			alert("상품'"+eResult+"'을 등록하였습니다.");
 			
+		}
+		
+		/* 수정 성공하였을 시의 이벤트 */
+		let modify_result = '${modify_result}';
+		if(modify_result == 1){
+			alert("수정완료");
 		}
 	});
 	
