@@ -125,9 +125,19 @@
 		
 		/* 수정 성공하였을 시의 이벤트 */
 		let modify_result = '${modify_result}';
+		
 		if(modify_result == 1){
 			alert("수정완료");
 		}
+		
+		/* 삭제시 경고창 */
+		let delete_result = "${delete_result}";
+		
+		if(delete_result == 1){
+			alert("삭제완료");
+			
+		}
+		
 	});
 	
 	let searchForm = $('#searchForm');

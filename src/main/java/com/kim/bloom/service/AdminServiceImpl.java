@@ -39,12 +39,14 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<BookVO> goodsGetList(Criteria cri) {
 		log.info("(service)goodsGetList..........");
+		
 		return adminMapper.goodsGetList(cri);
 	}
 
 	@Override
 	public int goodsGetTotal(Criteria cri) {
 		log.info("(service)goodsGetTotal..........");
+		
 		return adminMapper.goodsGetTotal(cri);
 	}
 
@@ -57,7 +59,15 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int goodsModify(BookVO vo) {
 		log.info("(service)goodsModify..........");
+		
 		return adminMapper.goodsModify(vo);
+	}
+
+	@Override
+	public int goodsDelete(int bookId) {
+		log.info("(service)goodsDelete..........");
+		
+		return adminMapper.goodsDelete(bookId);
 	}
 
 }

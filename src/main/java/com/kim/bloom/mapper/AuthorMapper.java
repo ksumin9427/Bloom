@@ -18,4 +18,7 @@ public interface AuthorMapper {
 	public AuthorVO authorGetDetail(int authorId);
 	
 	public int authorModify(AuthorVO author);
+	
+	/* 작가 삭제 */
+	public int authorDelete(int authorId);
 }

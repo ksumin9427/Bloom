@@ -53,6 +53,10 @@
 		where bookId = ${bookId}
   	</update>
   	
+  	<delete id="goodsDelete">
+  		delete from bloom_book where bookId = #{bookId}
+  	</delete>
+  	
   </mapper>
   
   

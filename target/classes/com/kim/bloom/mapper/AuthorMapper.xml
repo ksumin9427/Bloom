@@ -39,5 +39,10 @@
      	update bloom_author set authorName = #{authorName}, nationId = #{nationId}, authorIntro = #{authorIntro}, updateDate = now()
      	where authorId = #{authorId}
      </update>
+     
+     <!-- 작가 삭제 -->
+     <delete id="authorDelete">
+     	delete from bloom_author where authorId = #{authorId}
+     </delete>
       
   </mapper>

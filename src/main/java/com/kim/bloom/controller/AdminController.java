@@ -198,6 +198,48 @@ public class AdminController {
 		
 		return "redirect:/admin/goodsManage";
 		
+	}
+	
+	/* 상품 삭제 */
+	@PostMapping("/goodsDelete")
+	public String goodsDeletePost(int bookId, RedirectAttributes rttr) {
+		logger.info("goodsDeletePost...........");
+		
+		int result = adminService.goodsDelete(bookId);
+		
+		rttr.addFlashAttribute("delete_result", result);
+		
+		return "redirect:/admin/goodsManage";
+		
+	}
+	
+	
+	/* 작가 삭제 */
+	/* 참조되지 않는 행을 지울 때는 삭제를 수행하고 작가 목록 페이지로 1을 전송
+	 * 예외 발생시, 2를 전송 */
+	@PostMapping("/authorDelete")
+	public String authorDeletePost(int authorId, RedirectAttributes rttr) {
+		logger.info("authorDeletePost...........");
+		
+		int result = 0;
+		
+		try {
+			
+			result = authorService.authorDelete(authorId);
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+			result = 2;
+			
+			rttr.addFlashAttribute("delete_result", result);
+			
+			return "redirect:/admin/authorManage";
+		}
+		rttr.addFlashAttribute("delete_result", result);
+		
+		return "redirect:/admin/authorManage";
 		
 	}
 	

@@ -83,8 +83,9 @@
 	                   		</div>
 	                   		
 	                 		<div class="btn_section">
-	                   			<button id="cancelBtn" class="btn">취소</button>
-		                    	<button id="modifyBtn" class="btn modify_btn">수정</button>
+	                   			<button id="cancelBtn" class="btn">취 소</button>
+		                    	<button id="modifyBtn" class="btn modify_btn">수 정</button>
+		                    	<button id="deleteBtn" class="btn delete_btn">삭 제</button>
 		                    </div> 
 		                    
 	                    </form>
@@ -111,6 +112,18 @@
 			
 			moveForm.attr("action", "/admin/authorDetail")
 			moveForm.submit();
+		});
+		
+		/* 삭제 버튼 */
+		$("#deleteBtn").on("click", function(e){
+			e.preventDefault();
+			
+			moveForm.find("input").remove();
+			moveForm.append('<input type="hidden" name="authorId" value="${authorInfo.authorId}">');
+			moveForm.attr("action", "/admin/authorDelete");
+			moveForm.attr("method", "post");
+			moveForm.submit();
+			
 		});
 		
 		$("modifyBtn").on("click",function(e){

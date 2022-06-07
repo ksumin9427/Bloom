@@ -21,28 +21,33 @@ public class AuthorMapperTest {
 	
 	@Autowired
     private AuthorMapper mapper;
-    
-    @Test
-    public void authorGetListTest() throws Exception{
-        Criteria cri = new Criteria(3, 10);
-        
-        cri.setKeyword("김영하");
-        List<AuthorVO> list = mapper.authorGetList(cri);
-        
-        for (int i = 0; i < list.size() ; i++) {
-			System.out.println("list"+i+"...."+list.get(i));
-			
+	
+	@Test
+	public void authorDeleteTest() {
+		int authorId = 3;
+		int result = mapper.authorDelete(authorId);
+		
+		if (result == 1) {
+			System.out.println("삭제 성공");
 		}
-    }
+	}
     
-    @Test
-    public void authorModityTest() {
-    	AuthorVO author = new AuthorVO();
-    	
-    	author.setAuthorId(3555);
-    	author.setAuthorName("수정");
-    	author.setAuthorIntro("수정하였습니다.");
-    	
-    	mapper.authorModify(author);
-    }
+	/*
+	 * @Test public void authorGetListTest() throws Exception{ Criteria cri = new
+	 * Criteria(3, 10);
+	 * 
+	 * cri.setKeyword("김영하"); List<AuthorVO> list = mapper.authorGetList(cri);
+	 * 
+	 * for (int i = 0; i < list.size() ; i++) {
+	 * System.out.println("list"+i+"...."+list.get(i));
+	 * 
+	 * } }
+	 * 
+	 * @Test public void authorModityTest() { AuthorVO author = new AuthorVO();
+	 * 
+	 * author.setAuthorId(3555); author.setAuthorName("수정");
+	 * author.setAuthorIntro("수정하였습니다.");
+	 * 
+	 * mapper.authorModify(author); }
+	 */
 }
