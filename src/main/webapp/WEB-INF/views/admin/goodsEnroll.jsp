@@ -333,17 +333,29 @@ $("#discount_interface").on("propertychange change keyup paste input", function(
 	
 	/* 이미지 업로드 */
 	$("input[type='file']").on("change", function(e){
-		/* alert("동작"); */
+		
 		/* FileList 접근하기 위한 코드 */
+		let formData = new FormData();
 		let fileInput = $('input[name="uploadFile"]');
 		let fileList = fileInput[0].files;
 		let fileObj = fileList[0];
 		
-		console.log("fileList: "+fileList);
-		console.log("fileObj: "+fileObj);
-		console.log("fileName: "+fileObj.name);
-		console.log("fileSize: "+fileObj.size);
-		console.log("fileType(MimeType): "+fileObj.type);
+		if(!fileCheck(fileObj.name,fileObj.size)){
+			return false;
+		}
+		
+		formData.append("uploadFile",fileObj);
+		
+		/* 첨부파일을 AJAX를 이용하여 서버에 전송하는 코드 */
+		$.ajax({
+			url : '/admin/uploadAjaxAction',
+			processData : false, /* 서버로 전송할 데이터를 queryStirng 형태로 변환할지 여부 */
+			contentType : false, /* 서버로 전송되는 데이터의 content-type */
+			data : formData, /* 서버로 전송할 데이터 */
+			type : 'POST', /* 서버 요청 타입(GET, POST) */
+			dataType : 'json' /* 서버로부터 반환받을 데이터 타입 */
+		});
+		
 	});
 	
 	let regex = new RegExp("(.*?)\.(jpg|png)$");
