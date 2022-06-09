@@ -1,10 +1,9 @@
 package com.kim.bloom.controller;
 
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -14,6 +13,9 @@ import javax.imageio.ImageIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kim.bloom.model.AttachImageVO;
 import com.kim.bloom.model.AuthorVO;
 import com.kim.bloom.model.BookVO;
 import com.kim.bloom.model.Criteria;
@@ -261,10 +264,10 @@ public class AdminController {
 
 	}
 
-	/* 첨부파일 업로드 */
+	/* 첨부파일 업로드 수행 메서드*/
 	/* 뷰에서 전송한 첨부파일 데이터를 받기 위해 MultipartFile */
-	@PostMapping("/uploadAjaxAction")
-	public void uploadAjaxActionPost(MultipartFile[] uploadFile) {
+	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<AttachImageVO>> uploadAjaxActionPost(MultipartFile[] uploadFile) {
 		logger.info("uploadAjaxActionPost...........");
 		String uploadFolder = "C:\\upload";
 
@@ -280,13 +283,24 @@ public class AdminController {
 		if (uploadPath.exists() == false) {
 			uploadPath.mkdirs();
 		}
-
+		
+		/* 이미지의 정보를 담기 위한 객체 */
+		List<AttachImageVO> list = new ArrayList();
+		
+		/* 향상된 for문 */
 		for (MultipartFile multipartFile : uploadFile) {
+			
+			/* 이미지 정보 객체 */
+			AttachImageVO vo = new AttachImageVO();
+			
 			/* 파일 이름 */
 			String uploadFileName = multipartFile.getOriginalFilename();
+			vo.setFileName(uploadFileName);
+			vo.setUploadPath(datePath);
 
 			/* UUID 적용 파일 이름, 식별자가 UUID 타입이기 때문에 string으로 변환해야 한다 */
 			String uuid = UUID.randomUUID().toString();
+			vo.setUuid(uuid);
 
 			uploadFileName = uuid + "_" + uploadFileName;
 
@@ -296,26 +310,7 @@ public class AdminController {
 			/* 파일 저장 */
 			try {
 				multipartFile.transferTo(saveFile);
-
-				/*
-				 * 썸네일 생성 File thumbnailFile = new File(uploadPath,"s_"+uploadFileName);
-				 * 
-				 * BufferedImage bo_image = ImageIO.read(saveFile);
-				 * 
-				 * 원본 이미지 비율을 지정한 값 비율로 줄이기 위해 double ratio = 3; int width = (int)
-				 * (bo_image.getWidth() / ratio); int height = (int) (bo_image.getHeight() /
-				 * ratio);
-				 * 
-				 * 
-				 * BufferedImage bt_image = new BufferedImage(width, height,
-				 * BufferedImage.TYPE_3BYTE_BGR);
-				 * 
-				 * Graphics2D graphic = bt_image.createGraphics();
-				 * 
-				 * graphic.drawImage(bo_image, 0, 0, width, height, null);
-				 * 
-				 * 제작한 썸네일 이미지를 파일로 저장 ImageIO.write(bt_image, "jpg", thumbnailFile);
-				 */
+				
 				File thumbnailFile = new File(uploadPath,"s_"+uploadFileName);
 				
 				BufferedImage bo_image = ImageIO.read(saveFile);
@@ -331,8 +326,12 @@ public class AdminController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+			list.add(vo);
 		}
-
+			ResponseEntity<List<AttachImageVO>> result = new ResponseEntity<List<AttachImageVO>>(list, HttpStatus.OK);
+			
+			return result;
 	}
 
 }
