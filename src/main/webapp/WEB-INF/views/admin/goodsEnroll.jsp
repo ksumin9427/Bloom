@@ -340,9 +340,9 @@ $("#discount_interface").on("propertychange change keyup paste input", function(
 		let fileList = fileInput[0].files;
 		let fileObj = fileList[0];
 		
-		if(!fileCheck(fileObj.name,fileObj.size)){
+		/* if(!fileCheck(fileObj.name,fileObj.size)){
 			return false;
-		}
+		} */
 		
 		formData.append("uploadFile",fileObj);
 		
@@ -356,6 +356,9 @@ $("#discount_interface").on("propertychange change keyup paste input", function(
 			dataType : 'json', /* 서버로부터 반환받을 데이터 타입 */
 			success : function(result){
 				console.log(result);
+			},
+			error : function(result){
+				alert("이미지 파일이 아닙니다.")
 			}
 		});
 		

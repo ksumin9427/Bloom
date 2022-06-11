@@ -2,6 +2,8 @@ package com.kim.bloom.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -266,9 +268,26 @@ public class AdminController {
 
 	/* 첨부파일 업로드 수행 메서드*/
 	/* 뷰에서 전송한 첨부파일 데이터를 받기 위해 MultipartFile */
-	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<AttachImageVO>> uploadAjaxActionPost(MultipartFile[] uploadFile) {
 		logger.info("uploadAjaxActionPost...........");
+		
+		for (MultipartFile multipartFile: uploadFile ) {
+			File checkFile = new File(multipartFile.getOriginalFilename());
+			String type = null;
+			
+			try {
+				type = Files.probeContentType(checkFile.toPath());
+				logger.info("MIME TYPE: "+type);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if(!type.startsWith("image")) {
+				List<AttachImageVO> list = null;
+				return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
+			}
+		}
+		
 		String uploadFolder = "C:\\upload";
 
 		/* 날짜 폴더 경로 */
