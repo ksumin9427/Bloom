@@ -17,6 +17,36 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<style type="text/css">
+	#result_card img{
+		max-width: 100%;
+	    height: auto;
+	    display: block;
+	    padding: 5px;
+	    margin-top: 10px;
+	    margin: auto;	
+	}
+	#result_card {
+		position: relative;
+	}
+	.imgDeleteBtn{
+	    position: absolute;
+	    top: 0;
+	    right: 5%;
+	    background-color: #ef7d7d;
+	    color: wheat;
+	    font-weight: 900;
+	    width: 30px;
+	    height: 30px;
+	    border-radius: 50%;
+	    line-height: 26px;
+	    text-align: center;
+	    border: none;
+	    display: block;
+	    cursor: pointer;	
+	}
+	
+</style>
 </head>
 <body>
  
@@ -154,6 +184,12 @@
                     			</div>
                     			<div class="form_section_content">
 									<input type="file" id="fileItem" name="uploadFile" style="height: 30px;">
+									<div id="uploadResult">
+										<!-- <div id="result_card">
+											<div class="imgDeleteBtn">x</div>
+											<img src="/display?fileName=바람이 분다.jpg">
+										</div> -->
+									</div>
                     			</div>
                     		</div>
                     		
