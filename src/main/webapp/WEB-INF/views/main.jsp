@@ -51,7 +51,7 @@
 			
 			<div class="top_area">
 				<div class="logo_area">
-					<a href="/main"><img src="resources/img/Bloom_logo.png"></a>
+					<a href="/main"><img src="resources/img/Logo.png"></a>
 				</div>
 				
 				<div class="search_area">
@@ -115,7 +115,7 @@
             <div class="footer_container">
                 
                 <div class="footer_left">
-                    <img src="resources/img/Bloom_logo.png">
+                    <img src="resources/img/Logo.png">
                 </div>
                 <div class="footer_right">
                     (주) Bloom  대표이사 : 김수민

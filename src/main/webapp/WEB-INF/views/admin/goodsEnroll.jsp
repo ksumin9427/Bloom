@@ -370,6 +370,11 @@ $("#discount_interface").on("propertychange change keyup paste input", function(
 	/* 이미지 업로드 */
 	$("input[type='file']").on("change", function(e){
 		
+		/* 이미지가 존재할 시 삭제 */
+		if($(".imgDeleteBtn").length > 0){
+			deleteFile();
+		}
+		
 		/* FileList 접근하기 위한 코드 */
 		let formData = new FormData();
 		let fileInput = $('input[name="uploadFile"]');
@@ -392,6 +397,7 @@ $("#discount_interface").on("propertychange change keyup paste input", function(
 			dataType : 'json', /* 서버로부터 반환받을 데이터 타입 */
 			success : function(result){
 				console.log(result);
+				showUploadImage(result);
 			},
 			error : function(result){
 				alert("이미지 파일이 아닙니다.")
@@ -415,6 +421,59 @@ $("#discount_interface").on("propertychange change keyup paste input", function(
 		return true;
 	}
 	
+	/* 이미지 출력 메서드 */
+	function showUploadImage(uploadResultArr){
+		
+		if(!uploadResultArr || uploadResultArr.length == 0){
+			return;
+		}
+		
+		let uploadResult = $("#uploadResult");
+		
+		let obj = uploadResultArr[0];
+		
+		let str = "";
+		
+		let fileCallPath = encodeURIComponent(obj.uploadPath+ "/s_" + obj.uuid + "_" + obj.fileName);
+		
+		str += "<div id='result_card'>";
+		str += "<img src='/display?fileName=" + fileCallPath +"'>";
+		str += "<div class='imgDeleteBtn' data-file='"+fileCallPath+"'>x</div>";
+		str += "</div>";
+		
+		uploadResult.append(str);
+	}
+	
+	/* 이미지 삭제 버튼 동작 메서드 */
+	$("#uploadResult").on("click", ".imgDeleteBtn", function(e){
+		deleteFile();
+	});
+	
+	
+	/* 파일 삭제 메서드 */
+	function deleteFile(){
+		
+		let targetFile = $(".imgDelteBtn").data("file");
+		let targetDiv = $("#result_card");
+		
+		$.ajax({
+			url : '/admin/deleteFile',
+			data : {fileName : targetFile},
+			dataType : 'text',
+			type : 'POST',
+			success : function(result){
+				console.log(result);
+				
+				targetDiv.remove();
+				$("input[type='file']").val("");
+			},
+			error : function(result){
+				console.log(result);
+				
+				alert("파일을 삭제하지 못하였습니다.")
+			}
+		});
+	}
 	
 
 /*이지웍 사용 */
