@@ -7,6 +7,14 @@
   	
   	<!-- 책 등록 -->
   	<insert id="bookEnroll">
+  	
+  		<selectKey resultType="int" keyProperty="bookId" order="AFTER">
+  		
+  			SELECT LAST_INSERT_ID()
+  			
+  		</selectKey>
+  		
+  		
   		insert into bloom_book(bookName, authorId, publicYear, publisher, cateCode, bookPrice, 
   			bookStock, bookDiscount, bookIntro ,bookContents) 
   		values(#{bookName}, #{authorId}, #{publicYear}, #{publisher}, #{cateCode},
@@ -56,6 +64,11 @@
   	<delete id="goodsDelete">
   		delete from bloom_book where bookId = #{bookId}
   	</delete>
+  	
+  	<!-- 이미지 등록 -->
+  	<insert id="imageEnroll">
+  		insert into bloom_image(bookId, fileName, uploadPath, uuid) values(#{bookId},#{fileName},#{uploadPath},#{uuid})
+  	</insert>
   	
   </mapper>
   

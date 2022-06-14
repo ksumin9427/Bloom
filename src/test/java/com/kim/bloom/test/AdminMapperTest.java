@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.kim.bloom.mapper.AdminMapper;
+import com.kim.bloom.model.AttachImageVO;
 import com.kim.bloom.model.BookVO;
 
 @WebAppConfiguration
@@ -19,14 +20,36 @@ public class AdminMapperTest {
 	private AdminMapper mapper;
 	
 	
-	
 	/*
-	 * @Test public void goodsDeleteTest() { int bookId = 15346;
+	 * @Test public void imageEnrollTest() { AttachImageVO vo = new AttachImageVO();
 	 * 
-	 * int result =mapper.goodsDelete(bookId);
+	 * vo.setBookId(16372); vo.setFileName("test"); vo.setUploadPath("test");
+	 * vo.setUuid("test2");
 	 * 
-	 * if(result == 1) { System.out.println("삭제 성공"); } }
+	 * mapper.imageEnroll(vo); }
 	 */
+	
+	/* 책 등록 */
+	@Test
+	public void bookEnrollTest() throws Exception{
+		
+		BookVO book = new BookVO();
+		
+		book.setBookName("테스트");
+		book.setAuthorId(759);
+		book.setPublicYear("2022-06-14");
+		book.setPublisher("출판사");
+		book.setCateCode("101001");
+		book.setBookPrice(20000);
+		book.setBookStock(300);
+		book.setBookDiscount(0.23);
+		book.setBookIntro("책 소개 ");
+		book.setBookContents("책 목차 ");
+		System.out.println("Before BookVO: "+book);
+		mapper.bookEnroll(book);
+		System.out.println("After BookVO: "+book);
+	}
+	
 	
 	/*
 	 * @Test public void goodsModifyTest() {

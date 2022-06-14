@@ -1,6 +1,7 @@
 package com.kim.bloom.model;
 
 import java.sql.Date;
+import java.util.List;
 
 public class BookVO {
 	
@@ -40,6 +41,18 @@ public class BookVO {
 	private Date regDate;
 	
 	private Date updateDate;
+	
+	/* 이미지 정보 */
+	private List<AttachImageVO> imageList;
+	
+
+	public List<AttachImageVO> getImageList() {
+		return imageList;
+	}
+
+	public void setImageList(List<AttachImageVO> imageList) {
+		this.imageList = imageList;
+	}
 
 	public int getBookId() {
 		return bookId;
@@ -167,6 +180,6 @@ public class BookVO {
 				+ authorName + ", publeYear=" + publicYear + ", publisher=" + publisher + ", cateCode=" + cateCode
 				+ ", cateName=" + cateName + ", bookPrice=" + bookPrice + ", bookStock=" + bookStock + ", bookDiscount="
 				+ bookDiscount + ", bookIntro=" + bookIntro + ", bookContents=" + bookContents + ", regDate=" + regDate
-				+ ", updateDate=" + updateDate + "]";
+				+ ", updateDate=" + updateDate + ", imageList=" + imageList +"]";
 	}
 }

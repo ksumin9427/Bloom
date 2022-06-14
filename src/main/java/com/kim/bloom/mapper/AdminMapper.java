@@ -2,6 +2,7 @@ package com.kim.bloom.mapper;
 
 import java.util.List;
 
+import com.kim.bloom.model.AttachImageVO;
 import com.kim.bloom.model.BookVO;
 import com.kim.bloom.model.CateVO;
 import com.kim.bloom.model.Criteria;
@@ -27,6 +28,9 @@ public interface AdminMapper {
 	
 	/* 상품 삭제 */
 	public int goodsDelete(int bookId);
+	
+	/* 이미지 등록 */
+	public void imageEnroll(AttachImageVO vo);
 	
 	
 }

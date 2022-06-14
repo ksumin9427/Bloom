@@ -439,6 +439,9 @@ $("#discount_interface").on("propertychange change keyup paste input", function(
 		str += "<div id='result_card'>";
 		str += "<img src='/display?fileName=" + fileCallPath +"'>";
 		str += "<div class='imgDeleteBtn' data-file='"+fileCallPath+"'>x</div>";
+		str += "<input type='hidden' name='imageList[0].fileName' value='"+obj.fileName+"'>";
+		str += "<input type='hidden' name='imageList[0].uuid' value='"+obj.uuid+"'>";
+		str += "<input type='hidden' name='imageList[0].uploadPath' value='"+obj.uploadPath+"'>";
 		str += "</div>";
 		
 		uploadResult.append(str);
@@ -453,7 +456,7 @@ $("#discount_interface").on("propertychange change keyup paste input", function(
 	/* 파일 삭제 메서드 */
 	function deleteFile(){
 		
-		let targetFile = $(".imgDelteBtn").data("file");
+		let targetFile = $(".imgDeleteBtn").data("file");
 		let targetDiv = $("#result_card");
 		
 		$.ajax({
