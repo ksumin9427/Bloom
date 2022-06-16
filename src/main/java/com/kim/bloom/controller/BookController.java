@@ -25,7 +25,7 @@ import com.kim.bloom.service.AttachService;
 public class BookController {
 	
 	@Autowired
-	private AttachMapper attachMapper;
+	private AttachService attachService;
 	
 	/* Console 창에 해당 로그가 찍혀 프로그램이 오류 발생 시 어디서 어떤 이유로 오류가 발생하는지 알 수 있어 이슈 처리가 용이 */
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
@@ -63,7 +63,7 @@ public class BookController {
 	public ResponseEntity<List<AttachImageVO>> getAttachList(int bookId){
 		logger.info("getAttachList............"+bookId);
 		
-		return new ResponseEntity(attachMapper.getAttachList(bookId), HttpStatus.OK);
+		return new ResponseEntity(attachService.getAttachList(bookId), HttpStatus.OK);
 		
 	}
 	

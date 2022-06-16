@@ -70,6 +70,10 @@
   		insert into bloom_image(bookId, fileName, uploadPath, uuid) values(#{bookId},#{fileName},#{uploadPath},#{uuid})
   	</insert>
   	
+  	<delete id="deleteImageAll">
+  		delete from bloom_image where bookId = #{bookId}
+  	</delete>
+  	
   </mapper>
   
   
