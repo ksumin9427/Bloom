@@ -1,5 +1,7 @@
 package com.kim.bloom.test;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,17 @@ public class AdminMapperTest {
 	@Autowired
 	private AdminMapper mapper;
 	
+	@Test
+	public void getAttachInfoTest() {
+		int bookId = 16391;
+		List<AttachImageVO> list = mapper.getAttachInfo(bookId);
+		System.out.println("list : "+list);
+	}
+	
+	/*
+	 * @Test public void checkImageListTest() { mapper.checkFileList(); }
+	 */
+	
 	
 	/*
 	 * @Test public void imageEnrollTest() { AttachImageVO vo = new AttachImageVO();
@@ -29,26 +42,18 @@ public class AdminMapperTest {
 	 * mapper.imageEnroll(vo); }
 	 */
 	
-	/* 책 등록 */
-	@Test
-	public void bookEnrollTest() throws Exception{
-		
-		BookVO book = new BookVO();
-		
-		book.setBookName("테스트");
-		book.setAuthorId(759);
-		book.setPublicYear("2022-06-14");
-		book.setPublisher("출판사");
-		book.setCateCode("101001");
-		book.setBookPrice(20000);
-		book.setBookStock(300);
-		book.setBookDiscount(0.23);
-		book.setBookIntro("책 소개 ");
-		book.setBookContents("책 목차 ");
-		System.out.println("Before BookVO: "+book);
-		mapper.bookEnroll(book);
-		System.out.println("After BookVO: "+book);
-	}
+	/*
+	 * @Test public void bookEnrollTest() throws Exception{
+	 * 
+	 * BookVO book = new BookVO();
+	 * 
+	 * book.setBookName("테스트"); book.setAuthorId(759);
+	 * book.setPublicYear("2022-06-14"); book.setPublisher("출판사");
+	 * book.setCateCode("101001"); book.setBookPrice(20000); book.setBookStock(300);
+	 * book.setBookDiscount(0.23); book.setBookIntro("책 소개 ");
+	 * book.setBookContents("책 목차 "); System.out.println("Before BookVO: "+book);
+	 * mapper.bookEnroll(book); System.out.println("After BookVO: "+book); }
+	 */
 	
 	
 	/*

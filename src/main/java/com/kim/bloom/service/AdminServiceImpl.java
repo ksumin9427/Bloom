@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kim.bloom.mapper.AdminMapper;
+import com.kim.bloom.model.AttachImageVO;
 import com.kim.bloom.model.BookVO;
 import com.kim.bloom.model.CateVO;
 import com.kim.bloom.model.Criteria;
@@ -69,6 +70,7 @@ public class AdminServiceImpl implements AdminService{
 		return adminMapper.goodsGetDetail(bookId);
 	}
 	
+	/* 두 개 이상의 쿼리를 요청하기 때문에 @Transactional 사용 */ 
 	@Transactional
 	@Override
 	public int goodsModify(BookVO vo) {
@@ -93,6 +95,13 @@ public class AdminServiceImpl implements AdminService{
 		log.info("(service)goodsDelete..........");
 		
 		return adminMapper.goodsDelete(bookId);
+	}
+
+	@Override
+	public List<AttachImageVO> getAttachInfo(int bookId) {
+		log.info("(service)getAttachInfo..........");
+		
+		return adminMapper.getAttachInfo(bookId);
 	}
 
 }
