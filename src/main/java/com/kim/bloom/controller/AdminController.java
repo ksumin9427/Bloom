@@ -247,7 +247,7 @@ public class AdminController {
 			});
 			
 			pathList.forEach(path -> {
-				//////
+				path.toFile().delete();
 			});
 		}
 

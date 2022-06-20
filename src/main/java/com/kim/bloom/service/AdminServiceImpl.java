@@ -90,9 +90,12 @@ public class AdminServiceImpl implements AdminService{
 		return result;
 	}
 
+	@Transactional
 	@Override
 	public int goodsDelete(int bookId) {
 		log.info("(service)goodsDelete..........");
+		
+		adminMapper.deleteImageAll(bookId);
 		
 		return adminMapper.goodsDelete(bookId);
 	}
