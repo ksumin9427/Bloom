@@ -12,7 +12,7 @@ import com.kim.bloom.mapper.AttachMapper;
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
-public class AttachMapperTest {
+public class AttachMapperTests {
 	
 	@Autowired
 	private AttachMapper attachMapper;

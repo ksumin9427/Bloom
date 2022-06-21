@@ -16,7 +16,7 @@ import com.kim.bloom.model.BookVO;
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
-public class AdminMapperTest {
+public class AdminMapperTests {
 	
 	@Autowired
 	private AdminMapper mapper;

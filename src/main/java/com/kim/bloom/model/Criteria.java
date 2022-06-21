@@ -1,5 +1,7 @@
 package com.kim.bloom.model;
 
+import java.util.Arrays;
+
 public class Criteria { 
 	/* 페이징 쿼리를 동적 제어하기 위해 필요한 데이터 'pageNum'과 'amount'을 같이 파라미터로 전달하기 위한 용도 */
 	
@@ -8,6 +10,8 @@ public class Criteria {
 	private int skip; /* 스킵할 게시물 수 */
 	private String type; /* 검색 카테고리 */
 	private String keyword; /* 검색 키워드 */
+	private String[] authorArr; /* 작가 리스트 */
+	private String cateCode; /* 카테고리 코드 */
 	
 	public Criteria(int pageNum, int amount) {
 		this.pageNum = pageNum;
@@ -19,6 +23,22 @@ public class Criteria {
 		this(1,10);
 	}
 	
+	public String[] getAuthorArr() {
+		return authorArr;
+	}
+
+	public void setAuthorArr(String[] authorArr) {
+		this.authorArr = authorArr;
+	}
+
+	public String getCateCode() {
+		return cateCode;
+	}
+
+	public void setCateCode(String cateCode) {
+		this.cateCode = cateCode;
+	}
+
 	public String[] getTypeArr() { /* 타입을 하나의 문자열로 저장하고, 사용할 때에는 각각을 나눠 배열로 가져온다. */
 		return type == null? new String[] {}:type.split("");
 	}
@@ -68,7 +88,7 @@ public class Criteria {
 	@Override
 	public String toString() {
 		
-		 return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", type=" + type + ", keyword=" 
-		 + keyword + "]";
+		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", type=" + type + ", keyword=" + keyword
+				+ ", authorArr=" + Arrays.toString(authorArr) + ", cateCode=" + cateCode + "]";
 	}
 }

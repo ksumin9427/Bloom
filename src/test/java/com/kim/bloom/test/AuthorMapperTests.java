@@ -17,7 +17,7 @@ import com.kim.bloom.model.Criteria;
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
-public class AuthorMapperTest {
+public class AuthorMapperTests {
 	
 	@Autowired
     private AuthorMapper mapper;
