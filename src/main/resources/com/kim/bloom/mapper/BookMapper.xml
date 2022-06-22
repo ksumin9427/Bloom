@@ -41,7 +41,7 @@
   	
   	<!--상품 검색-->
   	<select id="getGoodsList" resultType="com.kim.bloom.model.BookVO">
-  		select  bookId, bookName, b.authorName, a.authorId, c.cateName, a.cateCode, publisher, publicYear, bookPrice
+  		select  bookId, bookName, b.authorName, a.authorId, c.cateName, a.cateCode, publisher, publicYear, bookPrice, bookDiscount
 		from bloom_book a left outer join bloom_author b on a.authorId = b.authorId
 		left outer join bloom_bcate c on a.cateCode = c.cateCode
 		<include refid="criteria"></include>
