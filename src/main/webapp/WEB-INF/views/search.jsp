@@ -112,8 +112,8 @@
 								<c:forEach items="${list}" var="list">
 									<tr>
 										<td class="image">
-											<div class="image_wrap" data-bookid="${list.imageList[0].bookId}" data-path="${list.imageList[0].uploadPath}"
-											data-uuid="${list.imageList[0].uuid}" data-fileName="${list.imageList[0].fileName}">
+											<div class="image_wrap" data-bookid="${list.imageList[0].bookId}" data-path="${list.imageList[0].uploadPath}" data-uuid="${list.imageList[0].uuid}" data-filename="${list.imageList[0].fileName}">
+												<img>
 											</div>
 										</td>
 										<td class="detail">
@@ -186,6 +186,7 @@
 					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 					<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 					<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+					<input type="hidden" name="cateCode" value="${pageMaker.cri.cateCode}">
 					<input type="hidden" name="type" value="${pageMaker.cri.type}">
 				</form>
 				
@@ -255,30 +256,37 @@
 		
 		/* 페이지 이동 버튼 */
 		const moveForm = $("#moveForm");
-		$(".pageMaker_btn_a").on("click", function(e){
+		$(".pageMaker_btn a").on("click", function(e){
 			e.preventDefault();
 			moveForm.find("input[name='pageNum']").val($(this).attr("href"));
 			moveForm.submit();
 		});
 		
 		
+		
 		$(document).ready(function(){
 		/* 검색 타입 selected하기	 */
 		const selectedType = '<c:out value="${pageMaker.cri.type}"/>';
 		if(selectedType != ""){
-			$("selected[name='type']").val(selectedType).attr("selected","selected");
+			$("select[name='type']").val(selectedType).attr("selected","selected");
 		}
 		
 		/* 이미지 삽입 */
 		$(".image_wrap").each(function(i, obj){ // i는 순회하면서 실행될 때의 idnex, obj는 그 순서의 객체
 			const bobj = $(obj);
 			
-			const uploadPath = bobj.data("path");
-			const uuid = bobj.data("uuid");
-			const filename = bobj.data("filename");
-			const fileCallPath = encodeURIComponent(uploadPath+"/s_"+uuid+fileName);
+			if(bobj.data("bookid")){
+				const uploadPath = bobj.data("path");
+				const uuid = bobj.data("uuid");
+				const fileName = bobj.data("filename");
+				const fileCallPath = encodeURIComponent(uploadPath+"/s_"+uuid+"_"+fileName);
+				
+				$(this).find("img").attr('src','/display?fileName='+fileCallPath);
+			} else {
+				$(this).find("img").attr('src','/resources/img/NoImage.png');
+				
+			}
 			
-			$(this).find("img").attr('src','/display?fileName='+fileCallPath);
 			
 		});
 		

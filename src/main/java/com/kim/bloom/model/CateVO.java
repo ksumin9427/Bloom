@@ -4,7 +4,6 @@ public class CateVO {
 	/* 카테고리 등급 */
 	private int tier;
 	
-
 	private String cateName;
 	
 	/* 카테고리 넘버 */

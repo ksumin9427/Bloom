@@ -39,8 +39,11 @@ public class BookController {
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String mainPageGet() {
+	public String mainPageGet(Model model) {
 		logger.info("메인페이지 진입");
+		
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
 		
 		return "main";
 	}
