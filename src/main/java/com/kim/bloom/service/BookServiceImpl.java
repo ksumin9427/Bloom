@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kim.bloom.mapper.AdminMapper;
 import com.kim.bloom.mapper.AttachMapper;
 import com.kim.bloom.mapper.BookMapper;
 import com.kim.bloom.model.AttachImageVO;
@@ -25,6 +26,9 @@ public class BookServiceImpl implements BookService{
 	
 	@Autowired
 	private AttachMapper attachMapper;
+	
+	@Autowired
+	private AdminMapper adminMapper;
 	
 	/* 상품 검색 */
 	@Override
@@ -92,6 +96,9 @@ public class BookServiceImpl implements BookService{
 		for(String type : typeArr) {
 			if(type.equals("A")) {
 				authorArr = bookMapper.getAuthorIdList(cri.getKeyword());
+				if(authorArr.length == 0) {
+					return filterInfoList;
+				}
 				cri.setAuthorArr(authorArr);
 			}
 		}
@@ -105,7 +112,15 @@ public class BookServiceImpl implements BookService{
 		}
 		cri.setCateCode(tempCateCode);
 		
-		return null;
+		return filterInfoList;
+	}
+
+	@Override
+	public BookVO getGoodsInfo(int bookId) {
+		BookVO goodsInfo = bookMapper.getGoodsInfo(bookId);
+		goodsInfo.setImageList(adminMapper.getAttachInfo(bookId));
+		
+		return goodsInfo;
 	}
 
 }

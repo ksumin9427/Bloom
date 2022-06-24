@@ -7,10 +7,7 @@
   
   	<!-- criteria 검색조건 -->
   	<sql id="criteria">
-  		<!-- <if test="keyword != null">
-  			where (bookName like concat ('%', #{keyword}, '%'))
-  		</if>
-  		 -->
+  		
   		<trim prefix="where (" suffix=")" prefixOverrides="AND">
   			<foreach item="type" collection="typeArr">
   				<trim prefix="AND">
@@ -41,7 +38,8 @@
   	
   	<!--상품 검색-->
   	<select id="getGoodsList" resultType="com.kim.bloom.model.BookVO">
-  		select  bookId, bookName, b.authorName, a.authorId, c.cateName, a.cateCode, publisher, publicYear, bookPrice, bookDiscount
+  		select  bookId, bookName, b.authorName, a.authorId, c.cateName, a.cateCode, publisher, 
+  		publicYear, bookPrice, bookDiscount
 		from bloom_book a left outer join bloom_author b on a.authorId = b.authorId
 		left outer join bloom_bcate c on a.cateCode = c.cateCode
 		<include refid="criteria"></include>
@@ -52,6 +50,7 @@
   	<!-- 상품 총 개수 -->
   	<select id="goodsGetTotal" resultType="int">
   		select count(*) from bloom_book a
+  		<include refid="criteria"></include>
   	</select>
   	
   	<select id="getAuthorIdList" resultType="String">
@@ -94,7 +93,8 @@
   	
   	<!-- 카테고리 정보 -->		
 	<select id="getCateInfo" resultType="com.kim.bloom.model.CateFilterDTO">
-		select DISTINCT count(*) cateCount, a.cateCode, b.cateName from bloom_book a left join bloom_bcate b on a.cateCode = b.cateCode 
+		select DISTINCT count(*) cateCount, a.cateCode, b.cateName 
+		from bloom_book a left join bloom_bcate b on a.cateCode = b.cateCode 
 		where 
 		<foreach item="type" collection="typeArr">		
   				<choose>
@@ -113,7 +113,14 @@
   					</when>
   				</choose>
   		</foreach>
+	</select>
 	
+	<select id="getGoodsInfo" resultType="com.kim.bloom.model.BookVO">
+		select a.bookId, a.bookName, a.authorId, b.authorName, a.publicYear, a.publisher,
+		a.cateCode, c.cateName, a.bookPrice, a.bookStock, a.bookDiscount, a.bookIntro, a.bookContents 
+		from bloom_book a left outer join bloom_author b on a.authorId = b.authorId
+		left outer join bloom_bcate c on a.catecode = c.catecode
+		where bookid = ${bookId}
 	</select>
   	
   </mapper>

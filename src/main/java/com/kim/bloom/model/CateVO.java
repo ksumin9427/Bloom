@@ -1,6 +1,7 @@
 package com.kim.bloom.model;
 
 public class CateVO {
+	
 	/* 카테고리 등급 */
 	private int tier;
 	
