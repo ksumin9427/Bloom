@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.kim.bloom.mapper.CartMapper">
+	
+	<insert id="addCart">
+		insert into bloom_cart(memberId, bookId, bookCount) values(#{memberId}, #{bookId}, #{bookCount})
+	</insert>
+	
+	<delete id="deleteCart">
+		delete from bloom_cart where cartId = #{cartId}
+	</delete>
+	
+	<update id="modifyCount">
+		update bloom_cart set bookCount = #{bookCount} where cartId = #{cartId}
+	</update>
+	
+	<select id="getCart" resultType="com.kim.bloom.model.CartDTO">
+		select a.cartId, a.memberId, a.bookId, a.bookCount, b.bookName, b.bookPrice, b.bookDiscount
+		from bloom_cart a left outer join bloom_book b on a.bookId = b.bookId
+		where memberId = #{memberId}
+	</select>
+	
+	<select id="checkCart" resultType="com.kim.bloom.model.CartDTO">
+		select * from bloom_cart where memberId = #{memberId} and bookId = #{bookId}
+	</select>
+	  
+  </mapper>

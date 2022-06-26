@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Welcome BookMall</title>
-<link rel="stylesheet" href="/resources/css/goodsDetail.css?ver=4">
+<link rel="stylesheet" href="/resources/css/goodsDetail.css?ver=5">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -218,14 +218,19 @@
 		}
 	
 		/* 년,월,일 형식*/
-		const year = "${goodsInfo.publicYear}";
 		
-		let tempYear = year.substr(0,10);
-		let yearArray = tempYear.split("-");
-		let publicYear = yearArray[0]+"년 "+yearArray[1]+"월 "+yearArray[2]+"일";
+		/* publicYear */
+	
+	const year = "${goodsInfo.publicYear}";
+	
+	let tempYear = year.substr(0,10);
+	let yearArray = tempYear.split("-");
+	let publicYear = yearArray[0]+"년 " +yearArray[1]+"월 " +yearArray[2]+"일";
+	
+	$(".publicYear").html(publicYear); 
+}); 	
 		
-		$(".publicyear").html(publicYear);
-	});
+		
 	
 </script>	
 	
