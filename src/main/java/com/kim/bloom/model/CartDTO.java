@@ -1,31 +1,43 @@
 package com.kim.bloom.model;
 
+import java.util.List;
+
 public class CartDTO {
 	
-	 private int cartId;
+	private int cartId;
 	    
-	 private String memberId;
+	private String memberId;
 	    
-	 private int bookId;
+	private int bookId;
 	    
-	 private int bookCount;
+	private int bookCount;
 	    
-	 private String bookName;
+	private String bookName;
 	    
-	 private int bookPrice;
+	private int bookPrice;
 	    
-	 private double bookDiscount;
+	private double bookDiscount;
 	    
 	/* 할인을 적용한 판매 가격 */
-	 private int salePrice;
+	private int salePrice;
 	    
 	/* 총 가격 = 판매 가격 X 수량  */
-	 private int totalPrice;
+	private int totalPrice;
 	 
-	 private int point;
+	private int point;
+	
+	private int totalPoint;
 	 
-	 private int totalPoint;
+	private List<AttachImageVO> imageList;
 	 
+	public List<AttachImageVO> getImageList() {
+		return imageList;
+	}
+
+	public void setImageList(List<AttachImageVO> imageList) {
+		this.imageList = imageList;
+	}
+
 	public int getPoint() {
 		return point;
 	}
@@ -103,7 +115,7 @@ public class CartDTO {
 		return "CartDTO [cartId=" + cartId + ", memberId=" + memberId + ", bookId=" + bookId + ", bookCount="
 				+ bookCount + ", bookName=" + bookName + ", bookPrice=" + bookPrice + ", bookDiscount=" + bookDiscount
 				+ ", salePrice=" + salePrice + ", totalPrice=" + totalPrice + ", point=" + point +", totalPoint=" +
-				totalPoint+ "]";
+				totalPoint+ ", imageList="+ imageList + "]";
 	}
 	
 	public void initSaleTotal() {

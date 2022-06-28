@@ -41,4 +41,19 @@ public class CartController {
 		
 		return "/cart";
 	}
+	
+	@PostMapping("/cart/update")
+	public String updateCartPost(CartDTO cart) {
+		cartService.modifyCount(cart);
+		
+		return "redirect:/cart/" +cart.getMemberId();
+	}
+	
+	@PostMapping("/cart/delete")
+	public String deleteCartPost(CartDTO cart) {
+		cartService.deleteCart(cart.getCartId());
+		
+		return "redirect:/cart/" +cart.getMemberId();
+		
+	}
 }
