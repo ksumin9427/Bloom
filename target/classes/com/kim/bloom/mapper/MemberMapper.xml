@@ -7,7 +7,7 @@
   	<insert id="memberJoin">
   		insert into bloom_member 
 		values(#{memberId},#{memberPw},#{memberName},#{memberMail},
-		#{memberAddr1},#{memberAddr2},#{memberAddr3}, 0, now(), 100000, 5000);
+		#{memberAddr1},#{memberAddr2},#{memberAddr3}, 0, now(), 100000, 5000)
   	</insert>
   
   	<select id="idCheck" resultType="int">
@@ -16,7 +16,12 @@
   	
   	<select id="memberLogin" resultType="com.kim.bloom.model.MemberVO">
   		select memberId, memberPw, memberName, adminCk, money, point 
-		from bloom_member where memberId = #{memberId};
+		from bloom_member where memberId = #{memberId}
+  	</select>
+  	
+  	<select id="getMemberInfo" resultType="com.kim.bloom.model.MemberVO">
+  		select memberId, memberName, memberMail, memberAddr1 ,memberAddr2, memberAddr3, money, point 
+		from bloom_member where memberId = #{memberId}
   	</select>
   	
   </mapper>

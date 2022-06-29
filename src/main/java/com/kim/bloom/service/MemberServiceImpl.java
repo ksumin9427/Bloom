@@ -30,6 +30,12 @@ public class MemberServiceImpl implements MemberSerivice{
 		return memberMapper.memberLogin(member);
 	}
 
+	@Override
+	public MemberVO getMemberInfo(String memberId) {
+		
+		return memberMapper.getMemberInfo(memberId);
+	}
+
 	
 
 }

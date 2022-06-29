@@ -162,6 +162,11 @@
 						<div class="content_bottom">
 							리뷰
 						</div>
+						
+						<form action="/order/${member.memberId}" method="get" class="order_form">
+							<input type="hidden" name="orders[0].bookId" value="${goodsInfo.bookId}">
+							<input type="hidden" name="orders[0].bookCount" value="">
+						</form>
 			
 					</div>
 					
@@ -280,6 +285,12 @@
 			alert("로그인이 필요합니다.");	
 		}
 	}
+	
+	$(".btn_buy").on("click", function(){
+		let bookCount = $(".quantity_input").val();
+		$(".order_form").find("input[name='orders[0].bookCount']").val(bookCount);
+		$(".order_form").submit();
+	});
 		
 		
 	
