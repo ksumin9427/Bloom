@@ -1,5 +1,7 @@
 package com.kim.bloom.model;
 
+import java.util.List;
+
 public class OrderPageItemDTO {
 	
 	private int bookId;
@@ -20,12 +22,29 @@ public class OrderPageItemDTO {
 	
 	private int totalPoint;
 	
+	private List<AttachImageVO>	imageList; 
+	
+	
 	public void initSaleTotal() {
 		this.salePrice = (int) (this.bookPrice * (1-this.bookDiscount));
 		this.totalPrice = this.salePrice*this.bookCount;
 		this.point = (int)(Math.floor(this.salePrice*0.05));
 		this.totalPoint =this.point * this.bookCount;
 	}
+	
+	
+
+	public List<AttachImageVO> getImageList() {
+		return imageList;
+	}
+
+
+
+	public void setImageList(List<AttachImageVO> imageList) {
+		this.imageList = imageList;
+	}
+
+
 
 	public int getBookId() {
 		return bookId;
@@ -103,7 +122,8 @@ public class OrderPageItemDTO {
 	public String toString() {
 		return "OrderPageItemDTO [bookId=" + bookId + ", bookCount=" + bookCount + ", bookName=" + bookName
 				+ ", bookPrice=" + bookPrice + ", bookDiscount=" + bookDiscount + ", salePrice=" + salePrice
-				+ ", totalPrice=" + totalPrice + ", point=" + point + ", totalPoint=" + totalPoint + "]";
+				+ ", totalPrice=" + totalPrice + ", point=" + point + ", totalPoint=" + totalPoint + ", imageList="
+				+ imageList + "]";
 	}
 	
 	
