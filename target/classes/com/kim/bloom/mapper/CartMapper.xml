@@ -26,5 +26,9 @@
 	<select id="checkCart" resultType="com.kim.bloom.model.CartDTO">
 		select * from bloom_cart where memberId = #{memberId} and bookId = #{bookId}
 	</select>
+	
+	<delete id="deleteOrderCart">
+		delete from bloom_cart where memberId = #{memberId} and bookId = #{bookId}
+	</delete>
 	  
   </mapper>

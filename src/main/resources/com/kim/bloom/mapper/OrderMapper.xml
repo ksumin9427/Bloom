@@ -9,6 +9,28 @@
   		select bookId, bookName, bookPrice, bookDiscount from bloom_book where bookId = #{bookId}
   	</select>
   	
+  	<select id="getOrderInfo" resultType="com.kim.bloom.model.OrderItemDTO">
+  		select bookId, bookPrice, bookDiscount from bloom_book where bookId = #{bookId}
+  	</select>
+  	
+  	<insert id="enrollOrder">
+  		insert into bloom_order(orderId, addressee, memberId, memberAddr1, memberAddr2, memberAddr3, orderState, deliveryCost, usePoint)
+    	values(#{orderId},#{addressee}, #{memberId}, #{memberAddr1}, #{memberAddr2}, #{memberAddr3}, '배송준비', #{deliveryCost}, #{usePoint})
+  	</insert>
+  	
+  	<insert id="enrollOrderItem">
+  		insert into bloom_orderItem(orderId, bookId, bookCount, bookPrice, bookDiscount, savePoint)
+		values(#{orderId}, #{bookId}, #{bookCount}, #{bookPrice}, #{bookDiscount}, #{savePoint})
+  	</insert>
+  	
+  	<update id="deductMoney">
+  		update bloom_member set money = #{money}, point = #{point} where memberId = #{memberId}
+  	</update>
+  	
+  	<update id="deductStock">
+  		update bloom_book set bookStock = #{bookStock} where bookId = #{bookId}
+  	</update>
+  	
   	
   	
   </mapper>

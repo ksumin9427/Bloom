@@ -1,7 +1,5 @@
 package com.kim.bloom.test;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,35 +7,25 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.kim.bloom.mapper.CartMapper;
-import com.kim.bloom.model.CartDTO;
+import com.kim.bloom.mapper.OrderMapper;
+import com.kim.bloom.model.BookVO;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
-public class CartMapperTests {
+public class OrderMapperTests {
 	
 	@Autowired
-	private CartMapper mapper;
+	private OrderMapper mapper;
 	
-	/* 장바구니 제거(주문 처리) */
 	@Test
-	public void deleteOrderCart() {
-		String memberId = "admin";
-		int bookId = 17407;
+	public void deductStockTest() {
+		BookVO book = new BookVO();
 		
-		CartDTO dto = new CartDTO();
-		dto.setMemberId(memberId);
-		dto.setBookId(bookId);
+		book.setBookId(16404);
+		book.setBookStock(77);
 		
-		mapper.deleteOrderCart(dto);
-		
+		mapper.deductStock(book);
 	}
-		
-	
-
-	
-
-	
 	
 }

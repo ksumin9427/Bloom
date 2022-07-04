@@ -385,6 +385,11 @@
 			
 			$(".address_btn_"+className).css('backgroundColor', '#3c3838');
 			
+			$(".addressInfo_input_div").each(function(i,obj){
+				$(obj).find(".selectAddress").val("F");
+			});
+			
+			$(".addressInfo_input_div_"+className).find(".selectAddress").val("T");
 			
 		}
 	
@@ -531,11 +536,11 @@
 			$(".usePoint_span").text(usePoint.toLocaleString());
 		}
 		
-		$(".addressInfo_input_div").each(function(i,obj){
+		/* $(".addressInfo_input_div").each(function(i,obj){
 			$(obj).find(".selectAddress").val("F");
 		});
 		
-		$(".addressInfo_input_div_"+className).find(".selectAddress").val("T");
+		$(".addressInfo_input_div_"+className).find(".selectAddress").val("T"); */
 		
 		$(".order_btn").on("click", function(){
 			$(".addressInfo_input_div").each(function(i, obj){
