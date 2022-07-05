@@ -89,6 +89,14 @@ public class OrderServiceImpl implements OrderService{
 			oit.setOrderId(orderId);
 			orderMapper.enrollOrderItem(oit);
 		}
+		
+		int calMoney = member.getMoney();
+		calMoney -= ord.getOrderFinalSalePrice();
+		member.setMoney(calMoney);
+ 		
+ 		MemberVO member = memberMapper.getMemberInfo(ord.getMemberId());
+ 		
+ 		List<OrderItemDTO> ords = new ArrayList<OrderItemDTO>();
 	}
 	
 	
