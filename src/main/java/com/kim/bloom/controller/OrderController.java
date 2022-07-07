@@ -1,6 +1,7 @@
 package com.kim.bloom.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.kim.bloom.model.MemberVO;
 import com.kim.bloom.model.OrderDTO;
 import com.kim.bloom.model.OrderPageDTO;
 import com.kim.bloom.service.MemberSerivice;
@@ -39,6 +41,23 @@ public class OrderController {
 	@PostMapping("/order")
 	public String orderPagePost(OrderDTO od, HttpServletRequest request) {
 		System.out.println(od);
+		
+		orderService.order(od);
+		
+		MemberVO member = new MemberVO();
+		member.setMemberId(od.getMemberId());
+		
+		HttpSession session = request.getSession();
+		
+		try {
+			MemberVO memberLogin = memberSerivice.memberLogin(member);
+			memberLogin.setMemberPw("");
+			session.setAttribute("member", memberLogin);
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 		
 		return "redirect:/main";
 	}

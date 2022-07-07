@@ -15,6 +15,8 @@ import com.kim.bloom.mapper.CartMapper;
 import com.kim.bloom.mapper.MemberMapper;
 import com.kim.bloom.mapper.OrderMapper;
 import com.kim.bloom.model.AttachImageVO;
+import com.kim.bloom.model.BookVO;
+import com.kim.bloom.model.CartDTO;
 import com.kim.bloom.model.MemberVO;
 import com.kim.bloom.model.OrderDTO;
 import com.kim.bloom.model.OrderItemDTO;
@@ -94,9 +96,26 @@ public class OrderServiceImpl implements OrderService{
 		calMoney -= ord.getOrderFinalSalePrice();
 		member.setMoney(calMoney);
  		
- 		MemberVO member = memberMapper.getMemberInfo(ord.getMemberId());
+		orderMapper.deductMoney(member);
+			
+		/* 재고 변동 적용 */
+		for(OrderItemDTO oit : ord.getOrders()) {
+			/* 변동 재고 값 구하기 */
+			BookVO book = bookMapper.getGoodsInfo(oit.getBookId());
+			book.setBookStock(book.getBookStock() - oit.getBookCount());
+			/* 변동 값 DB 적용 */
+			orderMapper.deductStock(book);
+		}			
+		
+	/* 장바구니 제거 */
+		for(OrderItemDTO oit : ord.getOrders()) {
+			CartDTO dto = new CartDTO();
+			dto.setMemberId(ord.getMemberId());
+			dto.setBookId(oit.getBookId());
+			
+			cartMapper.deleteOrderCart(dto);
+		}
  		
- 		List<OrderItemDTO> ords = new ArrayList<OrderItemDTO>();
 	}
 	
 	
