@@ -82,6 +82,25 @@
   		select * from bloom_image where bookId = #{bookId}
   	</select>
   	
+	<select id="getOrderList" resultType="com.kim.bloom.model.OrderDTO">	
+			select orderId, memberId, orderstate, orderdate
+		    from bloom_order 
+		    <if test="keyword != null">
+		    	where memberId like concat('%',#{keyword}, '%')
+		    </if>
+		    order by orderdate desc
+		    limit #{skip}, #{amount}
+	</select>	
+	
+	<select id="getOrderTotal" resultType="int">
+		select count(*) from vam_order
+		
+	    <if test="keyword != null">
+	    	where memberId like concat('%',#{keyword}, '%')
+	    </if>
+	</select>
+ 
+  	
   </mapper>
   
   
