@@ -19,13 +19,13 @@ public class OrderMapperTests {
 	private OrderMapper mapper;
 	
 	@Test
-	public void deductStockTest() {
+	public void updateStockTest() {
 		BookVO book = new BookVO();
 		
 		book.setBookId(16404);
 		book.setBookStock(77);
 		
-		mapper.deductStock(book);
+		mapper.updateStock(book);
 	}
 	
 }

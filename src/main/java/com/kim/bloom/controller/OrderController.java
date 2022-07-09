@@ -49,13 +49,13 @@ public class OrderController {
 		
 		HttpSession session = request.getSession();
 		
+		/* memberLogin에 throw를 사용하였기 때문에 try catch 문을 사용 */
 		try {
 			MemberVO memberLogin = memberSerivice.memberLogin(member);
 			memberLogin.setMemberPw("");
 			session.setAttribute("member", memberLogin);
 			
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
 		

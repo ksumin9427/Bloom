@@ -18,6 +18,7 @@ import com.kim.bloom.model.AttachImageVO;
 import com.kim.bloom.model.BookVO;
 import com.kim.bloom.model.CartDTO;
 import com.kim.bloom.model.MemberVO;
+import com.kim.bloom.model.OrderCancleDTO;
 import com.kim.bloom.model.OrderDTO;
 import com.kim.bloom.model.OrderItemDTO;
 import com.kim.bloom.model.OrderPageItemDTO;
@@ -81,7 +82,7 @@ public class OrderServiceImpl implements OrderService{
 		
 		/* OrderDTO 객체의 orderId에 저장 */
 		Date date = new Date();
-		SimpleDateFormat format = new SimpleDateFormat("_yyyyMMddMM");
+		SimpleDateFormat format = new SimpleDateFormat("_yyyyMMddmm");
 		String orderId = member.getMemberId()+format.format(date);
 		ord.setOrderId(orderId);
 		
@@ -92,31 +93,73 @@ public class OrderServiceImpl implements OrderService{
 			orderMapper.enrollOrderItem(oit);
 		}
 		
+		/* 비용 차감, 변동 money Member 객체 적용 */
 		int calMoney = member.getMoney();
 		calMoney -= ord.getOrderFinalSalePrice();
 		member.setMoney(calMoney);
+		
+		/* 포인트 차감, 증가 , 변동 point Member 객체 적용 */
+		int calPoint= member.getPoint();
+		calPoint = calPoint - ord.getUsePoint() + ord.getOrderSavePoint();
+		member.setPoint(calPoint);
  		
-		orderMapper.deductMoney(member);
-			
+		orderMapper.updateMoney(member);
+		
 		/* 재고 변동 적용 */
 		for(OrderItemDTO oit : ord.getOrders()) {
-			/* 변동 재고 값 구하기 */
+			
 			BookVO book = bookMapper.getGoodsInfo(oit.getBookId());
 			book.setBookStock(book.getBookStock() - oit.getBookCount());
-			/* 변동 값 DB 적용 */
-			orderMapper.deductStock(book);
-		}			
+			
+			orderMapper.updateStock(book);
+		}
 		
-	/* 장바구니 제거 */
+		/* 장바구니 제거 */
 		for(OrderItemDTO oit : ord.getOrders()) {
+			
 			CartDTO dto = new CartDTO();
 			dto.setMemberId(ord.getMemberId());
 			dto.setBookId(oit.getBookId());
 			
 			cartMapper.deleteOrderCart(dto);
 		}
- 		
+	
 	}
+
+	@Override
+	@Transactional
+	public void orderCancle(OrderCancleDTO dto) {
+		
+		MemberVO member = memberMapper.getMemberInfo(dto.getMemberId());
+		
+		List<OrderItemDTO> ords = orderMapper.getOrderItemInfo(dto.getOrderId());
+		for(OrderItemDTO ord : ords) {
+			ord.initSaleTotal();
+		}
+		
+		OrderDTO orw = orderMapper.getOrder(dto.getOrderId());
+		orw.setOrders(ords);
+		orw.getOrderPriceInfo();
+	
+		orderMapper.orderCancle(dto.getOrderId());
+		
+		int calMoney = member.getMoney();
+		calMoney += orw.getOrderFinalSalePrice();
+		member.setMoney(calMoney);
+		
+		int calPoint = member.getPoint();
+		calPoint = calPoint + orw.getUsePoint() - orw.getOrderSavePoint();
+		member.setPoint(calPoint);
+		
+		orderMapper.updateMoney(member);
+		
+		for(OrderItemDTO ord : orw.getOrders()) {
+			BookVO book = bookMapper.getGoodsInfo(ord.getBookId());
+			book.setBookStock(book.getBookStock() + ord.getBookCount());
+			orderMapper.updateStock(book);
+		}
+	}
+		
 	
 	
 }

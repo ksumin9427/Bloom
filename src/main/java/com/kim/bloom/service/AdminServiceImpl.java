@@ -13,6 +13,7 @@ import com.kim.bloom.model.AttachImageVO;
 import com.kim.bloom.model.BookVO;
 import com.kim.bloom.model.CateVO;
 import com.kim.bloom.model.Criteria;
+import com.kim.bloom.model.OrderDTO;
 
 @Service("AdminService")
 public class AdminServiceImpl implements AdminService{
@@ -105,6 +106,16 @@ public class AdminServiceImpl implements AdminService{
 		log.info("(service)getAttachInfo..........");
 		
 		return adminMapper.getAttachInfo(bookId);
+	}
+
+	@Override
+	public List<OrderDTO> getOrderList(Criteria cri) {
+		return adminMapper.getOrderList(cri);
+	}
+
+	@Override
+	public int getOrderTotal(Criteria cri) {
+		return adminMapper.getOrderTotal(cri);
 	}
 
 }

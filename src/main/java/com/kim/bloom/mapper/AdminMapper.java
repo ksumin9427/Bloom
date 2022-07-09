@@ -43,9 +43,8 @@ public interface AdminMapper {
 	public List<AttachImageVO> getAttachInfo(int bookId);
 	
 	/* 주문 상품 리스트 */
-	public List<OrderDTO> getOrderList(Criteria cri);	
+	public List<OrderDTO> getOrderList(Criteria cri);
 	
 	/* 주문 총 갯수 */
 	public int getOrderTotal(Criteria cri);
-	
 }
