@@ -122,5 +122,9 @@
 		left outer join bloom_bcate c on a.catecode = c.catecode
 		where bookid = ${bookId}
 	</select>
+	
+	<select id="getBookIdName" resultType="com.kim.bloom.model.BookVO">
+		select bookId, bookName from bloom_book where bookId = #{bookId}
+	</select>
   	
   </mapper>

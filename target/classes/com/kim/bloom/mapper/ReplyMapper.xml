@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.kim.bloom.mapper.ReplyMapper">
+  	
+  	<insert id="enrollReply">
+  		insert into bloom_reply(bookId, memberId, content, rating) values(#{bookId}, #{memberId}, #{content}, #{rating}) 
+  	</insert>
+  	
+  	<select id="checkReply" resultType="integer">
+  		select replyId from bloom_reply where memberId = #{memberId} and bookId = #{bookId}
+  	</select>
+  	
+  	<select id="getReplyList" resultType="com.kim.bloom.model.ReplyDTO">
+  		select replyId, bookId, memberId, content, rating, regDate from bloom_reply 
+  		where bookId = #{bookId} order by regDate desc 
+  		limit #{skip}, #{amount} 
+  	</select>
+  	
+  	<select id="getReplyTotal" resultType="int">
+  		select count(*) from bloom_reply where bookId = #{bookId}
+  	</select>
+  	
+  </mapper>

@@ -438,14 +438,10 @@ public class AdminController {
 		
 		orderService.orderCancle(dto);
 		
+		MemberVO member = memberSerivice.getMemberInfo(dto.getMemberId());
+		
 		HttpSession session = request.getSession();
-		
-		
-		
-		
-		
-		
-	
+		session.setAttribute("member", member);
 		
 		return "redirect:/admin/orderList?keyword="+dto.getKeyword()+"&amount="+dto.getAmount()+"&pageNum="+dto.getPageNum();
 	}

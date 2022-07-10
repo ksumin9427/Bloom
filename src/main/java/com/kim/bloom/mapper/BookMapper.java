@@ -32,4 +32,7 @@ public interface BookMapper {
 	
 	/* 상품 정보 */
 	public BookVO getGoodsInfo(int bookId);
+	
+	/* 상품 id를 통한 이름 반환 */
+	public BookVO getBookIdName(int bookId);
 }

@@ -160,7 +160,17 @@
 						<div class="line">
 						</div>				
 						<div class="content_bottom">
-							리뷰
+						
+							<div class="reply_subject">
+								<h2>리뷰</h2>
+							</div>
+							
+							<c:if test="${member != null}">
+								<div class="reply_button_wrap">
+									<button>리뷰 쓰기</button>
+								</div>
+							</c:if>
+							
 						</div>
 						
 						<form action="/order/${member.memberId}" method="get" class="order_form">
@@ -290,6 +300,39 @@
 		let bookCount = $(".quantity_input").val();
 		$(".order_form").find("input[name='orders[0].bookCount']").val(bookCount);
 		$(".order_form").submit();
+	});
+	
+	$(".reply_button_wrap").on("click", function(e){
+		e.preventDefault();
+		
+		const memberId = '${member.memberId}';
+		const bookId = '${goodsInfo.bookId}';
+		
+		$.ajax({
+			data : {
+				bookId : bookId,
+				memberId : memberId
+			},
+			url : '/reply/check',
+			type : 'POST',
+			success : function(result){
+				if(result === '1'){
+					
+					alert("이미 등록된 리뷰가 존재합니다.")
+					
+				} else if(result === '0'){
+					
+					let popUrl ="/replyEnroll/"+memberId+"?bookId="+bookId;
+					console.log(popUrl);
+					let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
+					
+					window.open(popUrl,"리뷰 쓰기", popOption); 
+				}
+			}
+		});
+		
+		
+		 
 	});
 		
 		

@@ -6,12 +6,20 @@ public class Criteria {
 	/* 페이징 쿼리를 동적 제어하기 위해 필요한 데이터 'pageNum'과 'amount'을 같이 파라미터로 전달하기 위한 용도 */
 	
 	private int pageNum; /* 현재 페이지 번호 */
+	
 	private int amount; /* 한 페이지 당 보여줄 게시물 수  */
+	
 	private int skip; /* 스킵할 게시물 수 */
+	
 	private String type; /* 검색 카테고리 */
+	
 	private String keyword; /* 검색 키워드 */
+	
 	private String[] authorArr; /* 작가 리스트 */
+	
 	private String cateCode; /* 카테고리 코드 */
+	
+	private int bookId; 
 	
 	public Criteria(int pageNum, int amount) {
 		this.pageNum = pageNum;
@@ -21,6 +29,14 @@ public class Criteria {
 	
 	public Criteria() {
 		this(1,10);
+	}
+	
+	public int getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
 	}
 	
 	public String[] getAuthorArr() {
@@ -89,6 +105,6 @@ public class Criteria {
 	public String toString() {
 		
 		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", type=" + type + ", keyword=" + keyword
-				+ ", authorArr=" + Arrays.toString(authorArr) + ", cateCode=" + cateCode + "]";
+				+ ", authorArr=" + Arrays.toString(authorArr) + ", cateCode=" + cateCode + ", bookId=" + bookId +"]";
 	}
 }
