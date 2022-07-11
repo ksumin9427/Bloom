@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Welcome BookMall</title>
+<title></title>
 <link rel="stylesheet" href="/resources/css/goodsDetail.css?ver=5">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -171,6 +171,18 @@
 								</div>
 							</c:if>
 							
+							<div class="reply_not_div">
+					
+							</div>
+							
+							<ul class="reply_content_ul">
+								
+							</ul>
+							
+							<div class="reply_pageInfo_div">
+									
+							</div>
+							
 						</div>
 						
 						<form action="/order/${member.memberId}" method="get" class="order_form">
@@ -247,11 +259,53 @@
 	let publicYear = yearArray[0]+"년 " +yearArray[1]+"월 " +yearArray[2]+"일";
 	
 	$(".publicYear").html(publicYear); 
-}); 	
+	
 	let salePrice = "${goodsInfo.bookPrice - (goodsInfo.bookPrice * goodsInfo.bookDiscount)}"
 	let point = salePrice * 0.05;
 	point = Math.floor(point);
 	$(".point_span").text(point);
+	
+	/* 리뷰 리스트 출력 */
+	const bookId = '${goodsInfo.bookId}';
+	$.getJSON("/reply/list", {bookId : bookId}, function(obj){
+		if(obj.list.length === 0){
+			$(".reply_not_div").html('<span>리뷰가 없습니다.</span>');
+			$(".reply_content_ul").html('');
+			$(".pageMaker").html('');
+		} else {
+			$(".reply_not_div").html('');
+			const list = obj.list;
+			const pf = obj.pageInfo;
+			const userId = '${member.memberId}';
+			
+			let reply_list = '';
+			$(list).each(function(i,obj){
+				reply_list += '<li>';
+				reply_list += '<div class="comment_wrap">';
+				reply_list += '<div class="reply_top">';
+				/* 아이디 */
+				reply_list += '<span class="id_span">'+ obj.memberId+'</span>';
+				/* 날짜 */
+				reply_list += '<span class="date_span">'+ obj.regDate +'</span>';
+				/* 평점 */
+				reply_list += '<span class="rating_span">평점 : <span class="rating_value_span">'+ obj.rating +'</span>점</span>';
+				if(obj.memberId === userId){
+					reply_list += '<a class="update_reply_btn" href="'+ obj.replyId +'">수정</a><a class="delete_reply_btn" href="'+ obj.replyId +'">삭제</a>';
+				}
+				reply_list += '</div>'; //<div class="reply_top">
+				reply_list += '<div class="reply_bottom">';
+				reply_list += '<div class="reply_bottom_txt">'+ obj.content +'</div>';
+				reply_list += '</div>';//<div class="reply_bottom">
+				reply_list += '</div>';//<div class="comment_wrap">
+				reply_list += '</li>';
+			});
+			$('.reply_content_ul').html(reply_list);
+		}
+	});
+	
+	}); /* $(document).ready(function(){ */	
+	
+	
 	
 	/* 수량 버튼 */
 	let quantity = $(".quantity_input").val();
