@@ -300,6 +300,33 @@
 				reply_list += '</li>';
 			});
 			$('.reply_content_ul').html(reply_list);
+			let reply_pageMaker = '';	
+			
+			/* prev */
+			if(pf.prev){
+				let prev_num = pf.pageStart -1;
+				reply_pageMaker += '<li class="pageMaker_btn prev">';
+				reply_pageMaker += '<a href="'+ prev_num +'">이전</a>';
+				reply_pageMaker += '</li>';	
+			}
+			/* numbre btn */
+			for(let i = pf.pageStart; i < pf.pageEnd+1; i++){
+				reply_pageMaker += '<li class="pageMaker_btn ';
+				if(pf.cri.pageNum === i){
+					reply_pageMaker += 'active';
+				}
+				reply_pageMaker += '">';
+				reply_pageMaker += '<a href="'+i+'">'+i+'</a>';
+				reply_pageMaker += '</li>';
+			}
+			/* next */
+			if(pf.next){
+				let next_num = pf.pageEnd +1;
+				reply_pageMaker += '<li class="pageMaker_btn next">';
+				reply_pageMaker += '<a href="'+ next_num +'">다음</a>';
+				reply_pageMaker += '</li>';	
+			}			
+			$(".pageMaker").html(reply_pageMaker);	
 		}
 	});
 	
