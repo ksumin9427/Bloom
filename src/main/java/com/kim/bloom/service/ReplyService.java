@@ -14,4 +14,14 @@ public interface ReplyService {
 	
 	/* 댓글 페이징 */
 	public ReplyPageDTO replyList(Criteria cti);
+	
+	/* 댓글 수정 */
+	public int updateReply(ReplyDTO dto);
+	
+	/* 댓글 한 개 정보(수정할 때) */
+	public ReplyDTO getUpdateReply(int replyId);
+	
+	/* 댓글 삭제 */
+	public int deleteReply(ReplyDTO dto);
+	
 }

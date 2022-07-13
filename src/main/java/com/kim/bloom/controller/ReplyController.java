@@ -36,5 +36,15 @@ public class ReplyController {
 		return replyService.replyList(cri);
 	}
 	
+	@PostMapping("/update")
+	public void replyModifyPost(ReplyDTO dto) {
+		replyService.updateReply(dto);
+	}
+	
+	@PostMapping("/delete")
+	public void replyDeletePost(ReplyDTO dto) {
+		replyService.deleteReply(dto);
+	}
+	
 
 }

@@ -24,8 +24,10 @@ import com.kim.bloom.model.AttachImageVO;
 import com.kim.bloom.model.BookVO;
 import com.kim.bloom.model.Criteria;
 import com.kim.bloom.model.PageDTO;
+import com.kim.bloom.model.ReplyDTO;
 import com.kim.bloom.service.AttachService;
 import com.kim.bloom.service.BookService;
+import com.kim.bloom.service.ReplyService;
 
 @Controller
 public class BookController {
@@ -35,6 +37,9 @@ public class BookController {
 	
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private ReplyService replyService;
 	
 	/* Console 창에 해당 로그가 찍혀 프로그램이 오류 발생 시 어디서 어떤 이유로 오류가 발생하는지 알 수 있어 이슈 처리가 용이 */
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
@@ -126,6 +131,18 @@ public class BookController {
 		model.addAttribute("memberId",memberId);
 		
 		return "/replyEnroll";
+		
+	}
+	
+	@GetMapping("/replyUpdate")
+	public String replyUpdateWindowGet(ReplyDTO dto, Model model) {
+		
+		BookVO book = bookService.getBookIdName(dto.getBookId());
+		model.addAttribute("bookInfo", book);
+		model.addAttribute("replyInfo", replyService.getUpdateReply(dto.getReplyId()));
+		model.addAttribute("memberId", dto.getMemberId());
+		
+		return "/replyUpdate";
 		
 	}
 	

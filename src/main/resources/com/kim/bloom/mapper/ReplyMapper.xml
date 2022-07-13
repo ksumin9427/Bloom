@@ -23,4 +23,24 @@
   		select count(*) from bloom_reply where bookId = #{bookId}
   	</select>
   	
+  	<update id="updateReply">
+  		update bloom_reply set content = #{content}, rating = #{rating} where replyId = #{replyId}
+  	</update>
+  	
+  	<select id="getUpdateReply" resultType="com.kim.bloom.model.ReplyDTO">
+  		select * from bloom_reply where replyId = #{replyId}
+  	</select>
+  	
+  	<delete id="deleteReply">
+  		delete from bloom_reply where replyId = #{replyId}
+  	</delete>
+  	
+  	<select id="getRatingAverage" resultType="com.kim.bloom.model.ReplyDTO">
+  		select avg(rating) from bloom_reply where bookId = #{bookId}
+  	</select>
+  	
+  	<update id="updateRating">
+  		update bloom_book set ratingAvg = #{ratingAvg} where bookId = #{bookId}
+  	</update>
+  	
   </mapper>

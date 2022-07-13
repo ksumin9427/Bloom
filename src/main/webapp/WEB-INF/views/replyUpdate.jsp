@@ -96,6 +96,17 @@
 	    resize: none;
 	    margin-top: 10px;  	
   	}
+  	
+  	.update_btn{
+   	    display: inline-block;
+	    width: 130px;
+	    background-color: #7b8ed1;
+	    padding-top: 10px;
+	    height: 27px;
+	    color: #fff;
+	    font-size: 14px;
+	    line-height: 18px;   	
+  	}
   
   </style>  
 </head>
@@ -103,7 +114,7 @@
 	
 	<div class="wrapper_div">
 		<div class="subject_div">
-			리뷰 등록
+			리뷰 수정
 		</div>
 		
 		<div class="input_wrap">			
@@ -127,45 +138,61 @@
 			</div>
 			<div class="content_div">
 				<h4>리뷰</h4>
-				<textarea name="content"></textarea>
+				<textarea name="content">${replyInfo.content}</textarea>
 			</div>
 		</div>
 		
 		<div class="btn_wrap">
-			<a class="cancel_btn">취소</a><a class="enroll_btn">등록</a>
+			<a class="cancel_btn">취소</a><a class="update_btn">수정</a>
 		</div>
 		
 	</div>
 	
 	<script>
-		$(".cancel_btn").on("click", function(e){
-			window.close();
-		});
 		
-		$(".enroll_btn").on("click", function(e){
-			const bookId = '${bookInfo.bookId}';
-			const memberId = '${memberId}';
-			const rating = $("select").val();
-			const content = $("textarea").val();
-			
-			const data = {
-					bookId : bookId,
-					memberId : memberId,
-					rating : rating,
-					content : content
+	$(document).ready(function(){
+		
+		let rating = '${replyInfo.rating}';
+		
+		$("option").each(function(i,obj) {
+			if(rating === $(obj).val()){
+				$(obj).attr("selected","selected");
 			}
-			
-			$.ajax({
-				data : data,
-				type : 'POST',
-				url : '/reply/enroll',
-				success : function(result){
-					$(opener.location).attr("href", "javascript:replyListInit();");
-					window.close();
-				}
-				
-			});
 		});
+	});
+	
+	$(".cancel_btn").on("click", function(e){
+		
+		window.close();
+	});
+	
+	$(".update_btn").on("click", function(e){
+		
+		const replyId = '${replyInfo.replyId}';
+		const bookId = '${replyInfo.bookId}';
+		const memberId = '${memberId}';
+		const rating = $("select").val();
+		const content = $("textarea").val();		
+		
+		const data = {
+				replyId : replyId,
+				bookId : bookId,
+				memberId : memberId,
+				rating : rating,
+				content : content
+		}
+		
+		/* 댓글 수정을 서버에 요청 */
+		$.ajax({ 
+			data : data,
+			type : 'POST',
+			url : 'reply/update',
+			success : function(result){
+				$(opener.location).attr("href", "javascript:replyListInit();");
+				window.close();
+			}
+		});
+	});
 	</script>
 </body>
 </html>
