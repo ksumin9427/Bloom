@@ -57,7 +57,6 @@ public class ReplyServiceImpl implements ReplyService{
 		
 		setRating(dto.getBookId());
 		
-		
 		return result;
 	}
 

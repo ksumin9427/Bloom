@@ -6,6 +6,7 @@ import com.kim.bloom.model.BookVO;
 import com.kim.bloom.model.CateFilterDTO;
 import com.kim.bloom.model.CateVO;
 import com.kim.bloom.model.Criteria;
+import com.kim.bloom.model.SelectDTO;
 
 public interface BookService {
 	
@@ -29,4 +30,7 @@ public interface BookService {
 	
 	/* 상품 id를 통한 이름 반환 */
 	public BookVO getBookIdName(int bookId);
+	
+	/* 평점 순 상품 정보 */
+	public List<SelectDTO> likeSelect();
 }

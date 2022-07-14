@@ -14,6 +14,7 @@ import com.kim.bloom.model.BookVO;
 import com.kim.bloom.model.CateFilterDTO;
 import com.kim.bloom.model.CateVO;
 import com.kim.bloom.model.Criteria;
+import com.kim.bloom.model.SelectDTO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -127,6 +128,21 @@ public class BookServiceImpl implements BookService{
 	public BookVO getBookIdName(int bookId) {
 		
 		return bookMapper.getBookIdName(bookId);
+	}
+
+	@Override
+	public List<SelectDTO> likeSelect() {
+		
+		List<SelectDTO> list = bookMapper.likeSelect();
+		
+		/* 각 객체에 이미지 정보 추가 */
+		list.forEach(dto -> {
+			int bookId = dto.getBookId();
+			List<AttachImageVO> imageList = attachMapper.getAttachList(bookId);
+			dto.setImageList(imageList);
+		});
+		
+		return list;
 	}
 
 }

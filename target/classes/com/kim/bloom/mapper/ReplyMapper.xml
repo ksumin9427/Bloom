@@ -35,7 +35,7 @@
   		delete from bloom_reply where replyId = #{replyId}
   	</delete>
   	
-  	<select id="getRatingAverage" resultType="com.kim.bloom.model.ReplyDTO">
+  	<select id="getRatingAverage" resultType="double">
   		select avg(rating) from bloom_reply where bookId = #{bookId}
   	</select>
   	
