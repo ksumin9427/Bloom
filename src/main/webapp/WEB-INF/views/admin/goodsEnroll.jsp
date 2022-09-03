@@ -85,7 +85,7 @@
                     			</div>
                     			<div class="form_section_content">
                     				<input name="publicYear" autocomplete="off" readonly="readonly">
-                    				<span class="ck_warn publeYear_warn">출판일을 선택해주세요.</span>
+                    				<span class="ck_warn publicYear_warn">출판일을 선택해주세요.</span>
                     			</div>
                     		</div>  
                     		          
@@ -316,8 +316,8 @@ $("#enrollBtn").on("click", function(e){
 			$(".bookContents_warn").css('display','none');
 			contentsCk = true;
 		} else {
-			$(".bookContents_warn").css('display','block');
-			contentsCk = false;
+			$(".bookContents_warn").css('display','none');
+			contentsCk = true;
 		}
 		
 		if(bookNameCk && authorIdCk && publicYearCk && publisherCk && cateCodeCk && priceCk && stockCk && discountCk && introCk && contentsCk){
@@ -510,8 +510,10 @@ $("#discount_interface").on("propertychange change keyup paste input", function(
 	    dayNamesMin: ['일','월','화','수','목','금','토'],
 	    yearSuffix: '년',
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        yearRange: "-30:+0"
 	}
+	
 	
 	/*달력  */
 	$(function(){

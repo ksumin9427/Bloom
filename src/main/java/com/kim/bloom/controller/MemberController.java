@@ -45,6 +45,7 @@ public class MemberController {
 		return "join";
 	}
 	
+	/* 회원가입 */
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String joinPost(MemberVO member) throws Exception {
 		
@@ -127,9 +128,9 @@ public class MemberController {
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String loginPost(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception {
-		/* MemberVO 데이터를 전달받기 위해
-		 HttpServletRequest 로그인 성공시에 session에 회원 정보를 저장하기 위해
-		 RedirectAttributes(리다이렉트 할때 파라미터를 넘겨야 할 경우 사용)은 로그인 실패시에 리다이렉트 된 로그인 페이지에 실패를 의미하는 데이터를 전송하기 위해   */
+		/* MemberV, 데이터를 전달받기 위해
+		 HttpServletRequest, 로그인 성공시에 session에 회원 정보를 저장하기 위해
+		 RedirectAttributes(리다이렉트 할때 파라미터를 넘겨야 할 경우 사용)은, 로그인 실패시에 리다이렉트 된 로그인 페이지에 실패를 의미하는 데이터를 전송하기 위해   */
 		
 		HttpSession session = request.getSession();
 		String rawPw = ""; 
@@ -172,9 +173,11 @@ public class MemberController {
 		return "redirect:/main";
 	}
 	
+	/* 비동기방식 로그아웃 메서드 */
 	@RequestMapping(value = "/logout.do", method = RequestMethod.POST)
 	@ResponseBody /* ajax를 통해서 서버에 요청을 하는 방식이라면 해당 메서드에 @responseBody를 붙여야 한다 */
 	public void logoutPost(HttpServletRequest request) throws Exception{
+		/* 메서드만 작동하면 되기 때문에 void */
 		logger.info("비동기 로그아웃 메서드 진입");
 		
 		HttpSession session = request.getSession();

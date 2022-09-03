@@ -144,7 +144,7 @@
 			}
 			
 			if(!authorIntro){
-				$("#warn_authorIntro").css("display", "block");
+				$("#warn_authorIntro").css("display", "none");
 			} else {
 				$("#warn_authorIntro").css("display", "none");
 				IntroCk = true;

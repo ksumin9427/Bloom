@@ -1,6 +1,7 @@
 package com.kim.bloom.model;
 
 public class PageDTO {
+	/* 페이지 이동 인터페이스를 위해 */
 	
 	/* 시작 페이지 번호*/
 	private int pageStart; 
@@ -14,7 +15,7 @@ public class PageDTO {
     /*전체 게시물 수*/
     private int total;
     
-    /* 현재 페이지의 정보 */
+    /* 현재 페이지의 정보(번호, 행의 수, 검색 키워드, 검색 종류) */
     private Criteria cri;
 	
 	public PageDTO(Criteria cri, int total) { /* 클래스를 호출 할 때 각 변수의 값을 초기화 한다 */
@@ -22,13 +23,16 @@ public class PageDTO {
 		this.cri = cri;
 		this.total = total;
 		
-		/* 페이지 끝번호, 기본 [1] - [10] 설정 */
+		/* 10은 클릭할 수 있는 페이지 개수이다(DisplayPagenum), [1] - [10] 설정
+		   pageEnd = (int) (Math.ceil (cri.getPage()/ (double) displayPageNum) * displayPageNum);
+		   pageStart = (endPage - displayPageNum)+1; 
+		 */
 		this.pageEnd = (int) (Math.ceil(cri.getPageNum()/10.0)) * 10;
 		
 		this.pageStart = this.pageEnd - 9;
 		
 		
-		/* 전체 마지막 페이지 */
+		/* 전체 마지막 페이지, total * 1.0는 double로 만들기 위해서 */
 		int realEnd = (int) (Math.ceil(total * 1.0 / cri.getAmount()));
 		
 		if (realEnd < pageEnd) {

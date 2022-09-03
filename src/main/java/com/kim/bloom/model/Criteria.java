@@ -3,6 +3,7 @@ package com.kim.bloom.model;
 import java.util.Arrays;
 
 public class Criteria { 
+	/* 지정한 개수와 검색조건에 따라서 작가 데이터를 출력하는 쿼리를 실행하는데 필요로 한 데이터들의 모임 */
 	/* 페이징 쿼리를 동적 제어하기 위해 필요한 데이터 'pageNum'과 'amount'을 같이 파라미터로 전달하기 위한 용도 */
 	
 	private int pageNum; /* 현재 페이지 번호 */

@@ -34,10 +34,10 @@
 							<li><a href="/admin/main">관리자 페이지</a></li>
 						</c:if>
 						<li>
-							<a id="gnb_logout_button">로그아웃</a>
+							<a id="gnb_logout_button" href="/member/logout.do">로그아웃</a>
 						</li>
 						<li>
-							마이룸
+							<a href="/myRoom/myRoomMain">마이룸</a>
 						</li>
 						<li>
 							<a href="/cart/${member.memberId}">장바구니</a>
@@ -124,6 +124,7 @@
 						<form id="filter_form" action="/search" method="get">
 							<input type="hidden" name="keyword">
 							<input type="hidden" name="cateCode">
+							<input type="hidden" name="cateParent">
 							<input type="hidden" name="type">
 						</form>
 					</div>

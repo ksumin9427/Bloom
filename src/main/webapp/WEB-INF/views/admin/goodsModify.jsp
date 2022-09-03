@@ -186,7 +186,8 @@
 		    dayNamesMin: ['일','월','화','수','목','금','토'],
 		    yearSuffix: '년',
 	        changeMonth: true,
-	        changeYear: true
+	        changeYear: true,
+	        yearRange: "-30:+0"
 		}			
 		/* 캘린더 */
 		$(function() {	
@@ -583,8 +584,8 @@
 				$(".bookContents_warn").css('display','none');
 				contentsCk = true;
 			} else {
-				$(".bookContents_warn").css('display','block');
-				contentsCk = false;
+				$(".bookContents_warn").css('display','none');
+				contentsCk = true;
 			}		
 			
 			/* 최종 확인 */

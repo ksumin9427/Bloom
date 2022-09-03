@@ -29,6 +29,7 @@
   						<when test="type == 'T'.toString()">
   							bookName like concat ('%', #{keyword}, '%')
   						</when>
+  						
   					</choose>
   				</trim>
   			</foreach>
@@ -60,16 +61,17 @@
   	<!-- 국내 카테고리 리스트 -->
   	<select id="getCateCode1" resultType="com.kim.bloom.model.CateVO">
   		<![CDATA[
-  			select * from bloom_bcate where cateCode > 100000 and cateCode < 200000
+  			select * from bloom_bcate where cateParent > 100000 and cateParent < 200000
   		]]>
   	</select>
   	
   	<!-- 국외 카테고리 리스트 -->
   	<select id="getCateCode2" resultType="com.kim.bloom.model.CateVO">
   		<![CDATA[
-  			select * from bloom_bcate where cateCode > 200000 and cateCode < 300000
+  			select * from bloom_bcate where cateParent > 200000 and cateParent < 300000
   		]]>
   	</select>
+  	
   	
   	<select id="getCateList" resultType="String">
   		select distinct cateCode from bloom_book where

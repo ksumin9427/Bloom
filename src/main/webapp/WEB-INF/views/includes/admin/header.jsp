@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="wrapper">
+    
+	<div class="wrapper">
         <div class="wrap">
             <!-- gnv_area -->    
             <div class="top_gnb_area">
@@ -9,12 +10,13 @@
                     <li><a href="/member/logout.do">로그아웃</a></li>
                     <li>고객센터</li>            
                 </ul>
-            </div>
-            <!-- top_subject_area -->
+            </div><!-- top_gnb_area -->
+            
+            <!-- top_subject_area -->          
             <div class="admin_top_wrap">
                 <span>관리자 페이지</span>
-                
             </div>
+            
             <!-- contents-area -->
             <div class="admin_wrap">
                 <!-- 네비영역 -->
@@ -39,5 +41,5 @@
                       	 <a class="admin_list_06" href="/admin/orderList">주문 현황</a>
                       </li>                                                                                           
                   </ul>
-                </div>
+                </div><!-- admin_navi_wrap -->
   

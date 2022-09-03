@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Bloom</title>
+<title></title>
 <link rel="stylesheet" href="resources/css/main.css?after">
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
@@ -37,10 +37,10 @@
 							<li><a href="/admin/main">관리자 페이지</a></li>
 						</c:if>
 						<li>
-							<a id="gnb_logout_button">로그아웃</a>
+							<a id="gnb_logout_button" href="/member/logout.do">로그아웃</a>
 						</li>
 						<li>
-							마이룸
+							<a href="/myRoom/myRoomMain">마이룸</a>
 						</li>
 						<li>
 							<a href="/cart/${member.memberId}">장바구니</a>
@@ -101,23 +101,23 @@
 			
 			<div class="navi_bar_area">
 				<div class="dropdown">
-					<button class="dropbtn">국내
+					<button class="dropbtn">국내도서
 						<i class="fa fa-caret-down"></i>
 					</button>
 					<div class="dropdown-content">
 						<c:forEach items="${cate1}" var="cate">
-							<a href="search?type=C&cateCode=${cate.cateCode}">${cate.cateName}</a>
+								<a href="/search?type=C&cateCode=${cate.cateCode}&cateParent=${cate.cateCode}">${cate.cateName}</a>
 						</c:forEach>
 					</div>
 				</div>
 				
 				<div class="dropdown">
-					<button class="dropbtn">국외
+					<button class="dropbtn">국외도서
 						<i class="fa fa-caret-down"></i>
 					</button>
 					<div class="dropdown-content">
 						<c:forEach items="${cate2}" var="cate">
-							<a href="search?type=C&cateCode=${cate.cateCode}">${cate.cateName}</a>
+								<a href="/search?type=C&cateCode=${cate.cateCode}">${cate.cateName}</a>
 						</c:forEach>
 					</div>
 				</div>

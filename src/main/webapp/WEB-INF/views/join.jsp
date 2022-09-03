@@ -199,7 +199,7 @@
 				type : "post", /* 전송 방식  */
 				url : "/member/memberIdChk", /* 전송페이지  */
 				data : data, /* 전송할 데이터, GET 요청시엔 비운다  */
-				success : function(result){ /* 전송에 성공하면 실행될 코드 */
+				success : function(result){ /* 전송에 성공하면 실행될 코드, 컨트롤러에서 데이터를 받았다 */
 					
 					if (result != "fail") {
 						$(".id_input_re_1").css("display", "inline-block");
@@ -235,7 +235,6 @@
 		$.ajax({
 			type : "get",  /* url을 통해 데이터를 보낼 수 있도록 get방식으로  */
 			url : "mailCheck?email=" + email,
-			/* 전송에 성공하면 실행될 코드 */		
 			success : function(data) { 
 				/* attr()은 선택한 요소에 새 속성을 생성하거나 기존의 속성을 변경하거나 속성값을 가져올 때 사용 */
 				checkBox.attr("disabled", false); /* 인증번호 입력칸에 입력이 가능하도록 한다 */ 

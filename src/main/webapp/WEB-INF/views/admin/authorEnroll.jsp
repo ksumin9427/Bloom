@@ -93,8 +93,8 @@
  			}
  			
  			if(authorIntro === ''){
- 				wAuthorIntro.css('display', 'block');
- 				introCheck = false;
+ 				wAuthorIntro.css('display', 'none');
+ 				introCheck = true;
  			} else {
  				wAuthorIntro.css('display', 'none');
  				introCheck = true;
