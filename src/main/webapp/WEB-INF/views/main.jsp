@@ -45,10 +45,11 @@
 						<li>
 							<a href="/cart/${member.memberId}">장바구니</a>
 						</li>
+						<li>
+							<a href="/faq/faqMain">FAQ</a>
+						</li>
 					</c:if>
-					<li>
-						고객센터
-					</li>
+					
 				</ul>
 			</div>
 			
@@ -185,7 +186,7 @@
                     <span class="line">|</span>
                     <li>이용약관</li>
                     <span class="line">|</span>
-                    <li>고객센터</li>
+                    <li>FAQ</li>
                     <span class="line">|</span>
                     <li>광고문의</li>
                     <span class="line">|</span>
@@ -268,6 +269,18 @@
 			}
 			
 		});
+		
+		let dresult = '<c:out value="${delete_result}"/>';
+		checkDresult(dresult);
+		
+		function checkDresult(dresult){
+			
+			if(dresult === '1'){
+				alert("탈퇴하였습니다.")
+			} else if(dresult === '0'){
+				alert("탈퇴하지 못하였습니다.")
+			}
+		}
 	</script>
 	
 

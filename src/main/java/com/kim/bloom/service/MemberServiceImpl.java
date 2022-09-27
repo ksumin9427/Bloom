@@ -1,5 +1,7 @@
 package com.kim.bloom.service;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +10,8 @@ import com.kim.bloom.model.MemberVO;
 
 @Service("MemberSerivice")
 public class MemberServiceImpl implements MemberSerivice{
+	
+	
 	
 	@Autowired
 	MemberMapper memberMapper;
@@ -35,6 +39,8 @@ public class MemberServiceImpl implements MemberSerivice{
 		
 		return memberMapper.getMemberInfo(memberId);
 	}
+
+	
 
 	
 

@@ -136,6 +136,7 @@ public class AdminController {
 
 	}
 
+	/* 작가 등록 메서드*/
 	@RequestMapping(value = "/authorEnroll.do", method = RequestMethod.POST)
 	public String authorEnrollPost(AuthorVO author, RedirectAttributes rttr) throws Exception {
 		logger.info("작가 등록 : " + author);
@@ -178,7 +179,8 @@ public class AdminController {
 
 		return "redirect:/admin/authorManage";
 	}
-
+	
+	/* 상품 등록 메서드*/
 	/*
 	 * 상품 등록 후, 상품 관리 페이지에 이동하였을 때 책이 등록되었음을 알리는 경고창을 위해 상품 이름과 addFlashAttribute 사용
 	 */
@@ -226,7 +228,8 @@ public class AdminController {
 		model.addAttribute("goodsInfo", adminService.goodsGetDetail(bookId));
 
 	}
-
+	
+	/* 상품 수정 메서드 */
 	@PostMapping("/goodsModify")
 	public String goodsModifyPost(BookVO vo, RedirectAttributes rttr) {
 		logger.info("goodsModifyPost...........");

@@ -110,13 +110,25 @@
 				<div class="myRoom_navi_wrap">
 					<ul>
 						<li>
-							<a href="/myRoom/myRoomInfo">나의정보확인</a>
+							FAQ
 						</li>
 						<li>
-							<a href="/myRoom/myRoomInfoModify">나의정보수정</a>
+							<a href="/faq">주문</a>
 						</li>
 						<li>
-							<a href="/myRoom/memberDelete">회원탈퇴</a>
+							<a href="/faq">결제</a>
+						</li>
+						<li>
+							<a href="/faq">교환</a>
+						</li>
+						<li>
+							<a href="/faq">환불</a>
+						</li>
+						<li>
+							<a href="/faq">포인트</a>
+						</li>
+						<li>
+							<a href="/faq">회원</a>
 						</li>
 					</ul>
 				</div><!-- class="myRoom_navi_wrap" -->

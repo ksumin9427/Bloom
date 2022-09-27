@@ -61,4 +61,5 @@
     <context:component-scan base-package="com.kim.bloom.model"></context:component-scan>
     <context:component-scan base-package="com.kim.bloom.service"></context:component-scan>
 	<context:component-scan base-package="com.kim.bloom.task"></context:component-scan>
+	<!-- <context:component-scan base-package="com.kim.bloom.dao"></context:component-scan> -->
 </beans>

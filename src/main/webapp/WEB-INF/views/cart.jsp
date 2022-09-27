@@ -44,7 +44,7 @@
 						</li>
 					</c:if>
 					<li>
-						고객센터
+						FAQ
 					</li>
 				</ul>
 			</div>
@@ -286,7 +286,7 @@
                     <span class="line">|</span>
                     <li>이용약관</li>
                     <span class="line">|</span>
-                    <li>고객센터</li>
+                    <li>FAQ</li>
                     <span class="line">|</span>
                     <li>광고문의</li>
                     <span class="line">|</span>

@@ -7,32 +7,44 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<link rel="stylesheet" href="/resources/css/myRoom/myRoomMain.css?ver18">
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<link rel="stylesheet" href="/resources/css/faq/faqMain.css">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous">
 </script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </head>
 <body>
 
-		<%@include file="../includes/myRoom/myRoomHeader.jsp" %>
+		<%@include file="../includes/faq/faqHeader.jsp" %>
 			
 			<div class="content_area">
 				
-				<%
-					HttpSession sess = request.getSession();
-					sess.getAttribute("member");
-				%>
-				
-				${member.memberMail}
+				<div class="wrapper_faq">
+		
+					<form id="faq_form">
+						<div class="wrap_faq">
+							<div class="subject">
+								<span>FAQ</span>
+							</div>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+						</div><!-- wrap_faq -->
+					</form><!-- faq_form -->
+					
+				</div><!-- wrapper_faq -->
 				
 			</div> <!-- content_area -->
 			
-		<%@include file="../includes/myRoom/myRoomFooter.jsp" %>
+		<%@include file="../includes/faq/faqFooter.jsp" %>
 		
 	
 	<script>

@@ -2,9 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
   <mapper namespace="com.kim.bloom.mapper.MyRoomMapper">
-  	
+  
   	<select id="getCateCode1" resultType="com.kim.bloom.model.CateVO">
   		<![CDATA[
   			select * from bloom_bcate where cateParent > 100000 and cateParent < 200000
@@ -18,5 +17,24 @@
   		]]>
   		
   	</select>
+  	
+  	<select id="getMyRoomInfo" resultType="com.kim.bloom.model.MemberVO">
+  		select memberId, memberName, memberMail, memberAddr1 ,memberAddr2, memberAddr3, 
+  		adminCk, money, point 
+  		from bloom_member where memberId = #{memberId}
+  		
+  	</select>
+  	
+  	<update id="memberUpdate">
+  		update bloom_member set memberName = #{memberName}, memberMail = #{memberMail}, memberAddr1 = #{memberAddr1},
+  		memberAddr2 = #{memberAddr2}, memberAddr3 = #{memberAddr3}
+  		where memberId = #{memberId}
+  	</update>
+  	
+  	<delete id="memberDelete">
+  		delete from bloom_member where memberId = #{memberId} and memberPw = #{memberPw}
+  	</delete>
+  	
+  	
   	
   </mapper>

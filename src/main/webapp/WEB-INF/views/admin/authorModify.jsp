@@ -126,7 +126,7 @@
 			
 		});
 		
-		$("modifyBtn").on("click",function(e){
+		$("#modifyBtn").on("click",function(e){
 			
 			let authorName = $(".form_section_content input[name='authorName']").val();
 			let authorIntro= $(".form_section_content textarea").val();
@@ -150,7 +150,7 @@
 				IntroCk = true;
 			}
 			
-			if(nameCk && IntroCk){
+			if(nameCk){
 				modifyForm.submit();
 			} else {
 				return false;

@@ -12,4 +12,6 @@ public interface MemberSerivice {
 	
 	/* 주문자 정보 */
 	public MemberVO getMemberInfo(String memberId);
+	
+	
 }

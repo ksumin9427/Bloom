@@ -15,6 +15,20 @@ public class MemberVO {
 	private int money;
 	private int point;
 	
+	
+	
+	public MemberVO() {
+		super();
+	}
+
+	public MemberVO(String memberName, String memberMail, String memberAddr1, String memberAddr2, String memberAddr3) {
+		this.memberName = memberName;
+		this.memberMail = memberMail;
+		this.memberAddr1 = memberAddr1;
+		this.memberAddr2 = memberAddr2;
+		this.memberAddr3 = memberAddr3;
+	}
+	
 	public String getMemberId() {
 		return memberId;
 	}

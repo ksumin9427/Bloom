@@ -21,7 +21,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kim.bloom.model.MemberVO;
 import com.kim.bloom.service.MemberSerivice;
 
+import lombok.extern.log4j.Log4j;
+
 /*회원과 관련된 요청을 따로 관리하기 위해 controller를 분리*/
+@Log4j
 @Controller
 @RequestMapping("/member") /* 회원과 관련된 호출을 url 경로에서 member를 타도록 설계 */
 public class MemberController {
@@ -136,12 +139,16 @@ public class MemberController {
 		String rawPw = ""; 
 		String encodePw= ""; 
 		
+		log.info("login.do의 member"+member);
+		
 		MemberVO Ivo = memberSerivice.memberLogin(member);
 		
 		if (Ivo != null) {
 		
 			rawPw = member.getMemberPw(); /* 사용자가 제출한 비밀번호 */ 
 			encodePw = Ivo.getMemberPw(); /* 데이터베이스에 있는 인코딩된 비밀번호 */
+			
+			log.info("encodePw"+encodePw);
 			
 			if (true == pwEncoder.matches(rawPw, encodePw)) {
 				
