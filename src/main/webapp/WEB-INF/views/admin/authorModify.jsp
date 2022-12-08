@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/authorModify.css?ver=1">
+<link rel="stylesheet" href="../resources/css/admin/authorModify.css?ver4">
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -15,10 +15,9 @@
   crossorigin="anonymous"></script>
 </head>
 <body>
-				<%@include file="../includes/admin/header.jsp" %>
+				<%@include file= "../includes/admin/adminHeader.jsp"%>
+				<div class="content_area">
 				
-                <div class="admin_content_wrap">
-                    <div class="admin_content_subject"><span>작가 상세</span></div>
                     <div class="admin_content_main">
                     	<form id="modifyForm" action="/admin/authorModify" method="post">
                     	
@@ -84,13 +83,12 @@
 	                   		
 	                 		<div class="btn_section">
 	                   			<button id="cancelBtn" class="btn">취 소</button>
-		                    	<button id="modifyBtn" class="btn modify_btn">수 정</button>
-		                    	<button id="deleteBtn" class="btn delete_btn">삭 제</button>
+		                    	<button id="modifyBtn" class="btn">수 정</button>
+		                    	<button id="deleteBtn" class="btn">삭 제</button>
 		                    </div> 
 		                    
 	                    </form>
                     </div>                    
-                </div>
                 
                 <!-- 작가 상세 페이지에서 작가 관리 페이지로 이동할 경우 cri데이터가 필요하다 -->
                 <form id="moveForm" method="get">
@@ -99,8 +97,8 @@
                 	<input type="hidden" name="amount" value='<c:out value="${cri.amount }"/>' >
                 	<input type="hidden" name="keyword" value='<c:out value="${cri.keyword }"/>'>
                 </form>
-                
-				<%@include file="../includes/admin/footer.jsp" %>
+            </div><!-- content_area -->
+				<%@include file="../includes/admin/adminFooter.jsp" %>
 				
 	<script>
 		let moveForm = $("#moveForm");

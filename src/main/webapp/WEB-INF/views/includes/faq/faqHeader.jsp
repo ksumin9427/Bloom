@@ -29,7 +29,7 @@
 								<a href="/cart/${member.memberId}">장바구니</a>
 							</li>
 							<li>
-								<a href="/faq/faqMain">FAQ</a>
+								<a href="/faq/faqList">FAQ</a>
 							</li>
 						</c:if>
 						
@@ -39,7 +39,7 @@
 			
 			<div class="top_area">
 				<div class="logo_area">
-					<a href="/main"><img src="/resources/img/Logo.png"></a>
+					<a href="/main"><img src="/resources/img/Bloom_logo.jpg"></a>
 				</div>
 				
 				<div class="search_area">
@@ -108,27 +108,20 @@
 			
 			<div class="myRoom_wrap">
 				<div class="myRoom_navi_wrap">
+					<div class="myRoom_navi_menu"><ul>FAQ</ul></div>
 					<ul>
 						<li>
-							FAQ
-						</li>
-						<li>
-							<a href="/faq">주문</a>
-						</li>
-						<li>
-							<a href="/faq">결제</a>
-						</li>
-						<li>
-							<a href="/faq">교환</a>
-						</li>
-						<li>
-							<a href="/faq">환불</a>
-						</li>
-						<li>
-							<a href="/faq">포인트</a>
-						</li>
-						<li>
-							<a href="/faq">회원</a>
+							<a href="/faq/faqList?type=C&keyword=주문&cateCode=101&pageNum=1&amount=10">주문</a>
+						
+							<a href="/faq/faqList?type=C&keyword=결제&cateCode=101&pageNum=1&amount=10">결제</a>
+						
+							<a href="/faq/faqList?type=C&keyword=교환&cateCode=101&pageNum=1&amount=10">교환</a>
+						
+							<a href="/faq/faqList?type=C&keyword=환불&cateCode=101&pageNum=1&amount=10">환불</a>
+						
+							<a href="/faq/faqList?type=C&keyword=포인트&cateCode=101&pageNum=1&amount=10">포인트</a>
+						
+							<a href="/faq/faqList?type=C&keyword=회원&cateCode=101&pageNum=1&amount=10">회원</a>
 						</li>
 					</ul>
 				</div><!-- class="myRoom_navi_wrap" -->

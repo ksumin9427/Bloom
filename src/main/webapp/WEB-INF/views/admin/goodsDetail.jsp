@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/goodsDetail.css?ver=13">
+<link rel="stylesheet" href="../resources/css/admin/goodsDetail.css?ver17">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -25,9 +25,8 @@
 </style>
 </head>
 <body>
-					<%@include file="../includes/admin/header.jsp" %>
-                <div class="admin_content_wrap">
-                    <div class="admin_content_subject"><span>상품 상세</span></div>
+				<%@include file= "../includes/admin/adminHeader.jsp"%>
+               		<div class="content_area">
 
                     <div class="admin_content_main">
 
@@ -171,7 +170,7 @@
                    		
                    			<div class="btn_section">
                    				<button id="cancelBtn" class="btn">상품 목록</button>
-	                    		<button id="modifyBtn" class="btn enroll_btn">수정 </button>
+	                    		<button id="modifyBtn" class="btn">수정 </button>
 	                    	</div> 
                     </div>      
 
@@ -183,7 +182,8 @@
                 	</form>
                 	
                 </div>
- 						<%@include file="../includes/admin/footer.jsp" %>
+               </div><!-- content_area -->
+ 						<%@include file="../includes/admin/adminFooter.jsp" %>
  	
  	<script>
  		$(document).ready(function(){

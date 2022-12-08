@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %><!--fmt 태그를 사용하기 위해서  -->
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/authorEnroll.css?ver=15">
+<link rel="stylesheet" href="../resources/css/admin/authorEnroll.css?ver19">
  
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -14,9 +16,9 @@
 </head>
 </head>
 <body>
-                <%@include file="../includes/admin/header.jsp" %>
-                <div class="admin_content_wrap">
-                    <div class="admin_content_subject"><span>작가 등록</span></div>
+                <%@include file= "../includes/admin/adminHeader.jsp"%>
+                <div class="content_area">
+                
                     <div class="admin_content_main">
                     	<form action="/admin/authorEnroll.do" method="post" id="enrollForm">
                     		<div class="form_section">
@@ -57,8 +59,8 @@
 	                    		</div>
                     </div>
                 </div>
-                
-                <%@include file="../includes/admin/footer.jsp" %>
+                </div><!-- content_area -->
+                <%@include file="../includes/admin/adminFooter.jsp" %>
 
 	<script>
 		$("#enrollBtn").click(function(){

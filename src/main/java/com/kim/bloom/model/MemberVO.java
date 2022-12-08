@@ -1,5 +1,7 @@
 package com.kim.bloom.model;
 
+import java.util.Date;
+
 public class MemberVO {
 	/* bloom_member 테이블에 데이터를 저장하거나 반환할 데이터를 담을 객체 */
 	
@@ -11,7 +13,9 @@ public class MemberVO {
 	private String memberAddr2;
 	private String memberAddr3;
 	private int adminCk;
-	private int regDate;
+	private Date regDate;
+	
+
 	private int money;
 	private int point;
 	
@@ -77,12 +81,14 @@ public class MemberVO {
 	public void setAdminCk(int adminCk) {
 		this.adminCk = adminCk;
 	}
-	public int getRegDate() {
+	public Date getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(int regDate) {
+
+	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	
 	public int getMoney() {
 		return money;
 	}

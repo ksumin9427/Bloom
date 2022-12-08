@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<link rel="stylesheet" href="/resources/css/myRoom/myRoomInfoModify.css">
+<link rel="stylesheet" href="/resources/css/myRoom/myRoomInfoModify.css?ver14">
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <script
@@ -70,8 +70,7 @@
 						</div>
 						
 						<div class="modify_button_wrap">
-							<!-- <input type="submit" class="modify_button" value="수정하기"> -->
-							<button class="modify_button">수정하기</button>
+							<input type="button" class="modify_button" value="수정하기">
 						</div>
 						
 						<input type="hidden" name="memberId" value="${member.memberId}">

@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %><!--fmt 태그를 사용하기 위해서  -->   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/goodsEnroll.css?ver=49">
+<link rel="stylesheet" href="../resources/css/admin/goodsEnroll.css?ver78">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
  
 <script
@@ -50,10 +50,10 @@
 </head>
 <body>
  
-    			<%@include file="../includes/admin/header.jsp" %>
     			
-                <div class="admin_content_wrap">
-                    <div class="admin_content_subject"><span>상품 등록</span></div>
+    			<%@include file= "../includes/admin/adminHeader.jsp"%>
+    			
+                <div class="content_area">
                     <div class="admin_content_main">
                     	<form action="/admin/goodsEnroll" method="post" id="enrollForm">
                     	
@@ -197,12 +197,12 @@
                    		
                    			<div class="btn_section">
                    				<button id="cancelBtn" class="btn">취 소</button>
-	                    		<button id="enrollBtn" class="btn enroll_btn">등 록</button>
+	                    		<button id="enrollBtn" class="btn">등 록</button>
 	                    	</div> 
                     </div>  
                 </div>
                 
-                <%@include file="../includes/admin/footer.jsp" %> 
+                <%@include file="../includes/admin/adminFooter.jsp" %> 
 
 <script>
 
@@ -316,8 +316,8 @@ $("#enrollBtn").on("click", function(e){
 			$(".bookContents_warn").css('display','none');
 			contentsCk = true;
 		} else {
-			$(".bookContents_warn").css('display','none');
-			contentsCk = true;
+			$(".bookContents_warn").css('display','block');
+			contentsCk = false;
 		}
 		
 		if(bookNameCk && authorIdCk && publicYearCk && publisherCk && cateCodeCk && priceCk && stockCk && discountCk && introCk && contentsCk){

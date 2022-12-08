@@ -9,11 +9,8 @@
   	<insert id="bookEnroll">
   	
   		<selectKey resultType="int" keyProperty="bookId" order="AFTER">
-  		
   			SELECT LAST_INSERT_ID()
-  			
   		</selectKey>
-  		
   		
   		insert into bloom_book(bookName, authorId, publicYear, publisher, cateCode, bookPrice, 
   			bookStock, bookDiscount, bookIntro ,bookContents) 
@@ -96,6 +93,27 @@
 				where memberId like concat('%', #{keyword}, '%')
 			</if>
 	</select>
+	
+	<select id="memberGetList" resultType="com.kim.bloom.model.MemberVO">
+		select  memberId, memberName, memberMail, regDate
+        from bloom_member 
+        
+        <if test="keyword != null">
+            where memberName like concat('%',#{keyword}, '%')
+        </if>
+        
+        limit #{skip}, #{amount}
+	</select>
+	
+	 <select id="memberGetTotal" resultType="int">
+      
+          select count(*) from bloom_member
+          
+          <if test="keyword != null">
+              where memberName like concat('%', #{keyword}, '%');
+          </if>
+          
+      </select>
  
   	
   </mapper>

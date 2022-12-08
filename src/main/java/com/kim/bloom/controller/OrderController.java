@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kim.bloom.model.MemberVO;
 import com.kim.bloom.model.OrderDTO;
 import com.kim.bloom.model.OrderPageDTO;
+import com.kim.bloom.service.BookService;
 import com.kim.bloom.service.MemberSerivice;
 import com.kim.bloom.service.OrderService;
 
@@ -28,10 +30,14 @@ public class OrderController {
 	@Autowired
 	private MemberSerivice memberSerivice;
 	
+	@Autowired
+	private BookService bookService;
+	
 	/* 주문 페이지 이동 */
 	@GetMapping("/order/{memberId}")
 	public String orderPageGet(@PathVariable("memberId") String memberId, OrderPageDTO opd, Model model) {
-	
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
 		model.addAttribute("orderList", orderService.getGoodsInfo(opd.getOrders()));
 		model.addAttribute("memberInfo", memberSerivice.getMemberInfo(memberId));
 		
@@ -61,6 +67,8 @@ public class OrderController {
 		
 		return "redirect:/main";
 	}
+	
+	
 	
 	
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kim.bloom.model.CartDTO;
 import com.kim.bloom.model.MemberVO;
+import com.kim.bloom.service.BookService;
 import com.kim.bloom.service.CartService;
 
 @Controller
@@ -20,6 +21,9 @@ public class CartController {
 	
 	@Autowired
 	private CartService cartService;
+	
+	@Autowired
+	private BookService bookService;
 	
 	@PostMapping("/cart/add")
 	@ResponseBody
@@ -36,6 +40,8 @@ public class CartController {
 	
 	@GetMapping("/cart/{memberId}")
 	public String cartPageGet(@PathVariable("memberId") String memberId, Model model) {
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
 		
 		model.addAttribute("cartInfo", cartService.getCartList(memberId));
 		

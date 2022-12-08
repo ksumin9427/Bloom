@@ -22,7 +22,7 @@
  	/* 팝업창 제목 */
   	.subject_div{
 	    width: 100%;
-	    background-color: #7b8ed1;
+	    background-color: #708175;
 	    color: white;
 	    padding: 10px;
 	    font-weight: bold;
@@ -42,7 +42,7 @@
   		margin-right:5px;
   	    display: inline-block;
 	    width: 130px;
-	    background-color: #5e6b9f;
+	    background-color: #455549;
 	    padding-top: 10px;
 	    height: 27px;
 	    color: #fff;
@@ -52,7 +52,7 @@
   	.enroll_btn{
    	    display: inline-block;
 	    width: 130px;
-	    background-color: #7b8ed1;
+	    background-color: #455549;
 	    padding-top: 10px;
 	    height: 27px;
 	    color: #fff;

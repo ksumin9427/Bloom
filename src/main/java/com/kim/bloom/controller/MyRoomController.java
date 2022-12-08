@@ -45,6 +45,9 @@ public class MyRoomController {
 	/* 나의정보확인 */
 	@RequestMapping(value = "/myRoomInfo")
 	public void myRoomInfoGet(HttpServletRequest request, Model model) throws Exception{
+		model.addAttribute("cate1", myRoomService.getCateCode1());
+		model.addAttribute("cate2", myRoomService.getCateCode2());
+		
 		HttpSession session = request.getSession();
 		MemberVO vo = (MemberVO) session.getAttribute("member");
 		vo = myRoomService.getMyRoomInfo(vo.getMemberId());
@@ -57,6 +60,10 @@ public class MyRoomController {
 	/* 나의정보수정 페이지 진입 */
 	@GetMapping({"/myRoomInfoModify"})
 	public String myRoomInfoModifyGet(HttpServletRequest request, Model model) throws Exception{
+		
+		model.addAttribute("cate1", myRoomService.getCateCode1());
+		model.addAttribute("cate2", myRoomService.getCateCode2());
+		
 		HttpSession session = request.getSession();
 		MemberVO vo = (MemberVO) session.getAttribute("member");
 		vo = myRoomService.getMyRoomInfo(vo.getMemberId());
@@ -69,7 +76,10 @@ public class MyRoomController {
 	
 	/* 나의정보수정 메서드 */
 	@RequestMapping(value = "/memberUpdate", method = RequestMethod.POST)
-	public String memberUpdate(MemberVO vo, RedirectAttributes rttr) throws Exception{
+	public String memberUpdate(MemberVO vo, RedirectAttributes rttr, Model model) throws Exception{
+		
+		model.addAttribute("cate1", myRoomService.getCateCode1());
+		model.addAttribute("cate2", myRoomService.getCateCode2());
 		
 		int result = myRoomService.memberUpdate(vo);
 		
@@ -83,9 +93,12 @@ public class MyRoomController {
 	
 	/* 회원탈퇴페이지 진입 */
 	@RequestMapping(value = "/memberDelete")
-	public String memberDeleteGet(/* HttpServletRequest request, Model model */) {
+	public String memberDeleteGet(Model model) throws Exception {
 		log.info("회원탈퇴페이지 진입");
-		 
+		
+		model.addAttribute("cate1", myRoomService.getCateCode1());
+		model.addAttribute("cate2", myRoomService.getCateCode2());
+		
 		return "myRoom/memberDelete";
 		
 	}

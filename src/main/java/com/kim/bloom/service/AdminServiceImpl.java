@@ -13,6 +13,7 @@ import com.kim.bloom.model.AttachImageVO;
 import com.kim.bloom.model.BookVO;
 import com.kim.bloom.model.CateVO;
 import com.kim.bloom.model.Criteria;
+import com.kim.bloom.model.MemberVO;
 import com.kim.bloom.model.OrderDTO;
 
 @Service("AdminService")
@@ -116,6 +117,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int getOrderTotal(Criteria cri) {
 		return adminMapper.getOrderTotal(cri);
+	}
+
+	@Override
+	public List<MemberVO> memberGetList(Criteria cri) throws Exception {
+		return adminMapper.memberGetList(cri);
+	}
+
+	@Override
+	public int memberGetTotal(Criteria cri) throws Exception {
+		return adminMapper.memberGetTotal(cri);
 	}
 
 }

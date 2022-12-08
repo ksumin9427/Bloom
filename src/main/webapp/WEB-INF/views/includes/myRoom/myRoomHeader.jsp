@@ -29,7 +29,7 @@
 								<a href="/cart/${member.memberId}">장바구니</a>
 							</li>
 							<li>
-								<a href="/faq/faqMain">FAQ</a>
+								<a href="/faq/faqList">FAQ</a>
 							</li>
 						</c:if>
 						
@@ -39,7 +39,7 @@
 			
 			<div class="top_area">
 				<div class="logo_area">
-					<a href="/main"><img src="/resources/img/Logo.png"></a>
+					<a href="/main"><img src="/resources/img/Bloom_logo.jpg"></a>
 				</div>
 				
 				<div class="search_area">
@@ -78,7 +78,7 @@
 					</c:if>
 				</div>
 			<div class="clearfix"></div>
-			</div> <!-- top_area -->
+		</div> <!-- top_area -->
 			
 			<div class="wrap_for_navi_bar_area">
 			<div class="navi_bar_area">
@@ -108,19 +108,34 @@
 			
 			<div class="myRoom_wrap">
 				<div class="myRoom_navi_wrap">
-					<ul>
-						<li>
-							<a href="/myRoom/myRoomInfo">나의정보확인</a>
-						</li>
-						<li>
-							<a href="/myRoom/myRoomInfoModify">나의정보수정</a>
-						</li>
-						<li>
-							<a href="/myRoom/memberDelete">회원탈퇴</a>
-						</li>
-					</ul>
+						<div class="myRoom_navi_menu"><ul>MY 정보</ul></div>
+						<ul>
+							<li>
+								<a href="/myRoom/myRoomInfo">나의 정보 확인</a>
+								<a href="/myRoom/myRoomInfoModify">나의 정보 수정</a>
+							</li>
+						</ul>	
+						<div class="myRoom_navi_menu"><ul>탈퇴</ul></div>
+							<ul>
+							<li>
+								<a href="/myRoom/memberDelete">회원탈퇴</a>
+							</li>
+							</ul>
+						<div class="myRoom_navi_menu"><ul>고객상담</ul></div>
+							<div class="call">
+								<ul>
+								<li><img src="/resources/img/tel.png"><p>
+								9999 - 9999
+								</li>
+								</ul>
+							</div>
+					
+				</div>	
 				</div><!-- class="myRoom_navi_wrap" -->
 			</div><!-- class="myRoom_wrap" --> 
+			
+			
+			
 		
 		
 

@@ -44,6 +44,7 @@ import com.kim.bloom.model.OrderDTO;
 import com.kim.bloom.model.PageDTO;
 import com.kim.bloom.service.AdminService;
 import com.kim.bloom.service.AuthorService;
+import com.kim.bloom.service.BookService;
 import com.kim.bloom.service.MemberSerivice;
 import com.kim.bloom.service.OrderService;
 
@@ -66,17 +67,26 @@ public class AdminController {
 	
 	@Autowired
 	private MemberSerivice memberSerivice;
+	
+	@Autowired
+	private BookService bookService;
 
 	/* 관리자 페이지 접속 */
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void adminMainGet() throws Exception {
+	public void adminMainGet(Model model) throws Exception {
 		logger.info("관리자 페이지 이동");
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
+		
 	}
 
 	/* 상품 관리 페이지 접속 */
 	@RequestMapping(value = "/goodsManage", method = RequestMethod.GET)
 	public void goodsManageGet(Criteria cri, Model model) throws Exception {
 		logger.info("상품 관리 페이지 접속");
+		
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
 
 		List list = adminService.goodsGetList(cri);
 
@@ -94,6 +104,9 @@ public class AdminController {
 	@RequestMapping(value = "/goodsEnroll", method = RequestMethod.GET)
 	public void goodsEnrollGet(Model model) throws Exception {
 		logger.info("상품 등록 페이지 접속");
+		
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
 
 		ObjectMapper objm = new ObjectMapper();
 
@@ -110,14 +123,20 @@ public class AdminController {
 
 	/* 작가 등록 페이지 접속 */
 	@RequestMapping(value = "/authorEnroll", method = RequestMethod.GET)
-	public void authorEnrollGet() throws Exception {
+	public void authorEnrollGet(Model model) throws Exception {
 		logger.info("작가 등록 페이지 접속");
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
+		
 	}
 
 	/* 작가 관리 페이지 접속 */
 	@RequestMapping(value = "/authorManage", method = RequestMethod.GET)
 	public void authorManageGet(Criteria cri, Model model) throws Exception {
 		logger.info("작가 관리 페이지 접속............. " + cri);
+		
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
 
 		List list = authorService.authorGetList(cri);
 
@@ -138,8 +157,12 @@ public class AdminController {
 
 	/* 작가 등록 메서드*/
 	@RequestMapping(value = "/authorEnroll.do", method = RequestMethod.POST)
-	public String authorEnrollPost(AuthorVO author, RedirectAttributes rttr) throws Exception {
+	public String authorEnrollPost(AuthorVO author, RedirectAttributes rttr, Model model) throws Exception {
+		
 		logger.info("작가 등록 : " + author);
+		
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
 
 		authorService.authorEnroll(author);
 
@@ -153,6 +176,8 @@ public class AdminController {
 	public void authorGetInfoGET(int authorId, Criteria cri, Model model) throws Exception {
 
 		logger.info("authorDetail......." + authorId);
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
 
 		/*
 		 * 작가 상세 페이지에서 작가 관리 페이지 이동을 위한 작가 관리 페이지 정보 해당 정보가 없으면 무조건 작가 관리 페이지의 1페이지로
@@ -170,10 +195,15 @@ public class AdminController {
 	 * 데이터를 전송하기 위하여 RedirectAttributes 사용
 	 */
 	@PostMapping("/authorModify")
-	public String authorModifyPost(AuthorVO author, RedirectAttributes rttr) throws Exception {
+	public String authorModifyPost(AuthorVO author, RedirectAttributes rttr, Criteria cri, Model model) throws Exception {
 		logger.info("authorModifyPost......" + author);
+		
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
 
 		int result = authorService.authorModify(author);
+		
+		model.addAttribute("cri", cri);
 
 		rttr.addFlashAttribute("modify_result", result);
 
@@ -185,8 +215,11 @@ public class AdminController {
 	 * 상품 등록 후, 상품 관리 페이지에 이동하였을 때 책이 등록되었음을 알리는 경고창을 위해 상품 이름과 addFlashAttribute 사용
 	 */
 	@PostMapping("/goodsEnroll")
-	public String goodsEnrollPost(BookVO book, RedirectAttributes rttr) {
+	public String goodsEnrollPost(BookVO book, RedirectAttributes rttr, Model model) {
 		logger.info("goodsEnrollPost..... " + book);
+		
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
 
 		adminService.bookEnroll(book);
 
@@ -217,6 +250,9 @@ public class AdminController {
 	@GetMapping({ "/goodsDetail", "/goodsModify" })
 	public void goodsGetInfoGet(int bookId, Criteria cri, Model model) throws JsonProcessingException {
 		logger.info("goodsGetInfoGet...........");
+		
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
 
 		/* 카테고리 리스트 데이터를 전달하기 위해 */
 		ObjectMapper mapper = new ObjectMapper();
@@ -421,6 +457,8 @@ public class AdminController {
 	/* 주문 현황 페이지 이동 */
 	@GetMapping("/orderList")
 	public String orderListGet(Criteria cri, Model model) {
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
 		
 		/* 주문 정보와 페이지 번호를 만드는 데 필요한 페이지 정보를 뷰로 전달 */
 		List<OrderDTO> list = adminService.getOrderList(cri);
@@ -448,5 +486,20 @@ public class AdminController {
 		
 		return "redirect:/admin/orderList?keyword="+dto.getKeyword()+"&amount="+dto.getAmount()+"&pageNum="+dto.getPageNum();
 	}
+	
+	@RequestMapping(value = "/memberManage", method = RequestMethod.GET)
+	public void memberManageGet(Criteria cri, Model model) throws Exception {
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
+		
+		List list = adminService.memberGetList(cri);
+		model.addAttribute("list", list);
+		
+		int total = adminService.memberGetTotal(cri);
+		
+		PageDTO pageMaker = new PageDTO(cri, total);
+		model.addAttribute("pageMaker", pageMaker);
+	}
+	
 
 }

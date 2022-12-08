@@ -10,7 +10,7 @@ public class Criteria {
 	
 	private int amount; /* 한 페이지 당 보여줄 게시물 수  */
 	
-	private int skip; /* 스킵할 게시물 수 */
+	private int skip; /* 스킵할 게시물 수  (pageNum-1) * amount ) */
 	
 	private String type; /* 검색 카테고리 */
 	
@@ -18,9 +18,17 @@ public class Criteria {
 	
 	private String[] authorArr; /* 작가 리스트 */
 	
+	private String[] fnoCateCodeArr; /* 글번호 카테코드 리스트 */
+	
 	private String cateCode; /* 카테고리 코드 */
 	
+	private String cateName; 
+	
 	private int bookId; 
+	
+	public String[] getTypeArr() { /* 타입을 하나의 문자열로 저장하고, 사용할 때에는 각각을 나눠 배열로 가져온다. */
+		return type == null? new String[] {}:type.split("");
+	}
 	
 	public Criteria(int pageNum, int amount) {
 		this.pageNum = pageNum;
@@ -40,6 +48,15 @@ public class Criteria {
 		this.bookId = bookId;
 	}
 	
+	public String getCateName() {
+		return cateName;
+	}
+	
+	public void setCateName(String cateName) {
+		this.cateName = cateName;
+		
+	}
+	
 	public String[] getAuthorArr() {
 		return authorArr;
 	}
@@ -55,11 +72,7 @@ public class Criteria {
 	public void setCateCode(String cateCode) {
 		this.cateCode = cateCode;
 	}
-
-	public String[] getTypeArr() { /* 타입을 하나의 문자열로 저장하고, 사용할 때에는 각각을 나눠 배열로 가져온다. */
-		return type == null? new String[] {}:type.split("");
-	}
-
+	
 	public int getPageNum() {
 		return pageNum;
 	}
@@ -102,10 +115,22 @@ public class Criteria {
 		this.keyword = keyword;
 	}
 	
+	public String[] getFnoCateCodeArr() {
+		return fnoCateCodeArr;
+	}
+
+	public void setFnoCateCodeArr(String[] fnoCateCodeArr) {
+		this.fnoCateCodeArr = fnoCateCodeArr;
+	}
+
 	@Override
 	public String toString() {
-		
-		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", type=" + type + ", keyword=" + keyword
-				+ ", authorArr=" + Arrays.toString(authorArr) + ", cateCode=" + cateCode + ", bookId=" + bookId +"]";
+		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", skip=" + skip + ", type=" + type
+				+ ", keyword=" + keyword + ", authorArr=" + Arrays.toString(authorArr) + ", fnoCateCodeArr="
+				+ Arrays.toString(fnoCateCodeArr) + ", cateCode=" + cateCode + ", cateName=" + cateName + ", bookId="
+				+ bookId + "]";
 	}
+	
+	
+	
 }

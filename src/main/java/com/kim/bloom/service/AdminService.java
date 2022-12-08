@@ -6,6 +6,7 @@ import com.kim.bloom.model.AttachImageVO;
 import com.kim.bloom.model.BookVO;
 import com.kim.bloom.model.CateVO;
 import com.kim.bloom.model.Criteria;
+import com.kim.bloom.model.MemberVO;
 import com.kim.bloom.model.OrderDTO;
 
 public interface AdminService {
@@ -39,5 +40,9 @@ public interface AdminService {
 	/* 주문 총 갯수 */
 	public int getOrderTotal(Criteria cri);
 	
+	/* 회원 목록 */
+	public List<MemberVO> memberGetList(Criteria cri) throws Exception;
 	
+	/* 회원 수 */
+	public int memberGetTotal(Criteria cri) throws Exception;;
 }

@@ -33,7 +33,7 @@
 					            <div class="footer_container">
 					                
 					              	<div class="footer_left">
-				                    <img src="../resources/img/Logo.png">
+				                    <img src="../resources/img/Bloom_logo.jpg">
 				                	</div>
 					               <div class="footer_right">
 					                    (주) Bloom  대표이사 : 김수민

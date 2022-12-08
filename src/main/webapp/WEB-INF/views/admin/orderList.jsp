@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/orderList.css">
+<link rel="stylesheet" href="../resources/css/admin/orderList.css?ver9">
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -17,7 +17,7 @@
 </head>
 <body>
 
-				<%@include file="../includes/admin/header.jsp" %>
+				<%@include file= "../includes/admin/adminHeader.jsp"%>
 				
                 <div class="admin_content_wrap">
                     <div class="admin_content_subject"><span>주문 현황</span></div>
@@ -132,7 +132,7 @@
                                        
                
  
- 				<%@include file="../includes/admin/footer.jsp" %>
+ 				<%@include file="../includes/admin/adminFooter.jsp" %>
 
 	<script>
 		let searchForm =$('#searchForm');

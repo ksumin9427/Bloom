@@ -6,11 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/resources/css/member/login.css?ver35">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/resources/css/member/login.css?ver=3">
 </head>
 <body>
 	
@@ -21,7 +21,7 @@
 			<form id="login_form" method="post">
 			
 			<div class="logo_wrap">
-				<span>Bloom</span>
+				<img src="/resources/img/Bloom_logo.jpg"></a>
 			</div>
 			
 			<div class="login_wrap">

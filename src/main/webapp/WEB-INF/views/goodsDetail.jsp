@@ -7,85 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<link rel="stylesheet" href="/resources/css/goodsDetail.css?ver=6">
+<link rel="stylesheet" href="/resources/css/goodsDetail.css?ver13">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 </head>
 <body>
-
-			<div class="wrapper">
-				<div class="wrap">
-					<div class="top_gnb_area">
-						<ul class="list">
-							<c:if test = "${member == null}">	<!-- 로그인 x -->	
-								<li >
-									<a href="/member/login">로그인</a>
-								</li>
-								<li>
-									<a href="/member/join">회원가입</a>
-								</li>
-							</c:if>
-							<c:if test="${member != null }">	<!-- 로그인 o -->		
-								<c:if test="${member.adminCk == 1 }">	<!-- 관리자 계정 -->
-									<li><a href="/admin/main">관리자 페이지</a></li>
-								</c:if>							
-								<li>
-									<a id="gnb_logout_button" href="/member/logout.do">로그아웃</a>
-								</li>
-								<li>
-									<a href="/myRoom/myRoomMain">마이룸</a>
-								</li>
-								<li>
-									<a href="/cart/${member.memberId}">장바구니</a>
-								</li>
-							</c:if>				
-							<li>
-								FAQ
-							</li>			
-						</ul>			
-					</div>
-					<div class="top_area">
-						<!-- 로고영역 -->
-						<div class="logo_area">
-							<a href="/main"><img src="/resources/img/Logo.png"></a>
-						</div>
-						<div class="search_area">
-			                	<div class="search_wrap">
-			                		<form id="searchForm" action="/search" method="get">
-			                			<div class="search_input">
-			                				<select name="type">
-			                					<option value="T">책 제목</option>
-			                					<option value="A">작가</option>
-			                				</select>
-			                				<input type="text" name="keyword" value="<c:out value="${pageMaker.cri.keyword}"/>">
-			                    			<button class='btn search_btn'>검 색</button>                				
-			                			</div>
-			                		</form>
-			                	</div>
-						</div>
-						<div class="login_area">
-						
-							<!-- 로그인 하지 않은 상태 -->
-							<c:if test = "${member == null }">
-								<div class="login_button"><a href="/member/login">로그인</a></div>
-								<span><a href="/member/join">회원가입</a></span>				
-							</c:if>				
-							
-							<!-- 로그인한 상태 -->
-							<c:if test="${ member != null }">
-								<div class="login_success_area">
-									<span>회원 : ${member.memberName}</span>
-									<span>충전금액 : <fmt:formatNumber value="${member.money }" pattern="\#,###.##"/></span>
-									<span>포인트 : <fmt:formatNumber value="${member.point }" pattern="#,###" /></span>
-									<a href="/member/logout.do">로그아웃</a>
-								</div>
-							</c:if>
-							
-						</div>
-						<div class="clearfix"></div>			
-					</div>
+					<%@include file="../views/includes/header.jsp"%>
+			
+					
 					<div class="content_area">
 						<div class="line">
 						</div>			
@@ -140,10 +71,19 @@
 											<button class="minus_btn">-</button>
 										</span>
 									</div>
-									<div class="button_set">
-										<a class="btn_cart">장바구니 담기</a>
-										<a class="btn_buy">바로구매</a>
-									</div>
+									<c:if test="${member != null}">
+									
+										<div class="button_set">
+											<a class="btn_cart">장바구니 담기</a>
+											<a class="btn_buy">바로구매</a>
+										</div>
+									</c:if>
+									<c:if test="${member == null}">
+										<div class="loginAlert">
+											로그인을 하셔야 제품을 구입하실 수 있습니다.
+										</div>
+									</c:if>
+									
 								</div>
 							</div>
 						</div>
@@ -194,45 +134,7 @@
 			
 					</div>
 					
-					<!-- Footer 영역 -->
-					<div class="footer_nav">
-						<div class="footer_nav_container">
-							<ul>
-								<li>회사소개</li>
-								<span class="line">|</span>
-								<li>이용약관</li>
-								<span class="line">|</span>
-								<li>FAQ</li>
-								<span class="line">|</span>
-								<li>광고문의</li>
-								<span class="line">|</span>
-								<li>채용정보</li>
-								<span class="line">|</span>
-							</ul>
-						</div>
-					</div> <!-- class="footer_nav" -->
-		
-				<div class="footer">
-				            <div class="footer_container">
-				                
-				                <div class="footer_left">
-				                    <img src="../resources/img/Logo.png">
-				                </div>
-				               <div class="footer_right">
-				                    (주) Bloom  대표이사 : 김수민
-				                    <br>
-				                    사업자등록번호 : 111-11-11111
-				                    <br>
-				                    대표전화 : 1111-1111(발신자 부담전화)
-				                    <br>
-				                    <br>
-				                    COPYRIGHT(C) <strong>kimsumin.tistory.com</strong>    ALL RIGHTS RESERVED.
-				                </div>
-				                <div class="clearfix"></div>
-				            </div>
-				        </div> <!-- class="footer" -->	
-			</div>	<!-- class="wrap" -->
-		</div>	<!-- class="wrapper" -->
+					<%@include file="../views/includes/footer.jsp"%>
 
 <script>
 $(document).ready(function(){
@@ -319,6 +221,7 @@ function cartAlert(result){
 		alert("로그인이 필요합니다.");	
 	}
 }
+
 
 $(".btn_buy").on("click", function(){
 	let bookCount = $(".quantity_input").val();
