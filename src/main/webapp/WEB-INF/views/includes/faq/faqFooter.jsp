@@ -36,14 +36,14 @@
 				                    <img src="../resources/img/Bloom_logo.jpg">
 				                	</div>
 					               <div class="footer_right">
-					                    (주) Bloom  대표이사 : 김수민
+					                    (주) Bloom  대표이사 : 김가람
 					                    <br>
 					                    사업자등록번호 : 111-11-11111
 					                    <br>
 					                    대표전화 : 1111-1111(발신자 부담전화)
 					                    <br>
 					                    <br>
-					                    COPYRIGHT(C) <strong>kimsumin.tistory.com</strong>    ALL RIGHTS RESERVED.
+					                    COPYRIGHT(C) <strong>kimgaram.tistory.com</strong>    ALL RIGHTS RESERVED.
 					                </div><!--  footer_right -->
 					                
 					                <div class="clearfix"></div>

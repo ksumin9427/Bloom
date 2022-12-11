@@ -168,7 +168,7 @@
 			
 			$(".move").on("click", function(e){
 				e.preventDefault();
-				/* moveForm.empty(); */
+				moveForm.empty();
 				moveForm.append("<input type='hidden' name='fno' value='"+$(this).attr("href")+"'>");
 				moveForm.attr("action","/faq/faqGet");
 				moveForm.submit();

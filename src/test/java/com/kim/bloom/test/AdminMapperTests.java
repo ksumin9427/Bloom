@@ -10,10 +10,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.kim.bloom.mapper.AdminMapper;
-import com.kim.bloom.model.AttachImageVO;
 import com.kim.bloom.model.BookVO;
 import com.kim.bloom.model.Criteria;
-import com.kim.bloom.model.MemberVO;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,12 +24,7 @@ public class AdminMapperTests {
 	@Test
 	public void test() throws Exception {
 		
-		Criteria cri = new Criteria();
-		cri.setKeyword("관리자");
 		
-		int total = mapper.memberGetTotal(cri);
-		
-			System.out.println("total"+total);
 	}
 	
 	

@@ -118,6 +118,8 @@ public class BookController {
 	
 	@GetMapping("/goodsDetail/{bookId}")
 	public String goodsDetailGet(@PathVariable("bookId")int bookId, Model model) {
+		model.addAttribute("cate1", bookService.getCateCode1());
+		model.addAttribute("cate2", bookService.getCateCode2());
 		logger.info("goodsDetailGet............");
 		
 		model.addAttribute("goodsInfo", bookService.getGoodsInfo(bookId));

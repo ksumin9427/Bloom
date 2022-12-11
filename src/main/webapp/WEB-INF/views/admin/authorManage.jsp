@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/authorManage.css?ver5">
+<link rel="stylesheet" href="../resources/css/admin/authorManage.css?ver9">
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -17,7 +17,7 @@
 </head>
 <body>
 
-				<%@include file= "../includes/admin/adminHeader.jsp"%>
+		<%@include file= "../includes/admin/adminHeader.jsp"%>
 				
 			<div class="content_area">
 				
@@ -61,11 +61,11 @@
                     </div> 
                     
                     <!-- 검색 영역 -->
-                    <div class="searchWrap">
-                    	<form id="searchForm" action="/admin/authorManage" method="get">
-                    		<div class="searchInput">
+                    <div class="admin_searchWrap">
+                    	<form id="admin_searchForm" action="/admin/authorManage" method="get">
+                    		<div class="admin_searchInput">
                     			<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
-                    			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
+                    			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum}"></c:out>'>
                     			<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
                     			<button class='searchBtnM'>검 색</button>
                     		</div>
@@ -165,19 +165,19 @@ $(function(){
 	});
 
 	/* 작거 검색 버튼 동작 */
-	let searchForm = $('#searchForm');
-	$("#searchForm button").on("click", function(e){
+	let admin_searchForm = $('#admin_searchForm');
+	
+	$('#admin_searchForm button').on("click", function(e){
 		e.preventDefault();
 		
-		/* 검색 키워드 유효성 검사 */
-		if(!searchForm.find("input[name='keyword']").val()){
+		 if(!admin_searchForm.find("input[name='keyword']").val()){
 			alert("키워드를 입력하십시오");
 			return false;
-		}
+		} 
 		
-		searchForm.find("input[name='pageNum']").val("1");
+		admin_searchForm.find("input[name='pageNum']").val("1");
 		
-		searchForm.submit();
+		admin_searchForm.submit();
 		
 	});
 	
@@ -185,8 +185,12 @@ $(function(){
 	$(".move").on("click", function(e){
 		e.preventDefault();
 		
+		moveForm.empty();
+		
 		moveForm.append("<input type='hidden' name='authorId' value='"+ $(this).attr("href") + "'>");
+		
 		moveForm.attr("action", "/admin/authorDetail");
+		
 		moveForm.submit();
 		
 	});

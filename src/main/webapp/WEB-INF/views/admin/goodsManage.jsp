@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/goodsManage.css?ver28">
+<link rel="stylesheet" href="../resources/css/admin/goodsManage.css?ver29">
  
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -58,12 +58,12 @@
                 	</div>
                 	
                 	<!-- 검색 영역 -->
-                	<div class="searchWrap">
-                		<form id="searchForm" action="/admin/goodsManage" method="get">
-                			<div class="searchInput">
+                	<div class="admin_searchWrap">
+                		<form id="admin_searchForm" action="/admin/goodsManage" method="get">
+                			<div class="admin_searchInput">
                     			<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
                     			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
-                    			<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
+                    			<input type="hidden" name="amount" value='<c:out value="${pageMaker.cri.amount}"/>'>
                     			<input type="hidden" name="type" value="G">
                     			<button class='searchBtnM'>검 색</button>                				
                 			</div>
@@ -140,22 +140,22 @@
 		
 	});
 	
-	let searchForm = $('#searchForm');
+	let admin_searchForm = $('#admin_searchForm');
 	let moveForm = $('#moveForm');
 	
 	/* 작가 검색 버튼 동작 */
-	$('#searchForm button').on("click", function(e){
+	$('#admin_searchForm button').on("click", function(e){
 		
 		e.preventDefault();
 		
-		if(!searchForm.find("input[name='keyword']").val()){
+		if(!admin_searchForm.find("input[name='keyword']").val()){
 			alert("키워드를 입력하십시오.");
 			return false;
 		}
 		
-		searchForm.find("input[name='pageNum']").val("1");
+		admin_searchForm.find("input[name='pageNum']").val("1");
 		
-		searchForm.submit();
+		admin_searchForm.submit();
 		
 	});
 	
@@ -185,6 +185,8 @@
 	$(".move").on("click", function(e){
 		
 		e.preventDefault();
+		
+		moveForm.empty();
 		
 		moveForm.append("<input type='hidden' name='bookId' value='"+$(this).attr("href")+"'>");
 		

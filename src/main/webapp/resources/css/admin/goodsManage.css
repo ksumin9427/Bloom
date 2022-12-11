@@ -115,6 +115,20 @@ ul{
     border-radius: 14px;
     font-size: 17px;
     font-weight: 600;	
+}
+
+.admin_searchWrap{
+	margin-top:15px;
+}
+.admin_searchInput{
+    position: relative;
+    text-align:center;	
+}
+.admin_searchInput input[name='keyword']{
+	padding: 4px 10px;
+    font-size: 15px;
+    height: 20px;
+    line-height: 20px;
 }	
 
 

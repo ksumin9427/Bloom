@@ -24,11 +24,14 @@ public class BookMapperTests {
 	/* 상품 정보 */
 	@Test
 	public void getGoodsInfo() {
-		int bookId = 16391;
-		BookVO goodsInfo = mapper.getGoodsInfo(bookId);
-		System.out.println("===========================");
-		System.out.println(goodsInfo);
-		System.out.println("===========================");
+		Criteria cri = new Criteria();
+		// 테스트 키워드
+		cri.setKeyword("파친코");
+		System.out.println("cri : " + cri);
+		
+		List<BookVO> list = mapper.getGoodsList(cri);
+		System.out.println("list : " + list);
+		
 		
 	}
 	
