@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.kim.bloom.mapper.AdminMapper">
+  	
+  	<!-- 책 등록 -->
+  	<insert id="bookEnroll">
+  	
+  		<selectKey resultType="int" keyProperty="bookId" order="AFTER">
+  			SELECT LAST_INSERT_ID()
+  		</selectKey>
+  		
+  		insert into bloom_book(bookName, authorId, publicYear, publisher, cateCode, bookPrice, 
+  			bookStock, bookDiscount, bookIntro ,bookContents) 
+  		values(#{bookName}, #{authorId}, #{publicYear}, #{publisher}, #{cateCode},
+  			#{bookPrice}, #{bookStock}, #{bookDiscount}, #{bookIntro}, #{bookContents})
+  	</insert>
+  	
+  	<!-- 카테고리 리스트 -->
+  	<select id="cateList" resultType="com.kim.bloom.model.CateVO">
+  		select * from bloom_bcate order by cateCode
+  	</select>
+  	
+  	<!-- 상품 리스트 -->
+  	<select id="goodsGetList" resultType="com.kim.bloom.model.BookVO">
+  		select bookId, bookName, b.authorName, c.cateName, bookStock, a.regDate
+  		from bloom_book a
+  		left outer join bloom_author b on a.authorId = b.authorId
+  		left outer join bloom_bcate c on a.cateCode = c.cateCode
+  		<if test="keyword != null">
+  			where bookName like concat ('%', #{keyword}, '%')
+  		</if>
+  		<!--limit 시작지점+1, 데이터 개수 -->
+  		order by bookId desc limit #{skip}, #{amount} 
+  	</select>
+  	
+  	<!-- 상품 총 개수 -->
+  	<select id="goodsGetTotal" resultType="int">
+  		select count(*) from bloom_book
+  		<if test="keyword != null">
+  			where bookName like concat ('%', #{keyword}, '%')
+  		</if>
+  	</select>
+  	
+  	<!-- 상품 조회 페이지 -->
+  	<select id="goodsGetDetail" resultType="com.kim.bloom.model.BookVO">
+  		select bookId, bookName, (select authorName from bloom_author where authorId = bloom_book.authorId) authorName, 
+			authorId, publicYear, publisher, cateCode, bookPrice, bookStock, bookDiscount, bookIntro, bookContents, regDate, updateDate 
+		from bloom_book where bookId = #{bookId}
+  		
+  	</select>
+  	
+  	<update id="goodsModify">
+  		update bloom_book set bookName = #{bookName}, authorId = #{authorId}, publicYear = #{publicYear}, publisher = #{publisher}, cateCode = ${cateCode}, 
+		bookPrice = #{bookPrice}, bookStock = #{bookStock}, bookDiscount = #{bookDiscount}, bookIntro = #{bookIntro}, bookContents = #{bookContents}, updateDate = now()
+		where bookId = ${bookId}
+  	</update>
+  	
+  	<delete id="goodsDelete">
+  		delete from bloom_book where bookId = #{bookId}
+  	</delete>
+  	
+  	<!-- 이미지 등록 -->
+  	<insert id="imageEnroll">
+  		insert into bloom_image(bookId, fileName, uploadPath, uuid) values(#{bookId},#{fileName},#{uploadPath},#{uuid})
+  	</insert>
+  	
+  	<delete id="deleteImageAll">
+  		delete from bloom_image where bookId = #{bookId}
+  	</delete>
+  	
+  	<select id="checkFileList" resultType="com.kim.bloom.model.AttachImageVO">
+		select * from bloom_image where uploadPath = DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 DAY), '%Y\%m\%d')	 	
+  	</select>
+  	
+  	<select id="getAttachInfo" resultType="com.kim.bloom.model.AttachImageVO">
+  		select * from bloom_image where bookId = #{bookId}
+  	</select>
+  	
+	<select id="getOrderList" resultType="com.kim.bloom.model.OrderDTO">
+		select orderId, memberId, orderState, orderDate from bloom_order
+			<if test="keyword != null">
+				where memberId like concat('%', #{keyword}, '%')
+			</if>
+		order by orderDate desc limit #{skip}, #{amount}	
+	</select>
+	
+	<select id="getOrderTotal" resultType="int">
+		select count(*) from bloom_order
+			<if test="keyword != null">
+				where memberId like concat('%', #{keyword}, '%')
+			</if>
+	</select>
+	
+	<select id="memberGetList" resultType="com.kim.bloom.model.MemberVO">
+		select  memberId, memberName, memberMail, regDate
+        from bloom_member 
+        
+        <if test="keyword != null">
+            where memberName like concat('%',#{keyword}, '%')
+        </if>
+        
+        limit #{skip}, #{amount}
+	</select>
+	
+	 <select id="memberGetTotal" resultType="int">
+      
+          select count(*) from bloom_member
+          
+          <if test="keyword != null">
+              where memberName like concat('%', #{keyword}, '%');
+          </if>
+          
+      </select>
+ 
+  	
+  </mapper>
+  
+  

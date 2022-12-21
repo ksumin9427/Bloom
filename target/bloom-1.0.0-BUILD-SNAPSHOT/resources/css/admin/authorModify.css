@@ -1,0 +1,547 @@
+@charset "UTF-8";
+*{
+	margin: 0;
+	padding:0;
+}
+a{
+	text-decoration: none;
+}
+ul, li{
+	list-style: none;
+}
+/* 화면 전체 렙 */
+.wrapper{
+	width: 100%;
+	margin: 0 auto;
+	
+}
+/* content 랩 */
+.wrap{
+	width : 100%;
+	margin: 0 auto;
+	min-width: 1180px;
+}
+.wrap_for_top_gnb_area{
+	width : 100%;
+	height: 50px;
+	background-color: #C8D5CB;
+	margin: 0 auto;
+}
+
+/* 홈페이지 기능 네비 */ 
+.top_gnb_area{
+	width: 1180px;
+    height: 50px;
+    background-color: #C8D5CB; 
+    position:relative;   
+	margin: 0 auto;
+  
+}
+.top_gnb_area .list{
+	position: absolute;
+    top: 0px;
+    right: 0;
+    
+}
+.top_gnb_area .list li{
+	list-style: none;	
+    float : left;
+    padding: 13px 15px 0 10px;
+    font-weight: 900;
+    cursor: pointer;
+    /* font: #77877F; */
+}
+.top_gnb_area .list li a:link {color: #56665A;}
+.top_gnb_area .list li a:visited {color: #56665A;}
+.top_gnb_area .list li a:active {color: #56665A;}
+.top_gnb_area .list li a:hover {color: black;}	
+
+.gnb_logout_button li a:link {color: #56665A;}
+.gnb_logout_button li a:visited {color: #56665A;}
+.gnb_logout_button li a:active {color: #56665A;}
+.gnb_logout_button li a:hover {color: black;}	
+/* 로고, 검색, 로그인 */
+.top_area{
+	width: 1180px;
+    height: 150px;
+    margin: 0 auto;
+}
+/* 로고 영역 */
+.logo_area{
+	width: 25%;
+	height: 100%;
+	float:left;
+}
+.logo_area img{
+	width: 75%;
+    height: 100%;
+}
+
+/* 검색 박스 영역 */
+.search_area{
+	width: 50%;
+	height: 100%;
+	float:left;	
+}
+.search_wrap{
+	width: 100%;
+    height: 100%;
+}
+#searchForm{
+	width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search_input{
+    display: flex;
+    height: 30%;
+    width: 80%;	
+}
+.search_input select{
+	width: 20%;
+    text-align: center;
+    font-size: 15px;	
+}
+.search_input input{
+    margin-left: 10px;
+    width: 57%;	
+    font-size: 18px;
+    padding-left: 2%;
+}
+.searchBtn{
+	margin-left: 10px;
+    width: 17%;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: 600;	
+}	
+
+
+/* 로그인 버튼 영역 */
+.login_area{
+	width: 25%;
+	height: 100%;
+	display: inline-block;	
+	text-align: center;		
+}
+.login_button{
+	height: 50%;
+    background-color: #9BA59D;
+    margin-top: 30px;
+    line-height: 77px;
+    font-size: 40px;
+    font-weight: 900;
+    border-radius: 10px;
+    cursor: pointer;	
+}
+.login_area>span{
+	margin-top: 10px;
+    font-weight: 900;
+    display: inline-block;
+}
+.login_button a{
+	color: black;
+}
+.login_area span a{
+	color: black;
+}
+
+.wrap_for_navi_bar_area{
+	width: 100%;
+	background-color: #708175;
+	margin: 0 auto;
+	position: relative;
+}
+/* 제품 목록 네비 */
+.navi_bar_area {
+  width: 1180px;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: #708175;
+}
+
+.navi_bar_area a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+  margin-left: 10px;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  font-weight: bold;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  width:140px;
+}
+
+.dropdown-content {
+  display:none;
+  position: absolute;
+  background-color: #f9f9f9;
+  width: 466px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: left;
+  width: 80px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.navi_bar_area a:hover, .dropdown:hover .dropbtn {
+  background-color: #676E69;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+
+.content_area{
+ width: 1180px;
+    min-height: 1000px;
+    margin: 0 auto;
+   
+}
+
+/* 로그인 성공 영역 */
+.login_success_area{
+	height: 62%;
+    width: 80%;
+    border: 2px solid #676E69;
+    border-radius: 15px;
+    margin: 5% auto;
+    padding-top: 5%;
+}
+.login_success_area>a{
+    font-size: 15px;
+    font-weight: 900;
+    display: inline-block;
+    margin-top: 5px;
+    background: #e1e5e8;
+    width: 82px;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 25px;
+    color: #606267;    
+}
+.login_success_area>span{
+	display : block;
+	text-align: left;
+    margin-left: 10%;
+}
+
+/* 관리자 네비 영역 */
+.admin_wrap{
+    width: 1180px;
+	margin: 0 auto;
+	height: 100%;
+	display: block;
+	position: relative;
+	top: -50px;
+}
+
+.admin_navi_wrap{
+    width: 15%;
+    height: 100%;
+    float:left;
+	border: 2px #E0E2E0 solid;
+	position: relative;
+	bottom: -160px;
+
+}
+.admin_navi_menu ul{
+	color: #9B9D9B;
+	font-weight: 600;
+	position: relative;
+	left: 10px;
+	top: 3px;
+	
+}
+.admin_navi_wrap ul li{
+    text-align: center;
+    padding: 15px;
+    color: black;
+    font-size: 15px;
+    
+}
+.admin_navi_wrap ul li a{
+	display: block;
+    margin: 0 auto;
+    cursor: pointer;
+    font-size: 15px;
+    color: black;
+    padding: 8px;
+  
+}
+
+/* 관리자페이지 컨텐츠 영역 */
+.admin_content_main{
+    width: 720px;
+    margin: 0 auto; 
+    position: relative;
+    left: 100px;
+    bottom: -20px;
+    
+}
+
+/* 관리자 컨텐츠 메인 영역 */
+.form_section{
+	width: 95%;
+    margin-left: 2%;
+    margin-top: 20px;
+    border: 1px solid #dbdde2;
+    background-color: #F6F6F6;	
+}
+.form_section_title{
+/* 	padding: 20px 35px; */	
+	padding: 5px 10px;	
+}
+.form_section_title label{
+	display: block;
+    font-size: 20px;
+    font-weight: 800;
+}
+.form_section_content{
+	padding: 20px 35px;
+    border-top: 1px solid #dbdde2;	
+}
+.form_section_content input{
+	width: 500px;
+    height: 25px;
+    font-size: 20px;
+    padding: 5px 1%;
+}
+.form_section_content textarea{
+    width: 98%;
+    height: 170px;
+    font-size: 20px;	
+}
+.form_section_content select{
+	width: 300px;;
+    height: 35px;
+    font-size: 20px;
+    text-align-last: center;
+}
+/* 입력란 공란 경고 태그 */
+.form_section_content span{	
+	display: none;
+    padding-top: 10px;
+    text-align: center;
+    color: #e05757;
+    font-weight: 300;    
+}
+
+.ck-content {						/* ckeditor 높이 */
+    height: 170px;
+}
+
+
+.ui-datepicker-trigger {/* 캘린더 css 설정 */
+    margin-left: 10px;
+    width: 14%;
+    height: 38px;
+    font-weight: 600;
+    background-color: #E1E1E1;
+    font-size: 15px;
+    cursor:pointer;
+}
+
+input[name='publicYear'] {
+    width: 500px;
+    text-align: center;
+}
+
+.authorId_btn {						/* 작가 선택 css 설정 */
+    margin-left: 5px;
+    width: 14%;
+    height: 38px;
+    font-weight: 600;
+    background-color: #E1E1E1;
+    font-size: 15px;
+    cursor:pointer;
+}
+#authorName_input {
+    width: 500px;;
+    text-align: center;
+}
+
+.form_section_content select {		/* 카테고리 css 설정 */
+    width: 500px;
+    height: 35px;
+    font-size: 20px;
+    text-align-last: center;
+    margin-left: 5px;
+}
+.cate_wrap span {
+    font-weight: 600;
+}
+.cate_wrap:not(:first-child) {
+    margin-top: 20px;
+}
+
+.ck_warn{						/* 입력란 공란 경고 태그 */
+	display: none;
+    padding-top: 10px;
+    text-align: center;
+    color: #e05757;
+    font-weight: 300;    
+}
+
+.step_val{						/* 할인 가격 문구 */
+	display: block;
+    padding-top: 5px;
+    font-weight: 500;
+}
+
+
+
+
+/* 입력란 공란 경고 태그 */
+.form_section_content span{	
+	display: none;
+    padding-top: 10px;
+    text-align: center;
+    color: #e05757;
+    font-weight: 300;    
+}
+
+
+
+/* 버튼 영역 */
+.btn_section{
+	text-align: center;
+	margin: 40px 0;
+}
+.btn{
+    min-width: 180px;
+    padding: 4px 30px;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 40px;
+    background-color: #E1E1E1;
+}
+.modify_btn{
+	background-color: #b8d3e8;
+	margin-left:15px;
+}
+.delete_btn{
+	background-color: #efcdcd;
+}
+.delete_btn:hover{
+	background-color : #e4a7a7;
+}
+
+.wrap_for_footer1_in{
+	width : 1180px;
+	min-width: 1180px;
+	margin: 0 auto;
+}
+.wrap_for_footer2_in{
+	width : 1180px;
+	min-width: 1180px;
+	margin: 0 auto;
+	left: -13px;
+	position: relative;
+}
+.wrap_for_footer1{
+	width: 100%;
+	background-color: #C8D5CB;
+}
+/* footer navai 영역 */
+.footer_nav{
+	width:100%;
+	height:50px;
+}
+.footer_nav_container{
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	background-color: #C8D5CB;
+}
+.footer_nav_container>ul{
+	font-weight : bold;
+	float:left;
+	list-style:none;
+	position:relative;
+	padding-top:10px;
+	line-height: 27px;
+	font-family: dotum;
+	margin-left: 10px;
+}
+.footer_nav_container>ul>li{
+	display:inline;
+	width: 45px;
+	height: 19px;
+	padding: 10px 9px 0 10px;
+}
+.footer_nav_container>ul>span{
+	margin: 0 4px;
+}
+.wrap_for_footer2{
+	width: 100%;
+	background-color: #DBE0DC;
+}
+/* footer 영역 */
+.footer{
+	width:100%;
+	height:130px;
+	background-color:#DBE0DC;
+	padding-bottom : 50px;
+}
+.footer_container{
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
+.footer_left>img {
+	width: 100%;
+    height: 130px;
+    /* margin-left: -20px; */
+    margin-top: -10px;
+}
+.footer_left{
+	float :left;
+	width: 200px;
+	margin-left: 30px;
+	margin-top : 30px;
+
+	
+	
+}
+.footer_right{
+	float :left;
+	width: 680px;
+	margin-left: 18px;
+	margin-top : 30px;
+}
+
+/* float 속성 해제 */
+.clearfix{
+	clear: both;
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.kim.bloom.mapper.OrderMapper">
+  	
+  	<select id="getGoodsInfo" resultType="com.kim.bloom.model.OrderPageItemDTO">
+  		select bookId, bookName, bookPrice, bookDiscount from bloom_book where bookId = #{bookId}
+  	</select>
+  	
+  	<select id="getOrderInfo" resultType="com.kim.bloom.model.OrderItemDTO">
+  		select bookId, bookPrice, bookDiscount from bloom_book where bookId = #{bookId}
+  	</select>
+  	
+  	<insert id="enrollOrder">
+  		insert into bloom_order(orderId, addressee, memberId, memberAddr1, memberAddr2, memberAddr3, orderState, deliveryCost, usePoint)
+    	values(#{orderId},#{addressee}, #{memberId}, #{memberAddr1}, #{memberAddr2}, #{memberAddr3}, '배송준비', #{deliveryCost}, #{usePoint})
+  	</insert>
+  	
+  	<insert id="enrollOrderItem">
+  		insert into bloom_orderItem(orderId, bookId, bookCount, bookPrice, bookDiscount, savePoint)
+		values(#{orderId}, #{bookId}, #{bookCount}, #{bookPrice}, #{bookDiscount}, #{savePoint})
+  	</insert>
+  	
+  	<update id="updateMoney">
+  		update bloom_member set money = #{money}, point = #{point} where memberId = #{memberId}
+  	</update>
+  	
+  	<update id="updateStock">
+  		update bloom_book set bookStock = #{bookStock} where bookId = #{bookId}
+  	</update>
+  	
+  	<update id="orderCancle">
+  		update bloom_order set orderState = '주문취소' where orderId = #{orderId}
+  	</update>
+  	
+  	<!-- 주문 상품 정보의 주문 취소 -->
+  	<select id="getOrderItemInfo" resultType="com.kim.bloom.model.OrderItemDTO">
+  		select * from bloom_orderItem where orderId = #{orderId}
+  	</select>
+  	
+  	<!-- 주문 정보의 주문 취소 -->
+  	<select id="getOrder" resultType="com.kim.bloom.model.OrderDTO">
+  		select * from bloom_order where orderId = #{orderId}
+  	</select>
+  	
+  	
+  </mapper>

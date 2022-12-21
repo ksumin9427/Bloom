@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.kim.bloom.mapper.FaqMapper">
+  		
+  	<sql id="criteria">
+		    <trim prefix="where (" suffix=")" prefixOverrides="AND">
+	  		<foreach item="type" collection="typeArr">
+	  			<trim prefix="AND">
+	  				<choose>
+	  					<when test="type == 'C'.toString()">
+	  						b.cateName like concat ('%', #{keyword}, '%')
+	  					</when>  					
+	  					<when test="type == 'T'.toString()">
+	  						a.title like concat ('%', #{keyword}, '%')
+	  					</when> 
+	  				</choose>
+	  			</trim>
+	  		</foreach>
+	  	</trim>
+	</sql>
+  	
+  	<insert id="faqEnroll">
+  		insert into bloom_faq(cateCode, cateName, title, content, writer) values(#{cateCode},#{cateName}, #{title}, #{content}, #{writer})
+  	</insert>
+  	
+	<select id="getFaqList" resultType="com.kim.bloom.model.FaqVO">
+			select a.fno, a.cateCode, b.cateName, b.cateParent, a.title, a.content, a.writer
+			from bloom_faq a join bloom_fcate b on a.cateCode = b.cateCode
+			<include refid="criteria"></include>
+			order by fno desc 
+			limit #{skip}, #{amount}
+	</select>
+  	
+  	<select id="getFaqPage" resultType="com.kim.bloom.model.FaqVO">
+  		select * from bloom_faq where fno = #{fno}
+  	</select>
+  	
+  	<update id="faqModify">
+  		update bloom_faq set title = #{title}, cateCode = #{cateCode}, content= #{content}, updatedate= now() where fno = #{fno}
+  	</update>
+  	
+  	<delete id="faqDelete">
+  		delete from bloom_faq where fno = #{fno}
+  	</delete>
+  	
+  	<select id="getListPaging" resultType="com.kim.bloom.model.FaqVO">
+  		select * from (select fno, writer ,title, content from bloom_faq order by fno desc) as T1
+  		limit #{skip}, #{amount} 
+  	</select>
+  	
+  	<!-- <select id="getTotal" resultType="int">
+  		select count(*) from bloom_faq
+  	</select> -->
+  	
+  	<select id="getTotal" resultType="int">
+  		select count(*) from bloom_faq
+  		
+  		<if test="keyword != null">
+  			where title like concat('%', #{keyword}, '%')
+  		</if>
+  	</select>
+  	
+  	<!-- 카테고리 종류 가져오기 -->
+  	<select id="cateList" resultType="com.kim.bloom.model.CateVO">
+  		select * from bloom_fcate order by cateCode
+  	</select>
+  	
+	<select id="getFaqSearch" resultType="com.kim.bloom.model.FaqVO">
+	
+			select a.fno, a.cateCode, a.cateName, b.cateParent, a.title, a.writer
+			from bloom_faq a join bloom_fcate b on a.cateCode = b.cateCode
+			<include refid="criteria"></include>
+			order by fno desc 
+			limit #{skip}, #{amount}	
+	
+	</select>
+	
+	<select id="getFaqSearchTotal" resultType="int">
+
+  		select count(*) from bloom_faq a join bloom_fcate b on a.cateCode = b.cateCode
+  		
+		<include refid="criteria"></include>
+		
+		
+	</select>
+	
+	<select id="getFaqFnoList" resultType="String">
+
+  		select a.fno from bloom_faq a join bloom_fcate b on a.cateCode = b.cateCode 
+  		where cateName like concat('%', #{keyword}, '%')
+		
+	</select>
+	
+	<!-- <select id="getFaqCatecodeList" resultType="String">
+
+  		select cateCode from bloom_faq where cateName like concat('%', #{keyword}, '%')
+		select a.cateCode from bloom_faq a join bloom_fcate b on a.cateCode = b.cateCode 
+  		where cateName like concat('%', #{keyword}, '%')
+	</select> -->
+	
+	
+	
+  	
+  </mapper>

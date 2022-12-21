@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.kim.bloom.mapper.BookMapper">
+  
+  	<!-- criteria 검색조건 -->
+  	<sql id="criteria">
+  		
+  		<trim prefix="where (" suffix=")" prefixOverrides="AND">
+  			<foreach item="type" collection="typeArr">
+  				<trim prefix="AND">
+  					<choose>
+  						<when test="type == 'A'.toString()">
+  							<trim prefixOverrides="or">
+  								<foreach item="authorId" collection="authorArr">
+  									<trim prefix="or">
+  										a.authorId = #{authorId}
+  									</trim>
+  								</foreach>
+  							</trim>
+  						</when>
+  						
+  						<when test="type == 'C'.toString()">
+  							a.cateCode like concat ('%', #{cateCode}, '%')
+  						</when>
+  						
+  						<when test="type == 'T'.toString()">
+  							bookName like concat ('%', #{keyword}, '%')
+  						</when>
+  						
+  					</choose>
+  				</trim>
+  			</foreach>
+  		</trim>
+  		
+  	</sql>
+  	
+  	<!--상품 검색-->
+  	<select id="getGoodsList" resultType="com.kim.bloom.model.BookVO">
+  		select  bookId, bookName, b.authorName, a.authorId, c.cateName, a.cateCode, publisher, 
+  		publicYear, bookPrice, bookDiscount
+		from bloom_book a left outer join bloom_author b on a.authorId = b.authorId
+		left outer join bloom_bcate c on a.cateCode = c.cateCode
+		<include refid="criteria"></include>
+		order by bookId desc 
+		limit #{skip}, #{amount}
+  	</select>
+  	
+  	<!-- 상품 총 개수 -->
+  	<select id="goodsGetTotal" resultType="int">
+  		select count(*) from bloom_book a
+  		<include refid="criteria"></include>
+  	</select>
+  	
+  	<select id="getAuthorIdList" resultType="String">
+  		select authorId from bloom_author where authorName like concat ('%',#{keyword},'%')
+  	</select>
+  	
+  	<!-- 국내 카테고리 리스트 -->
+  	<select id="getCateCode1" resultType="com.kim.bloom.model.CateVO">
+  		<![CDATA[
+  			select * from bloom_bcate where cateParent > 100000 and cateParent < 200000
+  		]]>
+  	</select>
+  	
+  	<!-- 국외 카테고리 리스트 -->
+  	<select id="getCateCode2" resultType="com.kim.bloom.model.CateVO">
+  		<![CDATA[
+  			select * from bloom_bcate where cateParent > 200000 and cateParent < 300000
+  		]]>
+  	</select>
+  	
+  	
+  	<select id="getCateList" resultType="String">
+  		select distinct cateCode from bloom_book where
+  		<foreach item="type" collection="typeArr">
+  			<choose>
+  				<when test="type == 'A'.toString()">
+  					<trim prefixOverrides="or">
+  						<foreach collection="authorArr" item="authorId">
+  							<trim prefix="or">
+  								authorId = #{authorId}
+  							</trim>
+  						</foreach>
+  					</trim>
+  				</when>
+  				<when test="type == 'T'.toString()">
+  					bookName like concat ('%', #{keyword},'%')
+  				</when>
+  			</choose>
+  		</foreach>
+  	</select>
+  	
+  	<!-- 카테고리 정보 -->		
+	<select id="getCateInfo" resultType="com.kim.bloom.model.CateFilterDTO">
+		select DISTINCT count(*) cateCount, a.cateCode, b.cateName 
+		from bloom_book a left join bloom_bcate b on a.cateCode = b.cateCode 
+		where 
+		<foreach item="type" collection="typeArr">		
+  				<choose>
+  					<when test="type == 'A'.toString()">
+  						<trim prefix="(" suffix=")" prefixOverrides="or">
+		  					<foreach collection="authorArr" item="authorId">
+		  						<trim prefix="or">
+		  							authorId = #{authorId}
+		  						</trim>
+		  					</foreach>
+  						</trim>
+  						and a.cateCode = #{cateCode}
+  					</when>
+  					<when test="type == 'T'.toString()">
+  						bookName like concat ('%', #{keyword}, '%') and a.cateCode = #{cateCode}
+  					</when>
+  				</choose>
+  		</foreach>
+	</select>
+	
+	<select id="getGoodsInfo" resultType="com.kim.bloom.model.BookVO">
+		select a.bookId, a.bookName, a.authorId, b.authorName, a.publicYear, a.publisher,
+		a.cateCode, c.cateName, a.bookPrice, a.bookStock, a.bookDiscount, a.bookIntro, a.bookContents 
+		from bloom_book a left outer join bloom_author b on a.authorId = b.authorId
+		left outer join bloom_bcate c on a.catecode = c.catecode
+		where bookid = ${bookId}
+	</select>
+	
+	<select id="getBookIdName" resultType="com.kim.bloom.model.BookVO">
+		select bookId, bookName from bloom_book where bookId = #{bookId}
+	</select>
+	
+	<select id="likeSelect" resultType="com.kim.bloom.model.SelectDTO">
+		select bookId, bookName, ratingAvg, (select cateName from bloom_bcate where bloom_book.cateCode = bloom_bcate.cateCode) as cateName
+		from bloom_book order by ratingAvg desc limit 8
+	</select>
+  	
+  </mapper>
