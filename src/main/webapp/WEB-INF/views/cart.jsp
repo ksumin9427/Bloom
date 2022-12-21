@@ -20,11 +20,8 @@
 			
 			<div class="content_area">
 				
-				<!-- <div class="content_subject"><span>장바구니</span></div> -->
-				<!-- 장바구니 리스트 -->
 				<div class="content_middle_section">
-				<!-- 장바구니 가격 합계 -->
-				<!-- cartInfo -->
+				
 				<div class="content_totalCount_section">
 				
 					<div class="all_check_input_div">
