@@ -23,10 +23,10 @@ public interface OrderMapper {
 	public int enrollOrderItem(OrderItemDTO orid);
 	
 	/* bloom_member 테이블에서 회원의 돈 포인트를 변경 */
-	public int updateMoney(MemberVO member);
+	public int deductMoney(MemberVO member);
 	
 	/* 주문한 상품 개수 만큼 재고를 차감 */
-	public int updateStock(BookVO book);
+	public int deductStock(BookVO book);
 	
 	/* 주문 취소 */
 	public int orderCancle(String orderId);

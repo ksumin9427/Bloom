@@ -45,21 +45,21 @@ public class BookController {
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String mainPageGet(Model model) {
+	public void mainPageGet(Model model) {
 		logger.info("메인페이지 진입");
 		
 		model.addAttribute("cate1", bookService.getCateCode1());
 		model.addAttribute("cate2", bookService.getCateCode2());
 		model.addAttribute("ls", bookService.likeSelect());
 		
-		return "main";
 	}
+	
 	
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getImage(String fileName){
 		logger.info("getImage............"+fileName);
 		
-		File file = new File("c:\\upload\\"+fileName);
+		File file = new File("/var/lib/tomcat9/webapps/upload2/"+fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		
@@ -86,7 +86,7 @@ public class BookController {
 	}
 	
 	/* 상품 검색 */
-	@GetMapping("search")
+	@GetMapping("/search")
 	public String searchGoodsGet(Criteria cri, Model model) {
 		model.addAttribute("cate1", bookService.getCateCode1());
 		model.addAttribute("cate2", bookService.getCateCode2());

@@ -41,7 +41,7 @@
 	font-weight: 600;
 }
 .author_table a{
-	color:#1088ed;
+	color:black;
 	font-weight: 500;
 }
 .th_column_1{
@@ -80,13 +80,17 @@
     line-height: 20px;
     position: absolute;
     margin-left: 15px;
-    background-color: #c3daf7;
+    background-color: #E1E1E1;
 }
 
 	/* 페이지 버튼 인터페이스 */
 .pageMaker_wrap{
+	text-align: center;
     margin-top: 20px;
     margin-bottom: 40px;
+}
+.pageMaker_wrap a{
+	color : black;
 }
 .pageMaker{
     list-style: none;

@@ -7,16 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<link rel="stylesheet" href="/resources/css/faq/faqGet.css?ver18">
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous">
-</script>
-<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
-<style>
-<style type ="text /css ">
-
-</style>
+<link rel="stylesheet" href="/resources/css/faq/faqGet.css?ver27">
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
 </head>
 <body>
 
@@ -54,16 +50,18 @@
 					 <input name="title" readonly="readonly"
 						value='<c:out value="${pageMaker.title}"/>'>
 				</div>
-				<div class="input_wrap">
-					<textarea name="content" id="content_textarea" disabled><c:out value="${pageMaker.content}" /></textarea>
-				</div>
+				
+				<div class="input_wrap_content">
+                    <textarea name="content" id="content_textarea" disabled>${pageMaker.content}</textarea>
+                </div>
+				
 				
 				
 
 			<div class="faq_button_wrap">
 				<a class="faq_button" id="list_btn">목록 페이지</a>
 				<c:if test="${member.adminCk == 1 }">
-					<a class="faq_button"id="modify_btn">수정 하기</a>
+					<a class="faq_button" id="modify_btn">수정 하기</a>
 				</c:if>
 			</div>
 			
@@ -98,6 +96,15 @@
 		
 		$(document).ready(function(){
 			
+			ClassicEditor
+ 			.create(document.querySelector('#content_textarea'))
+ 			.then(editor => { /* 내용 수정 못하게 하기*/
+ 				console.log(editor);
+ 				editor.isReadOnly = true;
+ 	 		})	
+ 			.catch(error=>{
+ 	 			console.error(error);
+ 			});
 			
 			
 			let cateList = JSON.parse('${cateList}');
@@ -144,16 +151,6 @@
 				}
 			});
 			
-			/*ckeditor로 책 소개 가져오기*/
-	 		ClassicEditor
-	 			.create(document.querySelector('#content_textarea'))
-	 			.then(editor => { /* 내용 수정 못하게 하기*/
-	 				console.log(editor);
-	 				editor.isReadOnly = true;
-	 	 		})	
-	 			.catch(error=>{
-	 	 			console.error(error);
-	 			});
 		});
 		
 		/* ClassicEditor

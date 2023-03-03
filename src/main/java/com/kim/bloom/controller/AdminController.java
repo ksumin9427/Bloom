@@ -15,7 +15,6 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,11 +33,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kim.bloom.mapper.OrderMapper;
 import com.kim.bloom.model.AttachImageVO;
 import com.kim.bloom.model.AuthorVO;
 import com.kim.bloom.model.BookVO;
 import com.kim.bloom.model.Criteria;
-import com.kim.bloom.model.MemberVO;
 import com.kim.bloom.model.OrderCancleDTO;
 import com.kim.bloom.model.OrderDTO;
 import com.kim.bloom.model.PageDTO;
@@ -70,6 +69,9 @@ public class AdminController {
 	
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private OrderMapper orderMapper;
 
 	/* 관리자 페이지 접속 */
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
@@ -94,8 +96,10 @@ public class AdminController {
 			model.addAttribute("list", list);
 		} else {
 			model.addAttribute("listCheck", "empty");
-			return;
+			/* return; */
 		}
+		
+		
 		/* 페이지 인터페이스 데이터 */
 		model.addAttribute("pageMaker", new PageDTO(cri, adminService.goodsGetTotal(cri)));
 	}
@@ -145,7 +149,6 @@ public class AdminController {
 			model.addAttribute("list", list);
 		} else {
 			model.addAttribute("listCheck", "empty");
-
 		}
 
 		int total = authorService.authorGetTotal(cri);
@@ -290,11 +293,25 @@ public class AdminController {
 			
 			fileList.forEach(vo -> {
 				/* 원본 이미지 */
-				Path path = Paths.get("C:\\upload", vo.getUploadPath(), vo.getUuid()+"_"+vo.getFileName());
+				/*
+				 * Path path = Paths.get("C:\\upload", vo.getUploadPath(),
+				 * vo.getUuid()+"_"+vo.getFileName());
+				 */
+				
+				 Path path = Paths.get("/var/lib/tomcat9/webapps/upload2", vo.getUploadPath(),
+				 vo.getUuid()+"_"+vo.getFileName());
+				 
 				pathList.add(path);
 				
 				/* 썸네일 이미지 */
-				path = Paths.get("C:\\upload", vo.getUploadPath(), "s_"+ vo.getUuid()+"_"+vo.getFileName());
+				/*
+				 * path = Paths.get("C:\\upload", vo.getUploadPath(), "s_"+
+				 * vo.getUuid()+"_"+vo.getFileName());
+				 */
+				
+				 path = Paths.get("/var/lib/tomcat9/webapps/upload2", vo.getUploadPath(), "s_"+
+				 vo.getUuid()+"_"+vo.getFileName());
+				 
 				pathList.add(path);
 			});
 			
@@ -345,7 +362,7 @@ public class AdminController {
 	/* 뷰에서 전송한 첨부파일 데이터를 받기 위해 MultipartFile */
 	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<AttachImageVO>> uploadAjaxActionPost(MultipartFile[] uploadFile) {
-		logger.info("uploadAjaxActionPost...........");
+		logger.info("@@@@@@@@@@@@@@@@@@@@@uploadAjaxActionPost...........");
 		
 		for (MultipartFile multipartFile: uploadFile ) {
 			File checkFile = new File(multipartFile.getOriginalFilename());
@@ -363,13 +380,14 @@ public class AdminController {
 			}
 		}
 		
-		String uploadFolder = "C:\\upload";
+		//String uploadFolder = "C:\\upload"; 
+		String uploadFolder = "/var/lib/tomcat9/webapps/upload2";
 
 		/* 날짜 폴더 경로 */
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		Date date = new Date();
 		String str = sdf.format(date);
-		String datePath = str.replace("-", File.separator);
+		String datePath = str.replace("/", File.separator);
 
 		// 우리가 만들고자 하는 "c: upload yyyy\MM\dd' 경로의 디렉터리를 대상으로 하는 File 객체로 초기화
 		File uploadPath = new File(uploadFolder, datePath);
@@ -436,7 +454,10 @@ public class AdminController {
 		
 		try {
 			/* 썸네일 이미지 파일 삭제 */
-			file = new File("c:\\upload\\"+URLDecoder.decode(fileName, "UTF-8"));
+			//file = new File("c:\\upload\\"+URLDecoder.decode(fileName, "UTF-8")); 
+			
+			file = new File("/var/lib/tomcat9/webapps/upload2"+URLDecoder.decode(fileName,"UTF-8"));
+			 
 			file.delete();
 			
 			/* 원본 이미지 파일 삭제 */
@@ -477,14 +498,13 @@ public class AdminController {
 	@PostMapping("/orderCancle")
 	public String orderCanclePost(OrderCancleDTO dto, HttpServletRequest request) {
 		
+		OrderDTO oriDto = orderMapper.getOrder(dto.getOrderId());
+		dto.setMemberId(oriDto.getMemberId());
+		System.out.println(dto);
 		orderService.orderCancle(dto);
 		
-		MemberVO member = memberSerivice.getMemberInfo(dto.getMemberId());
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("member", member);
-		
 		return "redirect:/admin/orderList?keyword="+dto.getKeyword()+"&amount="+dto.getAmount()+"&pageNum="+dto.getPageNum();
+		
 	}
 	
 	@RequestMapping(value = "/memberManage", method = RequestMethod.GET)
@@ -493,7 +513,14 @@ public class AdminController {
 		model.addAttribute("cate2", bookService.getCateCode2());
 		
 		List list = adminService.memberGetList(cri);
-		model.addAttribute("list", list);
+		
+		/* 검색어 결과 존재 유무 */
+		if (!list.isEmpty()) {
+			model.addAttribute("list", list);
+		} else {
+			model.addAttribute("listCheck", "empty");
+
+		}
 		
 		int total = adminService.memberGetTotal(cri);
 		

@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<link rel="stylesheet" href="/resources/css/goodsDetail.css?ver13">
+<link rel="stylesheet" href="/resources/css/goodsDetail.css?ver14">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -165,7 +165,7 @@ let publicYear = yearArray[0]+"년 " +yearArray[1]+"월 " +yearArray[2]+"일";
 $(".publicYear").html(publicYear); 
 
 let salePrice = "${goodsInfo.bookPrice - (goodsInfo.bookPrice * goodsInfo.bookDiscount)}"
-let point = salePrice * 0.05;
+let point = salePrice * 0.01;
 point = Math.floor(point);
 $(".point_span").text(point);
 

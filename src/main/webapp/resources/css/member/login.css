@@ -85,6 +85,7 @@
     font-weight: 500;
     color: black;
     margin : auto;
+    border: 1px solid black;
     /* border-radius: 100px; */
 }
 

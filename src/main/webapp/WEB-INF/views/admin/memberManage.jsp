@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/memberManage.css?ver1">
+<link rel="stylesheet" href="../resources/css/admin/memberManage.css?ver3">
  
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -48,7 +48,7 @@
                 		<!-- 게시물 x -->
                 		<c:if test="${listCheck == 'empty'}">
                 			<div class="table_empty">
-                				등록된 작가가 없습니다.
+                				등록된 회원이 없습니다.
                 			</div>
                 		</c:if> 						
                 			

@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/goodsManage.css?ver29">
+<link rel="stylesheet" href="../resources/css/admin/goodsManage.css?ver42">
  
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -17,11 +17,11 @@
 <body>
  
     <%@include file="../includes/admin/adminHeader.jsp"%>
-    			<div class="content_area">
+    		<div class="content_area">
                 <div class="admin_content_wrap">
                     <div class="goods_table_wrap">
                     	<!-- 상품 리스트 O -->
-	                    <c:if test="${listcheck != 'empty'}">
+	                    <c:if test="${listCheck != 'empty'}">
 	                    	<table class="goods_table">
 	                    		<thead>
 	                    			<tr>
@@ -49,26 +49,38 @@
 	                    		</c:forEach>
 	                    	</table>
 	                    </c:if>
+	                    
 	                    <!-- 상품 리스트 X -->
                 		<c:if test="${listCheck == 'empty'}">
                 			<div class="table_empty">
-                				등록된 작가가 없습니다.
+                				등록된 작품이 없습니다.
                 			</div>
                 		</c:if> 
-                	</div>
+                	</div> <!-- goods_table_wrap -->
                 	
                 	<!-- 검색 영역 -->
-                	<div class="admin_searchWrap">
+                	<%-- <div class="admin_searchWrap">
                 		<form id="admin_searchForm" action="/admin/goodsManage" method="get">
                 			<div class="admin_searchInput">
                     			<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
                     			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
                     			<input type="hidden" name="amount" value='<c:out value="${pageMaker.cri.amount}"/>'>
-                    			<input type="hidden" name="type" value="G">
+                    			<!-- <input type="hidden" name="type" value="G"> -->
                     			<button class='searchBtnM'>검 색</button>                				
                 			</div>
                 		</form>
-                	</div>
+                	</div> --%>
+                	<div class="admin_searchWrap">
+                    	<form id="admin_searchForm" action="/admin/goodsManage" method="get">
+                    		<div class="admin_searchInput">
+                    			<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
+                    			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum}"></c:out>'>
+                    			<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
+                    			<input type="hidden" name="type" value="G">
+                    			<button class='searchBtnM'>검 색</button>
+                    		</div>
+                    	</form>
+                    </div>
                 	
                 	<!-- 페이지 이름 인터페이스 영역 -->
                 	<div class="pageMaker_wrap">
@@ -82,11 +94,11 @@
                 			</c:if>
                 			
                 			<!-- 페이지 번호 -->
-                			<c:forEach begin="${pageMaker.pageStart }" end="${pageMaker.pageEnd }" var="num">
-                				<li class="pageMaker_btn ${pageMaker.cri.pageNum == num ? 'active':''}">
-                					<a href="${num}">${num}</a>
-                				</li>	
-                			</c:forEach>
+                			<c:forEach begin="${pageMaker.pageStart}" end="${pageMaker.pageEnd}" var="num">
+	                    		<li class="pageMaker_btn ${pageMaker.cri.pageNum == num ? "active":""}">
+	                    			<a href="${num}">${num}</a>
+	                    		</li>
+	                    	</c:forEach>
                 		
 	                    	<!-- 다음 버튼 -->
 	                    	<c:if test="${pageMaker.next}">
@@ -143,7 +155,8 @@
 	let admin_searchForm = $('#admin_searchForm');
 	let moveForm = $('#moveForm');
 	
-	/* 작가 검색 버튼 동작 */
+	/* let admin_searchForm = $('#admin_searchForm');
+	
 	$('#admin_searchForm button').on("click", function(e){
 		
 		e.preventDefault();
@@ -152,6 +165,23 @@
 			alert("키워드를 입력하십시오.");
 			return false;
 		}
+		
+		admin_searchForm.find("input[name='pageNum']").val("1");
+		
+		admin_searchForm.submit();
+		
+	}); */
+	
+	/* 작거 검색 버튼 동작 */
+	
+	
+	$('#admin_searchForm button').on("click", function(e){
+		e.preventDefault();
+		
+		 if(!admin_searchForm.find("input[name='keyword']").val()){
+			alert("키워드를 입력하십시오");
+			return false;
+		} 
 		
 		admin_searchForm.find("input[name='pageNum']").val("1");
 		
@@ -166,17 +196,7 @@
 		
 		moveForm.find("input[name='pageNum']").val($(this).attr("href"));
 		
-		moveForm.submit();
-		
-	});
-
-
-	/* 페이지 이동 버튼 */
-	$(".pageMaker_btn a").on("click", function(e){
-		
-		e.preventDefault();
-		
-		moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+		moveForm.attr("action", "/admin/goodsManage");
 		
 		moveForm.submit();
 		
@@ -186,13 +206,19 @@
 		
 		e.preventDefault();
 		
-		moveForm.empty();
-		
-		moveForm.append("<input type='hidden' name='bookId' value='"+$(this).attr("href")+"'>");
+		moveForm.append("<input type='hidden' id='bookId' name='bookId' value='"+$(this).attr("href") + "'>");
 		
 		moveForm.attr("action", "/admin/goodsDetail");
 		
 		moveForm.submit();
+		
+		/* 뒤로가기 시 bookId삭제  */
+		$(window).bind("pageshow", function (event) {
+			if(event.originalEvent.persisted){
+			$('#bookId').remove();
+			
+			}
+		}) 
 		
 		
 	});

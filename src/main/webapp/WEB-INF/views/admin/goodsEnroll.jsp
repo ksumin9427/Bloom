@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/goodsEnroll.css?ver78">
+<link rel="stylesheet" href="../resources/css/admin/goodsEnroll.css?ver80">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
  
 <script
@@ -185,10 +185,7 @@
                     			<div class="form_section_content">
 									<input type="file" id="fileItem" name="uploadFile" style="height: 30px;">
 									<div id="uploadResult">
-										<!-- <div id="result_card">
-											<div class="imgDeleteBtn">x</div>
-											<img src="/display?fileName=바람이 분다.jpg">
-										</div> -->
+										
 									</div>
                     			</div>
                     		</div>
@@ -398,11 +395,12 @@ $("#discount_interface").on("propertychange change keyup paste input", function(
 			success : function(result){
 				console.log(result);
 				showUploadImage(result);
+				
 			},
 			error : function(result){
 				alert("이미지 파일이 아닙니다.")
 			}
-		});
+		}); 
 		
 	});
 	

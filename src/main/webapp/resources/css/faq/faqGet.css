@@ -82,7 +82,7 @@ table tr th{
   	width: 20%;
   }
 
-  .top_btn{
+  .top_button{
   	font-size: 20px;
     padding: 6px 12px;
     background-color: #fff;
@@ -217,14 +217,14 @@ table tr th{
     font-size: 18px;
     padding-left: 2%;
 }
+	
 .search_btn{
 	margin-left: 10px;
     width: 17%;
     border-radius: 14px;
     font-size: 17px;
     font-weight: 600;	
-}	
-
+}
 
 /* 로그인 버튼 영역 */
 .login_area{
@@ -425,12 +425,16 @@ table tr th{
 	font-size: 20px;
 	margin-bottom: 12px;
 } 
+.input_wrap_content textarea{
+	font-size: 20px;
+}
+
 
 .ck-content {						/* ckeditor 높이 */
     height: 400px;
    
 }
-.btn {
+/* .btn {
 	display: inline-block;
 	font-size: 22px;
 	padding: 6px 12px;
@@ -443,7 +447,7 @@ table tr th{
 	text-align: center;
 	margin-left: 30px;
 	cursor: pointer;
-}
+} */
 
 .btn_wrap {
 	padding-left: 80px;
@@ -456,7 +460,7 @@ table tr th{
 .faq_button_wrap{
 	margin-top: 20px;
 	text-align: center;
-	background-color: blue;
+	/* background-color: blue; */
 }
 .faq_button{
 	display: inline-block;
@@ -464,13 +468,13 @@ table tr th{
 	width: 150px;
     height: 40px;
     font-size: 20px;
-    font-weight: 300;
+    font-weight: 600;
     color: black;
     position: relative;
     float: left;
     margin-right: 5px;
-    background-color: #F5F7F5;
-    border: 1px solid #E0E2E0;
+    background-color: #E1E1E1;
+    border: 1px solid black;
     line-height: 39px;
 }
 

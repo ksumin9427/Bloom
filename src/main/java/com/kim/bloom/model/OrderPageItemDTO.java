@@ -28,7 +28,7 @@ public class OrderPageItemDTO {
 	public void initSaleTotal() {
 		this.salePrice = (int) (this.bookPrice * (1-this.bookDiscount));
 		this.totalPrice = this.salePrice*this.bookCount;
-		this.point = (int)(Math.floor(this.salePrice*0.05));
+		this.point = (int)(Math.floor(this.salePrice*0.01));
 		this.totalPoint =this.point * this.bookCount;
 	}
 	

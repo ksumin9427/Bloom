@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/authorEnroll.css?ver19">
+<link rel="stylesheet" href="../resources/css/admin/authorEnroll.css?ver24">
  
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -54,11 +54,11 @@
                     		</div>
                    		</form>
 	                    		<div class="btn_section">
-	                    			<button id="enrollBtn" class="btn enroll_btn">등록</button>
+	                    			<button id="enrollBtn" class="btn">등록</button>  <!-- enroll_btn -->
 	                    			<button id="cancelBtn" class="btn" type="reset" >취소</button>
 	                    		</div>
                     </div>
-                </div>
+                
                 </div><!-- content_area -->
                 <%@include file="../includes/admin/adminFooter.jsp" %>
 

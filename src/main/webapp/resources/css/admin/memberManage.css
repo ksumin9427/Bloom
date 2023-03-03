@@ -336,7 +336,6 @@ ul{
 /* 수정 코드 */
 .admin_content_wrap{
     width: 820px;
-    /* float:left; */
     min-height:900px;
     margin: 0 auto; 
     position: relative;
@@ -355,16 +354,16 @@ ul{
 
 /* 상품 목록 영역 */
 .member_table_wrap{
-	padding: 20px 35px
+	padding: 20px 35px;
 }
 .member_table{
-	width: 100%;
+	width: 800px;
 	/* height: 650px; */
     border: 1px solid #d3d8e1;
     text-align: center;
     border-collapse: collapse;
     position: relative;
-    /* bottom: -100px; */
+    bottom: -3px;
 }
 .member_table td{
 	padding: 5px 5px;
@@ -379,19 +378,16 @@ ul{
 	font-weight: 500;
 } */
 .th_column_1{
-	width:50px;
+	width: 20%;
 }
 .th_column_2{
-	width: 100px;
+	width: 20%;
 }
 .th_column_3{
-	width: 50px;
+	width: 30%;
 }
 .th_column_4{
-	width: 80px;
-}
-.th_column_5{
-	width: 80px;
+	width: 30%;
 }
 
 	

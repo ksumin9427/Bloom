@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/authorManage.css?ver9">
+<link rel="stylesheet" href="../resources/css/admin/authorManage.css?ver11">
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -58,7 +58,7 @@
                 			</div>
                 		</c:if> 						
                 			
-                    </div> 
+                    </div> <!-- author_table_wrap -->
                     
                     <!-- 검색 영역 -->
                     <div class="admin_searchWrap">
@@ -74,7 +74,6 @@
 
                     <!-- 페이지 이동 인터페이스 영역 -->
                     <div class="pageMaker_wrap" >
-                    
 	                    <ul class="pageMaker">
 	                    
 	                    	<!-- 이전 버튼 -->
@@ -99,9 +98,7 @@
 	                    			<a href="${pageMaker.pageEnd + 1 }">다음</a>
 	                    		</li>
 	                    	</c:if>
-	                    	
 	                    </ul>
-	                    
                     </div>
                     
 					<form id="moveForm" action="/admin/authorManage" method="get">
@@ -154,11 +151,13 @@ $(function(){
 	
 	let moveForm = $('#moveForm');
 	
-	/* 페이지 이동 버튼 */
+	//* 페이지 이동 버튼 */
 	$(".pageMaker_btn a").on("click", function(e){
 		e.preventDefault();
 		
 		moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+		
+		moveForm.attr("action", "/admin/authorManage");
 		
 		moveForm.submit();
 		
@@ -185,13 +184,19 @@ $(function(){
 	$(".move").on("click", function(e){
 		e.preventDefault();
 		
-		moveForm.empty();
-		
-		moveForm.append("<input type='hidden' name='authorId' value='"+ $(this).attr("href") + "'>");
+		moveForm.append("<input type='hidden' id='authorId' name='authorId' value='"+ $(this).attr("href") + "'>");
 		
 		moveForm.attr("action", "/admin/authorDetail");
 		
 		moveForm.submit();
+		
+		/* 뒤로가기 시 bookId삭제  */
+		$(window).bind("pageshow", function (event) {
+			if(event.originalEvent.persisted){
+			$('#authorId').remove();
+			
+			}
+		}) 
 		
 	});
 

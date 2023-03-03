@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Bloom</title>
-<link rel="stylesheet" href="/resources/css/order.css?ver6">
+<link rel="stylesheet" href="/resources/css/order.css?ver10">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -182,27 +182,27 @@
 						<ul>
 							<li>
 								<span class="price_span_label">상품 금액</span>
-								<span class="totalPrice_span">100000</span>원
+								<span class="totalPrice_span"></span>원
 							</li>
 							<li>
 								<span class="price_span_label">배송비</span>
-								<span class="delivery_price_span">100000</span>원
+								<span class="delivery_price_span"></span>원
 							</li>
 																					<li>
 								<span class="price_span_label">할인금액</span>
-								<span class="usePoint_span">100000</span>원
+								<span class="usePoint_span"></span>원
 							</li>
 							<li class="price_total_li">
 								<strong class="price_span_label total_price_label">최종 결제 금액</strong>
 								<strong class="strong_red">
 									<span class="total_price_red finalTotalPrice_span">
-										1500000
+										
 									</span>원
 								</strong>
 							</li>
 							<li class="point_li">
 								<span class="price_span_label">적립예정 포인트</span>
-								<span class="totalPoint_span">7960원</span>
+								<span class="totalPoint_span">원</span>
 							</li>
 						</ul>
 					</div>
@@ -331,6 +331,7 @@
 		
 
 		$(".order_point_input").on("propertychange change keyup paste input", function(){
+			
 			const maxPoint = parseInt('${memberInfo.point}');
 			let inputValue = parseInt($(this).val());
 			
@@ -345,6 +346,7 @@
 		});
 		
 		$(".order_point_input_btn").on("click", function(){
+			
 			const maxPoint = parseInt('${memberInfo.point}');
 			
 			let state = $(this).data("state");
@@ -405,7 +407,8 @@
 			
 			usePoint = $(".order_point_input").val();
 			
-			finalTotalPrice = totalPrice - usePoint;
+			/* finalTotalPrice = totalPrice - usePoint; */
+			finalTotalPrice = finalTotalPrice - usePoint;
 			
 			$(".totalPrice_span").text(totalPrice.toLocaleString());
 			$(".goods_kind_div_count").text(totalCount);
@@ -416,37 +419,87 @@
 			$(".usePoint_span").text(usePoint.toLocaleString());
 		}
 		
-		/* $(".addressInfo_input_div").each(function(i,obj){
-			$(obj).find(".selectAddress").val("F");
-		});
-		
-		$(".addressInfo_input_div_"+className).find(".selectAddress").val("T"); */
-		
 		$(".order_btn").on("click", function(){
-			$(".addressInfo_input_div").each(function(i, obj){
-				if($(obj).find(".selectAddress").val() === 'T'){
-					$("input[name='addressee']").val($(obj).find(".addressee_input").val());
-					$("input[name='memberAddr1']").val($(obj).find(".address1_input").val());
-					$("input[name='memberAddr2']").val($(obj).find(".address2_input").val());
-					$("input[name='memberAddr3']").val($(obj).find(".address3_input").val());
-				}
+			
+			let totalPrice = 0;				
+			let totalCount = 0;				
+			let totalKind = 0;				
+			let totalPoint = 0;				
+			let deliveryPrice = 0;			
+			let usePoint = 0;				
+			let finalTotalPrice = 0; 
+			
+			$(".goods_table_price_td").each(function(index, element){
+				
+				totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
+				totalCount += parseInt($(element).find(".individual_bookCount_input").val());
+				totalKind += 1;
+				totalPoint += parseInt($(element).find(".individual_totalPoint_input").val());
+				
 			});
 			
-			$("input[name='usePoint']").val($(".order_point_input").val());
+			if(totalPrice >= 30000){
+				deliveryPrice = 0;
+			} else if(totalPrice == 0){
+				deliveryPrice = 0;
+			} else {
+				deliveryPrice = 3000;
+			}
 			
-			let form_contents = ''; 
-			$(".goods_table_price_td").each(function(index, element){
-				let bookId = $(element).find(".individual_bookId_input").val();
-				let bookCount = $(element).find(".individual_bookCount_input").val();
-				let bookId_input = "<input name='orders[" + index + "].bookId' type='hidden' value='" + bookId + "'>";
-				form_contents += bookId_input;
-				let bookCount_input = "<input name='orders[" + index + "].bookCount' type='hidden' value='" + bookCount + "'>";
-				form_contents += bookCount_input;
-			});	
 			
-			$(".order_form").append(form_contents);	
+			finalTotalPrice = totalPrice + deliveryPrice; 
 			
-			$(".order_form").submit();	
+			//원래 가격
+			let oriFinalTotalPrice = totalPrice + deliveryPrice;
+			
+			usePoint = $(".order_point_input").val();
+			
+			//포인트를 뺀 가격
+			finalTotalPrice = finalTotalPrice - usePoint;
+			
+			
+			/* finalTotalPrice가 충전금액과 포인트를 초과할 경우 */
+			let money ='${member.money}';
+			money = parseInt(money);
+			
+			let usingPoint = usePoint;
+			usingPoint = parseInt(usingPoint);
+			
+			// 현재 지불할 수 있는 금액
+			let payingMoney = money + usingPoint;
+			
+			if(oriFinalTotalPrice > payingMoney) {
+				alert("금액과 사용할 포인트가 부족합니다.");
+				return false;
+				
+			} else {
+				$(".addressInfo_input_div").each(function(i, obj){
+					if($(obj).find(".selectAddress").val() === 'T'){
+						$("input[name='addressee']").val($(obj).find(".addressee_input").val());
+						$("input[name='memberAddr1']").val($(obj).find(".address1_input").val());
+						$("input[name='memberAddr2']").val($(obj).find(".address2_input").val());
+						$("input[name='memberAddr3']").val($(obj).find(".address3_input").val());
+					}
+				});
+				
+				$("input[name='usePoint']").val($(".order_point_input").val());
+				
+				let form_contents = ''; 
+				$(".goods_table_price_td").each(function(index, element){
+					let bookId = $(element).find(".individual_bookId_input").val();
+					let bookCount = $(element).find(".individual_bookCount_input").val();
+					let bookId_input = "<input name='orders[" + index + "].bookId' type='hidden' value='" + bookId + "'>";
+					form_contents += bookId_input;
+					let bookCount_input = "<input name='orders[" + index + "].bookCount' type='hidden' value='" + bookCount + "'>";
+					form_contents += bookCount_input;
+				});	
+				
+				$(".order_form").append(form_contents);	
+				
+				$(".order_form").submit();		
+					
+			}
+			
 		});
 		
 	</script>

@@ -445,12 +445,12 @@ table tr th{
 	width: 150px;
     height: 40px;
     font-size: 20px;
-    font-weight: 300;
+    font-weight: 600;
     color: black;
     position: relative;
     left: -325px;
-    background-color: #F5F7F5;
-    border: 1px solid #E0E2E0;
+    background-color: #E1E1E1;
+    border: 1px solid black;
 }
 
 /* 로그인 성공 영역 */

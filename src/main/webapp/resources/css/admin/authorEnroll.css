@@ -445,6 +445,7 @@ input[name='publicYear'] {
     font-weight: 600;
     line-height: 40px;
     background-color: #E1E1E1;
+    border: 1px solid black;
 }
 .enroll_btn{
 	background-color: #dbdde2;

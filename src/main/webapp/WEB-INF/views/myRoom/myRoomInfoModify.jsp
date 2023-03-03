@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<link rel="stylesheet" href="/resources/css/myRoom/myRoomInfoModify.css?ver14">
+<link rel="stylesheet" href="/resources/css/myRoom/myRoomInfoModify.css?ver17">
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <script
@@ -28,7 +28,7 @@
 					<form class="info_modify_form" method="post">
 					<div class="wrap_info">
 						<div class="subject">
-							<span>나의정보수정</span>
+							<span>나의 정보 수정</span>
 						</div>
 						
 						

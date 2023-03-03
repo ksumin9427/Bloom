@@ -7,16 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/authorPop.css?ver19">
+<link rel="stylesheet" href="../resources/css/admin/authorPop.css?ver22">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="subject_name_warp">
-			<span>작가 선택</span>
-</div>
+
 		<div class="content_wrap">
                	<!-- 게시물 표 영역 -->
 				<div class="author_table_wrap">
