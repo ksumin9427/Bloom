@@ -4,7 +4,7 @@
 ## 개발 인원
 1명
 
-## 개발 언어 & 환경
+## 개발 환경
 사용 언어 : Java(JDK11), JavaScript, HTML/CSS  
 사용 웹 서버:  Apache Tomcat 9.0, AWS EC2, ubuntu  
 사용 프레임워크 : Spring Framework, MyBatis 3.5  
