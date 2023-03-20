@@ -6,10 +6,10 @@
 
 ## 개발 언어 & 환경
 사용 언어 : Java(JDK11), JavaScript, HTML/CSS  
-사용 라이브러리 : jQuery, ckeditor, slick  
-사용 프레임워크 : Spring Framework, MyBatis 3.5  
 사용 웹 서버:  Apache Tomcat 9.0, AWS EC2, ubuntu  
+사용 프레임워크 : Spring Framework, MyBatis 3.5  
 사용 운영체제 : Window, Linux  
+사용 라이브러리 : jQuery, ckeditor, slick  
 데이터베이스 : MySQL  
 데이터베이스 관리 툴 : MySQL Workbench  
 FTP 접속 툴 : Filezilla  
