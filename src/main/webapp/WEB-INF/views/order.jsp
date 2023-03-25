@@ -7,7 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Bloom</title>
+<<<<<<< HEAD
 <link rel="stylesheet" href="/resources/css/order.css?ver12">
+=======
+<link rel="stylesheet" href="/resources/css/order.css?ver10">
+>>>>>>> 19c0ea79dbeef91537ccb2cb46df1d4b27629800
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -202,7 +206,11 @@
 							</li>
 							<li class="point_li">
 								<span class="price_span_label">적립예정 포인트</span>
+<<<<<<< HEAD
 								<span class="totalPoint_span"></span>
+=======
+								<span class="totalPoint_span">원</span>
+>>>>>>> 19c0ea79dbeef91537ccb2cb46df1d4b27629800
 							</li>
 						</ul>
 					</div>
@@ -245,11 +253,173 @@
 				
 				const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
 				
+<<<<<<< HEAD
 				$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
+=======
+				if(bobj.data("bookid")){
+					const uploadPath = bobj.data("path");
+					const uuid = bobj.data("uuid");
+					const fileName = bobj.data("filename");
+					
+					const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
+					
+					$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
+				} else {
+					$(this).find("img").attr('src', '/resources/img/NoImage.png');
+				}
+				
+			});
+		});
+	
+		/* 주소 입력란 버튼 동작 */
+		function showAddress(className){
+			
+			$(".addressInfo_input_div").css('display', 'none');
+			
+			$(".addressInfo_input_div_"+className).css('display', 'block');
+			
+			$(".address_btn").css('backgroundColor', '#555');
+			
+			$(".address_btn_"+className).css('backgroundColor', '#3c3838');
+			
+			$(".addressInfo_input_div").each(function(i,obj){
+				$(obj).find(".selectAddress").val("F");
+			});
+			
+			$(".addressInfo_input_div_"+className).find(".selectAddress").val("T");
+			
+		}
+	
+		/* 다음 주소 연동 */
+		function execution_daum_address(){
+		 		console.log("동작");
+			   new daum.Postcode({
+			        oncomplete: function(data) {
+			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+			            
+			        	// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+		                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+		                var addr = ''; // 주소 변수
+		                var extraAddr = ''; // 참고항목 변수
+		 
+		                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+		                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+		                    addr = data.roadAddress;
+		                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+		                    addr = data.jibunAddress;
+		                }
+		 
+		                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+		                if(data.userSelectedType === 'R'){
+		                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+		                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+		                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+		                        extraAddr += data.bname;
+		                    }
+		                    // 건물명이 있고, 공동주택일 경우 추가한다.
+		                    if(data.buildingName !== '' && data.apartment === 'Y'){
+		                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+		                    }
+		                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+		                    if(extraAddr !== ''){
+		                        extraAddr = ' (' + extraAddr + ')';
+		                    }
+		                 	// 추가해야할 코드
+		                    // 주소변수 문자열과 참고항목 문자열 합치기
+		                      addr += extraAddr;
+		                
+		                } else {
+		                	addr += ' ';
+		                }
+		 
+		             	// 제거해야할 코드
+		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+		                $(".address1_input").val(data.zonecode);
+		                $(".address2_input").val(addr);				
+		                // 커서를 상세주소 필드로 이동한다.
+		                $(".address3_input").attr("readonly", false);
+		                $(".address3_input").focus();	 
+			            
+			            
+			        }
+			    }).open();  	
+			
+		}
+		
+
+		$(".order_point_input").on("propertychange change keyup paste input", function(){
+			
+			const maxPoint = parseInt('${memberInfo.point}');
+			let inputValue = parseInt($(this).val());
+			
+			if(inputValue < 0){
+				$(this).val(0);
+			} else if(inputValue > maxPoint){
+				$(this).val(maxPoint);
+				
+			}
+			/* 주문 정보 최신화 */
+			setTotalInfo();
+		});
+		
+		$(".order_point_input_btn").on("click", function(){
+			
+			const maxPoint = parseInt('${memberInfo.point}');
+			
+			let state = $(this).data("state");
+			
+			if(state == 'N'){
+				
+				console.log("N동작");
+				$(".order_point_input").val(maxPoint);
+				
+				$(".order_point_input_btn_Y").css("display", "inline-block");
+				$(".order_point_input_btn_N").css("display", "none");
+				
+			} else if(state == 'Y'){
+				
+				console.log("Y동작");
+				$(".order_point_input").val(0);
+				
+				$(".order_point_input_btn_Y").css("display", "none");
+				$(".order_point_input_btn_N").css("display", "inline-block");
+				
+			}
+			/* 주문 정보 최신화 */
+			setTotalInfo();
+			
+		});
+		
+		/* 총 주문 정보 세팅 */
+		function setTotalInfo(){
+			
+			let totalPrice = 0;				
+			let totalCount = 0;				
+			let totalKind = 0;				
+			let totalPoint = 0;				
+			let deliveryPrice = 0;			
+			let usePoint = 0;				
+			let finalTotalPrice = 0; 
+			
+			$(".goods_table_price_td").each(function(index, element){
+				
+				totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
+				totalCount += parseInt($(element).find(".individual_bookCount_input").val());
+				totalKind += 1;
+				totalPoint += parseInt($(element).find(".individual_totalPoint_input").val());
+				
+			});
+			
+			if(totalPrice >= 30000){
+				deliveryPrice = 0;
+			} else if(totalPrice == 0){
+				deliveryPrice = 0;
+>>>>>>> 19c0ea79dbeef91537ccb2cb46df1d4b27629800
 			} else {
 				$(this).find("img").attr('src', '/resources/img/NoImage.png');
 			}
 			
+<<<<<<< HEAD
 		});
 	});
 
@@ -387,6 +557,106 @@
 			totalCount += parseInt($(element).find(".individual_bookCount_input").val());
 			totalKind += 1;
 			totalPoint += parseInt($(element).find(".individual_totalPoint_input").val());
+=======
+			/* finalTotalPrice = totalPrice + deliveryPrice; */
+			
+			finalTotalPrice = totalPrice + deliveryPrice;
+			
+			usePoint = $(".order_point_input").val();
+			
+			/* finalTotalPrice = totalPrice - usePoint; */
+			finalTotalPrice = finalTotalPrice - usePoint;
+			
+			$(".totalPrice_span").text(totalPrice.toLocaleString());
+			$(".goods_kind_div_count").text(totalCount);
+			$(".goods_kind_div_kind").text(totalKind);
+			$(".totalPoint_span").text(totalPoint.toLocaleString());
+			$(".delivery_price_span").text(deliveryPrice.toLocaleString());	
+			$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());		
+			$(".usePoint_span").text(usePoint.toLocaleString());
+		}
+		
+		$(".order_btn").on("click", function(){
+			
+			let totalPrice = 0;				
+			let totalCount = 0;				
+			let totalKind = 0;				
+			let totalPoint = 0;				
+			let deliveryPrice = 0;			
+			let usePoint = 0;				
+			let finalTotalPrice = 0; 
+			
+			$(".goods_table_price_td").each(function(index, element){
+				
+				totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
+				totalCount += parseInt($(element).find(".individual_bookCount_input").val());
+				totalKind += 1;
+				totalPoint += parseInt($(element).find(".individual_totalPoint_input").val());
+				
+			});
+			
+			if(totalPrice >= 30000){
+				deliveryPrice = 0;
+			} else if(totalPrice == 0){
+				deliveryPrice = 0;
+			} else {
+				deliveryPrice = 3000;
+			}
+			
+			
+			finalTotalPrice = totalPrice + deliveryPrice; 
+			
+			//원래 가격
+			let oriFinalTotalPrice = totalPrice + deliveryPrice;
+			
+			usePoint = $(".order_point_input").val();
+			
+			//포인트를 뺀 가격
+			finalTotalPrice = finalTotalPrice - usePoint;
+			
+			
+			/* finalTotalPrice가 충전금액과 포인트를 초과할 경우 */
+			let money ='${member.money}';
+			money = parseInt(money);
+			
+			let usingPoint = usePoint;
+			usingPoint = parseInt(usingPoint);
+			
+			// 현재 지불할 수 있는 금액
+			let payingMoney = money + usingPoint;
+			
+			if(oriFinalTotalPrice > payingMoney) {
+				alert("금액과 사용할 포인트가 부족합니다.");
+				return false;
+				
+			} else {
+				$(".addressInfo_input_div").each(function(i, obj){
+					if($(obj).find(".selectAddress").val() === 'T'){
+						$("input[name='addressee']").val($(obj).find(".addressee_input").val());
+						$("input[name='memberAddr1']").val($(obj).find(".address1_input").val());
+						$("input[name='memberAddr2']").val($(obj).find(".address2_input").val());
+						$("input[name='memberAddr3']").val($(obj).find(".address3_input").val());
+					}
+				});
+				
+				$("input[name='usePoint']").val($(".order_point_input").val());
+				
+				let form_contents = ''; 
+				$(".goods_table_price_td").each(function(index, element){
+					let bookId = $(element).find(".individual_bookId_input").val();
+					let bookCount = $(element).find(".individual_bookCount_input").val();
+					let bookId_input = "<input name='orders[" + index + "].bookId' type='hidden' value='" + bookId + "'>";
+					form_contents += bookId_input;
+					let bookCount_input = "<input name='orders[" + index + "].bookCount' type='hidden' value='" + bookCount + "'>";
+					form_contents += bookCount_input;
+				});	
+				
+				$(".order_form").append(form_contents);	
+				
+				$(".order_form").submit();		
+					
+			}
+>>>>>>> 19c0ea79dbeef91537ccb2cb46df1d4b27629800
 			
 		});
 		

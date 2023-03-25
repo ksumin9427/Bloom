@@ -6,7 +6,7 @@
 a{
 	text-decoration: none;
 }
-ul, li{
+li{
 	list-style: none;
 }
 /* 화면 전체 렙 */
@@ -76,7 +76,6 @@ ul, li{
 	width: 75%;
     height: 100%;
 }
-
 /* 검색 박스 영역 */
 .search_area{
 	width: 50%;
@@ -220,15 +219,6 @@ ul, li{
 .dropdown-content a:hover {
   background-color: #ddd;
 }
-
-
-.content_area{
- width: 1180px;
-    min-height: 1000px;
-    margin: 0 auto;
-   
-}
-
 /* 로그인 성공 영역 */
 .login_success_area{
 	height: 62%;
@@ -256,6 +246,13 @@ ul, li{
     margin-left: 10%;
 }
 
+
+.content_area{
+ 	width: 1180px;
+    min-height: 1000px;
+    margin: 0 auto;
+   
+}
 /* 관리자 네비 영역 */
 .admin_wrap{
     width: 1180px;
@@ -299,15 +296,6 @@ ul, li{
     padding: 8px;
   
 }
-.admin_navi_wrap li a:link {color: black;}
-.admin_navi_wrap li a:visited {color: black;}
-.admin_navi_wrap li a:active {color: black;}
-.admin_navi_wrap li a:hover {color: black;}
- 
-.admin_list_02{
-    background-color: #c8c8c8;
-} 
-
 
 /* 관리자페이지 컨텐츠 영역 */
 .admin_content_main{
@@ -355,6 +343,14 @@ ul, li{
     height: 35px;
     font-size: 20px;
     text-align-last: center;
+}
+/* 입력란 공란 경고 태그 */
+.form_section_content span{	
+	display: none;
+    padding-top: 10px;
+    text-align: center;
+    color: #e05757;
+    font-weight: 300;    
 }
 
 .ck-content {						/* ckeditor 높이 */
@@ -432,29 +428,8 @@ input[name='publicYear'] {
     font-weight: 600;
     line-height: 40px;
     background-color: #E1E1E1;
+    border: 1px solid black;
 }
-.enroll_btn{
-	background-color: #dbdde2;
-	margin-left:15px;
-}
-#enrollBtn:hover {
-    background-color: #c9cbd0;
-}
-
-.form_section_content select {		/* 카테고리 css 설정 */
-    width: 92%;
-    height: 35px;
-    font-size: 20px;
-    text-align-last: center;
-    margin-left: 5px;
-}
-.cate_wrap span {
-    font-weight: 600;
-}
-.cate_wrap:not(:first-child) {
-    margin-top: 20px;
-}
-
 
 .wrap_for_footer1_in{
 	width : 1180px;
@@ -539,6 +514,7 @@ input[name='publicYear'] {
 	margin-left: 18px;
 	margin-top : 30px;
 }
+
 
 
 

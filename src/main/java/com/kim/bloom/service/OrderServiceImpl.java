@@ -82,7 +82,8 @@ public class OrderServiceImpl implements OrderService{
 		
 		/* OrderDTO 객체의 orderId에 저장 */
 		Date date = new Date();
-		SimpleDateFormat format = new SimpleDateFormat("_yyyyMMddmm");
+//		SimpleDateFormat format = new SimpleDateFormat("_yyyyMMddmm");
+		SimpleDateFormat format = new SimpleDateFormat("_yyyyMMddmmss");
 		String orderId = member.getMemberId()+format.format(date);
 		ord.setOrderId(orderId);
 		
@@ -171,6 +172,30 @@ public class OrderServiceImpl implements OrderService{
 			}	
 		
 		
+<<<<<<< HEAD
+=======
+		OrderDTO orw = orderMapper.getOrder(dto.getOrderId());
+		orw.setOrders(ords);
+		orw.getOrderPriceInfo();
+	
+		orderMapper.orderCancle(dto.getOrderId());
+		
+		int calMoney = member.getMoney();
+		calMoney += orw.getOrderFinalSalePrice();
+		member.setMoney(calMoney);
+		
+		int calPoint = member.getPoint();
+		calPoint = calPoint + orw.getUsePoint() - orw.getOrderSavePoint();
+		member.setPoint(calPoint);
+		
+		orderMapper.deductMoney(member);
+		
+		for(OrderItemDTO ord : orw.getOrders()) {
+			BookVO book = bookMapper.getGoodsInfo(ord.getBookId());
+			book.setBookStock(book.getBookStock() + ord.getBookCount());
+			orderMapper.deductStock(book);
+		}
+>>>>>>> 19c0ea79dbeef91537ccb2cb46df1d4b27629800
 	}
 
 		

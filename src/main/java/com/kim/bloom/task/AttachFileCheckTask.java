@@ -28,7 +28,7 @@ public class AttachFileCheckTask {
 	@Scheduled(cron = "0 0 1 * * *")
 	private String getFolderYesterDay() {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		
 		Calendar cal = Calendar.getInstance();
 		
@@ -36,7 +36,7 @@ public class AttachFileCheckTask {
 		
 		String str = sdf.format(cal.getTime());
 		
-		return str.replace("-", File.separator);
+		return str.replace("/", File.separator);
 	}	
 	
 	@Scheduled(cron="0 0 1 * * *")
@@ -59,7 +59,11 @@ public class AttachFileCheckTask {
 			 * Path path = Paths.get("C:\\upload", vo.getUploadPath(), vo.getUuid() + "_" +
 			 * vo.getFileName());
 			 */
+<<<<<<< HEAD
 			Path path = Paths.get("C:\\upload", vo.getUploadPath(), vo.getUuid() + "_" + vo.getFileName());
+=======
+			Path path = Paths.get("/var/lib/tomcat9/webapps/upload", vo.getUploadPath(), vo.getUuid() + "_" + vo.getFileName());
+>>>>>>> 19c0ea79dbeef91537ccb2cb46df1d4b27629800
 			checkFilePath.add(path);
 		});	
 		
@@ -69,14 +73,22 @@ public class AttachFileCheckTask {
 			 * Path path = Paths.get("C:\\upload", vo.getUploadPath(), "s_" + vo.getUuid() +
 			 * "_" + vo.getFileName());
 			 */
+<<<<<<< HEAD
 			Path path = Paths.get("C:\\upload", vo.getUploadPath(), "s_" +  vo.getUuid() + "_" + vo.getFileName());
+=======
+			Path path = Paths.get("/var/lib/tomcat9/webapps/upload", vo.getUploadPath(), "s_" +  vo.getUuid() + "_" + vo.getFileName());
+>>>>>>> 19c0ea79dbeef91537ccb2cb46df1d4b27629800
 			checkFilePath.add(path);
 		});
 		
 		
 		/*디렉토리 파일 리스트*/
 		/* File targetDir = Paths.get("C:\\upload", getFolderYesterDay()).toFile(); */
+<<<<<<< HEAD
 		File targetDir = Paths.get("C:\\upload", getFolderYesterDay()).toFile();
+=======
+		File targetDir = Paths.get("/var/lib/tomcat9/webapps/upload", getFolderYesterDay()).toFile();
+>>>>>>> 19c0ea79dbeef91537ccb2cb46df1d4b27629800
 		File[] targetFile = targetDir.listFiles();
 		
 		

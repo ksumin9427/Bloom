@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/authorModify.css?ver4">
+<link rel="stylesheet" href="../resources/css/admin/authorModify.css?ver12">
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -17,7 +17,6 @@
 <body>
 				<%@include file= "../includes/admin/adminHeader.jsp"%>
 				<div class="content_area">
-				
                     <div class="admin_content_main">
                     	<form id="modifyForm" action="/admin/authorModify" method="post">
                     	
@@ -88,7 +87,7 @@
 		                    </div> 
 		                    
 	                    </form>
-                    </div>                    
+                                     
                 
                 <!-- 작가 상세 페이지에서 작가 관리 페이지로 이동할 경우 cri데이터가 필요하다 -->
                 <form id="moveForm" method="get">
@@ -97,6 +96,7 @@
                 	<input type="hidden" name="amount" value='<c:out value="${cri.amount }"/>' >
                 	<input type="hidden" name="keyword" value='<c:out value="${cri.keyword }"/>'>
                 </form>
+                 </div>  
             </div><!-- content_area -->
 				<%@include file="../includes/admin/adminFooter.jsp" %>
 				

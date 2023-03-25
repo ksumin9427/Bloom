@@ -64,11 +64,12 @@ public class BookController {
 	 * return "main"; }
 	 */
 	
+	
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getImage(String fileName){
 		logger.info("getImage............"+fileName);
 		
-		File file = new File("c:\\upload\\"+fileName);
+		File file = new File("/var/lib/tomcat9/webapps/upload2/"+fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		

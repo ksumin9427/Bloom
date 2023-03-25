@@ -9,7 +9,11 @@
 	width: 700px;	
 	margin: 0 auto;
 	position: relative;
+<<<<<<< HEAD
 	bottom: -20px;
+=======
+	bottom: -15px
+>>>>>>> 19c0ea79dbeef91537ccb2cb46df1d4b27629800
 }
 
 /* content 랩 */

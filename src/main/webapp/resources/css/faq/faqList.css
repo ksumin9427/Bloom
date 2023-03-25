@@ -66,6 +66,12 @@ table tr th{
   	width: 70%;
   	bottom: -50px;
   }
+  .table_empty{
+	height: 50px;
+    text-align: center;
+    margin: 200px 0 215px 0px;
+    font-size: 25px;
+}
   
   .faq_search_input select{
   	position: relative;
@@ -86,7 +92,7 @@ table tr th{
   	width: 20%;
   }
 
-  .top_btn{
+  .top_button{
   	font-size: 20px;
     padding: 6px 12px;
     background-color: #fff;

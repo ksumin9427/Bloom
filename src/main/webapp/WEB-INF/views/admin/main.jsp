@@ -7,7 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<<<<<<< HEAD
 <link rel="stylesheet" href="../resources/css/admin/main.css?ver28">
+=======
+<link rel="stylesheet" href="../resources/css/admin/main.css?ver29">
+>>>>>>> 19c0ea79dbeef91537ccb2cb46df1d4b27629800
  
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"

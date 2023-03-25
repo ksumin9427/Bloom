@@ -7,7 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<<<<<<< HEAD
 <link rel="stylesheet" href="../resources/css/admin/authorEnroll.css?ver26">
+=======
+<link rel="stylesheet" href="../resources/css/admin/authorEnroll.css?ver24">
+>>>>>>> 19c0ea79dbeef91537ccb2cb46df1d4b27629800
  
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -54,11 +58,15 @@
                     		</div>
                    		</form>
 	                    		<div class="btn_section">
+<<<<<<< HEAD
 	                    			<button id="enrollBtn" class="btn">등록</button>
+=======
+	                    			<button id="enrollBtn" class="btn">등록</button>  <!-- enroll_btn -->
+>>>>>>> 19c0ea79dbeef91537ccb2cb46df1d4b27629800
 	                    			<button id="cancelBtn" class="btn" type="reset" >취소</button>
 	                    		</div>
                     </div>
-                </div>
+                
                 </div><!-- content_area -->
                 <%@include file="../includes/admin/adminFooter.jsp" %>
 

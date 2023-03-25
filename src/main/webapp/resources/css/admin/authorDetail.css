@@ -405,6 +405,7 @@ input[name='publicYear'] {
     font-weight: 600;
     line-height: 40px;
     background-color: #E1E1E1;
+    border: 1px solid black;
 }
 .modify_btn{
 	background-color: #b8d3e8;

@@ -7,7 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<<<<<<< HEAD
 <link rel="stylesheet" href="../resources/css/admin/orderList.css?ver25">
+=======
+<link rel="stylesheet" href="../resources/css/admin/orderList.css?ver23">
+>>>>>>> 19c0ea79dbeef91537ccb2cb46df1d4b27629800
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -59,6 +63,7 @@
                 		
                 	</div><!-- order_table_wrap -->
                     
+<<<<<<< HEAD
 		                    <div class="orderlist_searchWrap">
 		                    	<form id="orderlist_searchForm" action="/admin/orderList" method="get">
 		                    		<div class="orderlist_searchInput">
@@ -107,6 +112,64 @@
 							</form>
 					                 
                    </div><!--  admin_content_wrap  -->                  
+=======
+                    
+                    <div class="searchWrap">
+                    	<form id="searchForm" action="/admin/memberManage" method="get">
+                    		<div class="searchInput">
+                    			<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
+                    			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
+                    			<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
+                    			<button class='searchBtnM'>검 색</button>
+                    		</div>
+                    	</form>
+                    </div>  
+                    
+                  
+                  
+                      <div class="pageMaker_wrap" >
+                    
+	                    <ul class="pageMaker">
+	                    
+	                    	<c:if test="${pageMaker.prev}">
+	                    		<li class="pageMaker_btn prev">
+	                    			<a href="${pageMaker.pageStart - 1}">이전</a>
+	                    		</li>
+	                    	</c:if>
+	                    	
+	                    	<c:forEach begin="${pageMaker.pageStart}" end="${pageMaker.pageEnd}" var="num">
+	                    		<li class="pageMaker_btn ${pageMaker.cri.pageNum == num ? "active":""}">
+	                    			<a href="${num}">${num}</a>
+	                    		</li>
+	                    	</c:forEach>
+	                    	
+	                    	<c:if test="${pageMaker.next}">
+	                    		<li class="pageMaker_btn next">
+	                    			<a href="${pageMaker.pageEnd + 1 }">다음</a>
+	                    		</li>
+	                    	</c:if>
+	                    	
+	                    </ul>
+                    </div>
+                    
+                    
+                    <!-- 페이지 이동 -->
+					<form id="moveForm" action="/admin/orderList" method="get">
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+					</form>   
+					
+					<form id="deleteForm" action="/admin/orderCancle" method="post">
+						<input type="hidden" name="orderId">
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+						<input type="hidden" name="memberId" value="${member.memberId}">
+					</form>
+					                 
+                   </div>                    
+>>>>>>> 19c0ea79dbeef91537ccb2cb46df1d4b27629800
                 </div>  <!-- content_area -->
  
  				<%@include file="../includes/admin/adminFooter.jsp" %>

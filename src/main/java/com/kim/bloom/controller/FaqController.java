@@ -43,8 +43,17 @@ public class FaqController {
 		
 		
 		List list = faqService.getFaqList(cri);
-		model.addAttribute("list", list);
-		log.info("@@@@@@@@@@@@@@@@@@###############list "+list);
+		
+		if (!list.isEmpty()) {
+			model.addAttribute("list", list);
+		} else {
+			model.addAttribute("listCheck", "empty");
+			/* return; */
+		}
+		/*
+		 * model.addAttribute("list", list);
+		 * log.info("@@@@@@@@@@@@@@@@@@###############list "+list);
+		 */
 		
 		/* 페이지 이동 인터페이스 데이터 */
 		int total = faqService.getTotal(cri);

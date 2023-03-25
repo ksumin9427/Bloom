@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<link rel="stylesheet" href="/resources/css/faq/faqList.css?ver41">
+<link rel="stylesheet" href="/resources/css/faq/faqList.css?ver44">
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -24,7 +24,7 @@
 								<div class="table_wrap">
 									<div class="mini_wrap">
 									<c:if test="${member.adminCk == 1 }">
-										<a href="/faq/faqEnroll" class="top_btn">글쓰기</a>
+										<a href="/faq/faqEnroll" class="top_button">글쓰기</a>
 									</c:if>
 									
 									<div class="faq_search_wrap">
@@ -45,6 +45,7 @@
 				                			</div>
 				                		</form>
 				                	</div>
+				                	<c:if test="${listCheck != 'empty' }">
 				                	
 									<table>
 										<thead>
@@ -67,6 +68,14 @@
 										</c:forEach>
 										
 									</table>
+								</c:if>
+								
+								<!-- 게시물 x -->
+		                		<c:if test="${listCheck == 'empty'}">
+		                			<div class="table_empty">
+		                				관련된 주제의 게시글이 없습니다.
+		                			</div>
+		                		</c:if> 
 									
 									<div class="wrap_pageMaker">
 					                    <div class="pageMaker_wrap" >
@@ -183,11 +192,11 @@
 			
 			/* 위지윅 적용 */
 			 
-			ClassicEditor
+			/* ClassicEditor
 				.create(document.querySelector('#content_textarea'))
 				.catch(error=>{
 					console.error(error);
-				});
+				}); */
 			
 		
 		</script>
