@@ -176,16 +176,18 @@
 
                 	
                 	<form id="moveForm" action="/admin/goodsManage" method="get" >
- 						<input type="hidden" name="pageNum" value="${cri.pageNum}">
-						<input type="hidden" name="amount" value="${cri.amount}">
-						<input type="hidden" name="keyword" value="${cri.keyword}">
+ 						<input type="hidden" id="pageNum" name="pageNum" value="${cri.pageNum}">
+						<input type="hidden"  id="amount" name="amount" value="${cri.amount}">
+						<input type="hidden"  id="keyword" name="keyword" value="${cri.keyword}">
                 	</form>
+                	
                 	
                 </div>
                </div><!-- content_area -->
  						<%@include file="../includes/admin/adminFooter.jsp" %>
  	
  	<script>
+ 	
  		$(document).ready(function(){
  			
  			let bookDiscount = '<c:out value="${goodsInfo.bookDiscount}"/>' * 100;
@@ -338,8 +340,12 @@
 		});
 		
  	});	
+ 		
+ 		
+		
 		
 		$("#cancelBtn").on("click", function(e){
+			
 			e.preventDefault();
 			$("#moveForm").submit();
 		});
@@ -354,7 +360,6 @@
 			$("#moveForm").submit();
 		});
 			
- 			
  
  		
  	</script>					

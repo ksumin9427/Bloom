@@ -329,28 +329,19 @@ ul{
     left: 70px;
     bottom: -88px;
 }
-.admin_content_subject{            /* 관리자 컨텐츠 제목 영역 */
-    font-size: 40px;
-    font-weight: bolder;
-    padding-left: 15px;
-    background-color: #F6F6F6;
-    height: 80px;
-    line-height: 80px;
-    color: white;    
-}
 
 /* 상품 목록 영역 */
 .goods_table_wrap{
-	padding: 20px 35px
+	padding: 20px 35px;
 }
 .goods_table{
-	width: 100%;
+	width: 800px;
 	/* height: 650px; */
     border: 1px solid #d3d8e1;
     text-align: center;
     border-collapse: collapse;
     position: relative;
-    /* bottom: -100px; */
+    bottom: -3px;
 }
 .goods_table td{
 	padding: 3px 3px;
@@ -365,22 +356,22 @@ ul{
 	font-weight: 500;
 }
 .th_column_1{
-	width:80px;
+	width: 10%;
 }
 .th_column_2{
-	width: 140px;
+	width: 30%;
 }
 .th_column_3{
-	width: 140px;
+	width: 20%;
 }
 .th_column_4{
-	width: 80px;
+	width: 10%;
 }
 .th_column_5{
-	width: 50px;
+	width: 10%;
 }
 .th_column_6{
-	width: 100px;
+	width: 20%;
 }
 	
 .table_empty{

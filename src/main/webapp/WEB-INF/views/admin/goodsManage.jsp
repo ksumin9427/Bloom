@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/goodsManage.css?ver29">
+<link rel="stylesheet" href="../resources/css/admin/goodsManage.css?ver32">
  
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -98,9 +98,9 @@
                 	</div>
                 	
                 	<form id="moveForm" action="/admin/goodsManage" method="get" >
- 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+ 						<input type="hidden" id="pageNum" name="pageNum" value="${pageMaker.cri.pageNum}">
+						<input type="hidden" id="amount" name="amount" value="${pageMaker.cri.amount}">
+						<input type="hidden" id="keyword" name="keyword" value="${pageMaker.cri.keyword}">
                 	</form>
                     
                 </div>
@@ -109,6 +109,11 @@
      <%@include file="../includes/admin/adminFooter.jsp" %> 
      
 <script>
+let pageNum  = '<c:out value="${cri.pageNum}"/>';				
+let amount  = '<c:out value="${cri.amount}"/>';				
+let keyword  = '<c:out value="${cri.keyword}"/>';
+
+
 	$(function(){
 		
 		let eResult = '<c:out value = "${enroll_result}"/>';
@@ -143,6 +148,7 @@
 	let admin_searchForm = $('#admin_searchForm');
 	let moveForm = $('#moveForm');
 	
+	
 	/* 작가 검색 버튼 동작 */
 	$('#admin_searchForm button').on("click", function(e){
 		
@@ -159,46 +165,42 @@
 		
 	});
 	
+	
+	
+	
 	/* 페이지 이동 버튼 */
 	$(".pageMaker_btn a").on("click", function(e){
 		
-		e.preventDefault();
-		
-		moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-		
-		moveForm.submit();
-		
-	});
-
-
-	/* 페이지 이동 버튼 */
-	$(".pageMaker_btn a").on("click", function(e){
 		
 		e.preventDefault();
 		
+		
 		moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+		
+		moveForm.attr("action", "/admin/goodsManage");
 		
 		moveForm.submit();
 		
 	});
 	
+	
 	$(".move").on("click", function(e){
 		
 		e.preventDefault();
 		
-		moveForm.empty();
-		
-		moveForm.append("<input type='hidden' name='bookId' value='"+$(this).attr("href")+"'>");
+		moveForm.append("<input type='hidden' id='bookId' name='bookId' value='"+$(this).attr("href") + "'>");
 		
 		moveForm.attr("action", "/admin/goodsDetail");
 		
 		moveForm.submit();
 		
 		
+		
+		
 	});
-		
-		
-
+	
+	;
+	
 </script>     
  
 </body>

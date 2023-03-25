@@ -8,6 +8,8 @@
 .wrapper{
 	width: 700px;	
 	margin: 0 auto;
+	position: relative;
+	bottom: -20px;
 }
 
 /* content 랩 */
@@ -242,6 +244,7 @@
     background-color: #455549;
     font-size: 30px;
     color: white;
+    border: 1px solid black;
 }
 
 /* float 속성 해제 */

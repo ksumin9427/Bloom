@@ -122,9 +122,10 @@ public class OrderItemDTO {
     }
     
     public void initSaleTotal() {
-    	this.salePrice = (int) (this.bookPrice * (1 - this.bookDiscount));
-    	this.totalPrice = this.salePrice *  this.bookCount;
-    	this.savePoint = (int) (Math.floor(this.salePrice * 0.05));
-    	this.totalSavePoint = this.savePoint * bookCount;
-    }
+		this.salePrice = (int) (this.bookPrice * (1-this.bookDiscount));
+		this.totalPrice = this.salePrice*this.bookCount;
+		this.savePoint = (int)(Math.floor(this.salePrice*0.01));
+		this.totalSavePoint =this.savePoint * this.bookCount;
+		
+	}
 }

@@ -34,6 +34,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kim.bloom.mapper.OrderMapper;
 import com.kim.bloom.model.AttachImageVO;
 import com.kim.bloom.model.AuthorVO;
 import com.kim.bloom.model.BookVO;
@@ -70,6 +71,9 @@ public class AdminController {
 	
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private OrderMapper orderMapper;
 
 	/* 관리자 페이지 접속 */
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
@@ -363,7 +367,7 @@ public class AdminController {
 			}
 		}
 		
-		String uploadFolder = "C:\\upload";
+		 String uploadFolder = "C:\\upload"; 
 
 		/* 날짜 폴더 경로 */
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -475,16 +479,15 @@ public class AdminController {
 	}
 	
 	@PostMapping("/orderCancle")
-	public String orderCanclePost(OrderCancleDTO dto, HttpServletRequest request) {
+	public String orderCanclePost(OrderCancleDTO dto) {
 		
+		OrderDTO oriDto = orderMapper.getOrder(dto.getOrderId());
+		dto.setMemberId(oriDto.getMemberId());
+		System.out.println(dto);
 		orderService.orderCancle(dto);
 		
-		MemberVO member = memberSerivice.getMemberInfo(dto.getMemberId());
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("member", member);
-		
 		return "redirect:/admin/orderList?keyword="+dto.getKeyword()+"&amount="+dto.getAmount()+"&pageNum="+dto.getPageNum();
+		
 	}
 	
 	@RequestMapping(value = "/memberManage", method = RequestMethod.GET)
@@ -493,7 +496,14 @@ public class AdminController {
 		model.addAttribute("cate2", bookService.getCateCode2());
 		
 		List list = adminService.memberGetList(cri);
-		model.addAttribute("list", list);
+		
+		/* 검색어 결과 존재 유무 */
+		if (!list.isEmpty()) {
+			model.addAttribute("list", list);
+		} else {
+			model.addAttribute("listCheck", "empty");
+
+		}
 		
 		int total = adminService.memberGetTotal(cri);
 		

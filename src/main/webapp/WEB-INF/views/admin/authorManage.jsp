@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/authorManage.css?ver9">
+<link rel="stylesheet" href="../resources/css/admin/authorManage.css?ver14">
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -160,6 +160,8 @@ $(function(){
 		
 		moveForm.find("input[name='pageNum']").val($(this).attr("href"));
 		
+		moveForm.attr("action", "/admin/authorManage");
+		
 		moveForm.submit();
 		
 	});
@@ -192,6 +194,8 @@ $(function(){
 		moveForm.attr("action", "/admin/authorDetail");
 		
 		moveForm.submit();
+		
+		
 		
 	});
 

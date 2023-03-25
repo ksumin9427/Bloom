@@ -3,7 +3,9 @@ package com.kim.bloom.mapper;
 import java.util.List;
 
 import com.kim.bloom.model.CateVO;
+import com.kim.bloom.model.Criteria;
 import com.kim.bloom.model.MemberVO;
+import com.kim.bloom.model.OrderDTO;
 
 public interface MyRoomMapper {
 	
@@ -18,4 +20,6 @@ public interface MyRoomMapper {
 	public int memberUpdate(MemberVO vo) throws Exception;
 	
 	public int memberDelete(MemberVO vo) throws Exception;
+	
+	
 }

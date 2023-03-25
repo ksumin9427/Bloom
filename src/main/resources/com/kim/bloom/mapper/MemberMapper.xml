@@ -7,7 +7,7 @@
   	<insert id="memberJoin">
   		insert into bloom_member 
 		values(#{memberId},#{memberPw},#{memberName},#{memberMail},
-		#{memberAddr1},#{memberAddr2},#{memberAddr3}, 0, now(), 100000, 5000)
+		#{memberAddr1},#{memberAddr2},#{memberAddr3}, 0, now(), 50000, 1000)
   	</insert>
   
   	<select id="idCheck" resultType="int">

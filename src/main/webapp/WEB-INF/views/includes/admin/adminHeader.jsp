@@ -132,6 +132,8 @@
                   <ul>
                       <li>
                          <a href="/admin/memberManage">회원 관리</a>                            
+                      
+                         <a href="/admin/orderList">회원 주문 관리</a>                            
                       </li>
                   </ul>  
                     

@@ -55,18 +55,27 @@ public class AttachFileCheckTask {
 		
 		/* 원본 이미지 */
 		fileList.forEach(vo -> {
+			/*
+			 * Path path = Paths.get("C:\\upload", vo.getUploadPath(), vo.getUuid() + "_" +
+			 * vo.getFileName());
+			 */
 			Path path = Paths.get("C:\\upload", vo.getUploadPath(), vo.getUuid() + "_" + vo.getFileName());
 			checkFilePath.add(path);
 		});	
 		
 		/* 썸네일 이미지 */
 		fileList.forEach(vo -> {
+			/*
+			 * Path path = Paths.get("C:\\upload", vo.getUploadPath(), "s_" + vo.getUuid() +
+			 * "_" + vo.getFileName());
+			 */
 			Path path = Paths.get("C:\\upload", vo.getUploadPath(), "s_" +  vo.getUuid() + "_" + vo.getFileName());
 			checkFilePath.add(path);
 		});
 		
 		
 		/*디렉토리 파일 리스트*/
+		/* File targetDir = Paths.get("C:\\upload", getFolderYesterDay()).toFile(); */
 		File targetDir = Paths.get("C:\\upload", getFolderYesterDay()).toFile();
 		File[] targetFile = targetDir.listFiles();
 		

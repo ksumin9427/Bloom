@@ -182,5 +182,6 @@ public class OrderDTO {
 			deliveryCost = 3000;
 		} 
 		orderFinalSalePrice = orderSalePrice + deliveryCost - usePoint;
+		
 	}
 }

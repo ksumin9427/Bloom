@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/memberManage.css?ver1">
+<link rel="stylesheet" href="../resources/css/admin/memberManage.css?ver4">
  
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -48,16 +48,16 @@
                 		<!-- 게시물 x -->
                 		<c:if test="${listCheck == 'empty'}">
                 			<div class="table_empty">
-                				등록된 작가가 없습니다.
+                				등록된 회원이 없습니다.
                 			</div>
                 		</c:if> 						
                 			
                     </div> 
                     
                     <!-- 검색 영역 -->
-                    <div class="searchWrap">
-                    	<form id="searchForm" action="/admin/memberManage" method="get">
-                    		<div class="searchInput">
+                    <div class="member_searchWrap">
+                    	<form id="member_searchForm" action="/admin/memberManage" method="get">
+                    		<div class="member_searchInput">
                     			<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
                     			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
                     			<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
@@ -121,6 +121,23 @@ $(".pageMaker_btn a").on("click", function(e){
 	
 	moveForm.submit();
 	
+});
+
+/* 작거 검색 버튼 동작 */
+let member_searchForm = $('#member_searchForm');
+
+$('#member_searchForm button').on("click", function(e){
+	e.preventDefault();
+	
+	 if(!member_searchForm.find("input[name='keyword']").val()){
+		alert("키워드를 입력하십시오");
+		return false;
+	} 
+	
+	 member_searchForm.find("input[name='pageNum']").val("1");
+	
+	 member_searchForm.submit();
+
 });
 </script>
 </body>

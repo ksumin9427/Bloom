@@ -736,13 +736,13 @@ li{
 }
 .address_button{
     border: 1px solid black;
-    height: 51px;
+    height: 45px;
     width: 30%;
     float: right;
-    line-height: 50px;
+    line-height: 45px;
     text-align: center;
-    font-size: 30px;
-    font-weight: 900;
+    font-size: 25px;
+    font-weight: 800;
     background-color: #455549;
     color:white;
     cursor: pointer;	
@@ -789,11 +789,12 @@ li{
     height: 40px;
     background-color: #455549;
     border: #455549 1px;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 500;
     color: white;
     position: relative;
     left: -188px;
+    top: -15px;
 }
 
 

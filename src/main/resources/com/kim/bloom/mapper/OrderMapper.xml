@@ -23,11 +23,11 @@
 		values(#{orderId}, #{bookId}, #{bookCount}, #{bookPrice}, #{bookDiscount}, #{savePoint})
   	</insert>
   	
-  	<update id="updateMoney">
+  	<update id="deductMoney">
   		update bloom_member set money = #{money}, point = #{point} where memberId = #{memberId}
   	</update>
   	
-  	<update id="updateStock">
+  	<update id="deductStock">
   		update bloom_book set bookStock = #{bookStock} where bookId = #{bookId}
   	</update>
   	
@@ -44,6 +44,8 @@
   	<select id="getOrder" resultType="com.kim.bloom.model.OrderDTO">
   		select * from bloom_order where orderId = #{orderId}
   	</select>
+  	
+  	
   	
   	
   </mapper>

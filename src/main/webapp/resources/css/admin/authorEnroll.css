@@ -226,9 +226,9 @@ ul, li{
  width: 1180px;
     min-height: 1000px;
     margin: 0 auto;
+    
    
 }
-
 /* 로그인 성공 영역 */
 .login_success_area{
 	height: 62%;
@@ -330,6 +330,8 @@ ul, li{
 .form_section_content{
 	padding: 20px 35px;
     border-top: 1px solid #dbdde2;	
+    /* position: relative;
+    left: 30px; */
 }
 .form_section_content input{
 	width: 500px;
@@ -387,8 +389,10 @@ input[name='publicYear'] {
     cursor:pointer;
 }
 #authorName_input {
-    width: 500px;;
+    width: 500px;
     text-align: center;
+    /* position: relative;
+    left: 500px; */
 }
 
 .form_section_content select {		/* 카테고리 css 설정 */
@@ -445,6 +449,7 @@ input[name='publicYear'] {
     font-weight: 600;
     line-height: 40px;
     background-color: #E1E1E1;
+    border: 1px solid black;
 }
 .enroll_btn{
 	background-color: #dbdde2;

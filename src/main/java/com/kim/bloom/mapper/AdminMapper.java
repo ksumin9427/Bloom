@@ -7,6 +7,7 @@ import com.kim.bloom.model.BookVO;
 import com.kim.bloom.model.CateVO;
 import com.kim.bloom.model.Criteria;
 import com.kim.bloom.model.MemberVO;
+import com.kim.bloom.model.OrderCancleDTO;
 import com.kim.bloom.model.OrderDTO;
 
 public interface AdminMapper {
@@ -54,5 +55,9 @@ public interface AdminMapper {
 	
 	/* 회원 수 */
 	public int memberGetTotal(Criteria cri);
+	
+	/* public OrderDTO getOrderMemberInfo(OrderCancleDTO dto); */
+	
+	
 	
 }

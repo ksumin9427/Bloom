@@ -46,7 +46,6 @@ public class OrderController {
 	
 	@PostMapping("/order")
 	public String orderPagePost(OrderDTO od, HttpServletRequest request) {
-		System.out.println(od);
 		
 		orderService.order(od);
 		
