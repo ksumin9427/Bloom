@@ -11,7 +11,6 @@
 사용 운영체제 : Window, Linux  
 사용 라이브러리 : jQuery, ckeditor, slick  
 데이터베이스 : MySQL   
-형상관리 툴 : GitHub
 
 ## 주요 기능
 
